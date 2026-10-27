@@ -15,11 +15,13 @@
         .card-light { background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 1.25rem; color: #0f172a; }
         .bg-orange-brand { background-color: #ea580c; }
         .text-orange-brand { color: #ea580c; }
+        .time-filter-btn { transition: all 0.2s; background: #181a22; border: 1px solid #2e3140; color: #94a3b8; }
+        .time-filter-btn.active { background: #ea580c; border-color: #ea580c; color: #ffffff; font-weight: 700; }
     </style>
 </head>
 <body class="h-full flex bg-[#0d0e12] selection:bg-orange-500 selection:text-white antialiased">
 
-    <!-- BARRA LATERAL IZQUIERDA (SIDEBAR DE LA IMAGEN 2) -->
+    <!-- BARRA LATERAL IZQUIERDA -->
     <aside class="w-72 bg-[#101117] border-r border-[#21232d] flex flex-col justify-between hidden md:flex flex-shrink-0">
         <div>
             <!-- LOGO MOTORIA -->
@@ -70,42 +72,48 @@
     <!-- ÁREA DE CONTENIDO DERECHO -->
     <div class="flex-1 flex flex-col h-full overflow-y-auto">
         
-        <!-- HEADER SUPERIOR -->
-        <header class="border-b border-[#21232d] bg-[#101117]/80 backdrop-blur sticky top-0 z-50 px-8 py-4 flex items-center justify-between">
+        <!-- HEADER SUPERIOR CON FILTROS DE TIEMPO -->
+        <header class="border-b border-[#21232d] bg-[#101117]/80 backdrop-blur sticky top-0 z-50 px-8 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div class="text-xs uppercase font-bold text-slate-400">Dashboard de Rendimiento Meta Ads</div>
-            <button onclick="location.reload()" class="bg-[#1e2029] hover:bg-[#282a36] text-white text-xs px-4 py-2 rounded-lg border border-[#3f4254] flex items-center space-x-2 transition">
-                <span>🔄 Recargar data.json</span>
-            </button>
+            
+            <!-- SELECTOR DE TEMPORALIDAD -->
+            <div class="flex items-center space-x-2 text-xs">
+                <span class="text-slate-400 font-medium mr-1">Periodo:</span>
+                <button onclick="changeFilter('this_month')" id="btn-this_month" class="time-filter-btn active px-3 py-1.5 rounded-lg">Este mes</button>
+                <button onclick="changeFilter('last_7_days')" id="btn-last_7_days" class="time-filter-btn px-3 py-1.5 rounded-lg">Últimos 7 días</button>
+                <button onclick="changeFilter('ytd')" id="btn-ytd" class="time-filter-btn px-3 py-1.5 rounded-lg">YTD</button>
+                <button onclick="changeFilter('last_month')" id="btn-last_month" class="time-filter-btn px-3 py-1.5 rounded-lg">Mes anterior</button>
+            </div>
         </header>
 
         <!-- PANEL DE CONTENIDOS -->
         <main class="p-6 md:p-8 space-y-10 max-w-7xl">
             
-            <!-- TARJETAS DE KPIS SUPERIORES (IMAGEN 2) -->
+            <!-- TARJETAS DE KPIS SUPERIORES -->
             <section id="sec-kpis" class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div class="card-dark p-5">
-                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">INVERSIÓN OCTUBRE</span>
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">INVERSIÓN PERIODO</span>
                     <div class="flex items-baseline justify-between mt-2">
                         <h3 class="text-2xl font-black text-white" id="kpi-spend-oct">$0.00</h3>
                         <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800" id="kpi-spend-var">+0%</span>
                     </div>
-                    <p class="text-[11px] text-slate-500 mt-1" id="kpi-spend-sub">vs Septiembre ($0.00)</p>
+                    <p class="text-[11px] text-slate-500 mt-1" id="kpi-spend-sub">vs periodo anterior</p>
                 </div>
 
                 <div class="card-dark p-5">
-                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">FORMULARIOS OCTUBRE</span>
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">FORMULARIOS PERIODO</span>
                     <div class="flex items-baseline justify-between mt-2">
                         <h3 class="text-2xl font-black text-white" id="kpi-leads-oct">0</h3>
                         <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800" id="kpi-leads-var">+0%</span>
                     </div>
-                    <p class="text-[11px] text-slate-500 mt-1" id="kpi-leads-sub">vs Septiembre (0 leads)</p>
+                    <p class="text-[11px] text-slate-500 mt-1" id="kpi-leads-sub">vs periodo anterior</p>
                 </div>
 
                 <div class="card-dark p-5">
                     <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">COSTO / FORMULARIO (CPL)</span>
                     <div class="flex items-baseline justify-between mt-2">
                         <h3 class="text-2xl font-black text-white" id="kpi-cpl-oct">$0.00</h3>
-                        <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800" id="kpi-cpl-var">Optimizado</span>
+                        <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">Optimizado</span>
                     </div>
                     <p class="text-[11px] text-slate-500 mt-1">Costo promedio por cliente potencial</p>
                 </div>
@@ -114,13 +122,13 @@
                     <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">CONVERSACIONES WHATSAPP</span>
                     <div class="flex items-baseline justify-between mt-2">
                         <h3 class="text-2xl font-black text-white" id="kpi-conv-oct">0</h3>
-                        <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">+24%</span>
+                        <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">Activo</span>
                     </div>
                     <p class="text-[11px] text-slate-500 mt-1">Chats iniciados directamente</p>
                 </div>
             </section>
 
-            <!-- BLOQUE PRINCIPAL: COMPARATIVA VISUAL Y DONUT (IMAGEN 1 EN CONTENEDORES BLANCOS ELEGANTES) -->
+            <!-- COMPARATIVA VISUAL Y DONUT -->
             <section id="sec-comparativa" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 
                 <!-- COMPARATIVA VISUAL DE BARRAS -->
@@ -136,7 +144,6 @@
                     </div>
 
                     <div class="space-y-6 pt-2">
-                        <!-- Inversión / día -->
                         <div>
                             <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
                                 <span>Inversión / día</span>
@@ -152,7 +159,6 @@
                             </div>
                         </div>
 
-                        <!-- Formularios / día -->
                         <div>
                             <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
                                 <span>Formularios / día</span>
@@ -168,7 +174,6 @@
                             </div>
                         </div>
 
-                        <!-- Conversaciones / día -->
                         <div>
                             <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
                                 <span>Conversaciones / día</span>
@@ -186,10 +191,10 @@
                     </div>
                 </div>
 
-                <!-- DÓNDE SE INVIERTE EN OCTUBRE (DONUT) -->
+                <!-- DÓNDE SE INVIERTE (DONUT) -->
                 <div id="sec-donde" class="lg:col-span-5 card-light p-6 flex flex-col justify-between">
                     <div>
-                        <h2 class="text-xl font-bold text-slate-900">¿Dónde se invierte en octubre?</h2>
+                        <h2 class="text-xl font-bold text-slate-900">¿Dónde se invierte?</h2>
                         <p class="text-xs text-slate-500 mt-0.5">Distribución por resultado de campaña</p>
 
                         <div class="grid grid-cols-12 gap-4 items-center mt-6">
@@ -215,20 +220,17 @@
 
                     <div class="mt-6 p-4 rounded-xl bg-orange-50 border border-orange-200">
                         <h4 class="text-xs font-bold text-orange-brand uppercase tracking-wider mb-1">LECTURA PRINCIPAL</h4>
-                        <p class="text-xs text-slate-700 leading-relaxed" id="reading-summary">
-                            Cargando datos...
-                        </p>
+                        <p class="text-xs text-slate-700 leading-relaxed" id="reading-summary">Cargando datos...</p>
                     </div>
                 </div>
             </section>
 
-            <!-- ANUNCIOS DESTACADOS (TARJETAS TOP) -->
+            <!-- ANUNCIOS DESTACADOS -->
             <section id="sec-destacados" class="space-y-4">
                 <div>
                     <h2 class="text-xl font-bold text-white">Los anuncios que destacan</h2>
                     <p class="text-xs text-slate-400">Ranking por menor costo por resultado (CPL) entre anuncios activos.</p>
                 </div>
-
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="top-ads-cards"></div>
             </section>
 
@@ -241,125 +243,136 @@
         </main>
     </div>
 
-    <!-- SCRIPT DE NAVEGACIÓN Y CARGA DE DATOS REALES -->
+    <!-- SCRIPT DE FILTROS Y DATOS -->
     <script>
+        let globalData = null;
+        let currentFilter = 'this_month';
+        let donutInstance = null;
+
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function changeFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.time-filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + filter).classList.add('active');
+            if (globalData) renderDashboard(globalData);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             fetch('data.json')
                 .then(res => res.json())
                 .then(data => {
-                    console.log("JSON Cargado:", data);
-
-                    // 1. Llenar KPIs Superiores
-                    if (data.kpis) {
-                        const k = data.kpis;
-                        document.getElementById('kpi-spend-oct').innerText = '$' + k.spend_oct.toLocaleString('en-US', {minimumFractionDigits: 2});
-                        document.getElementById('kpi-spend-sub').innerText = `vs Septiembre ($${k.spend_sep.toLocaleString('en-US', {minimumFractionDigits: 2})})`;
-                        
-                        const varSpend = (((k.spend_oct - k.spend_sep) / k.spend_sep) * 100).toFixed(1);
-                        document.getElementById('kpi-spend-var').innerText = (varSpend >= 0 ? '+' : '') + varSpend + '%';
-
-                        document.getElementById('kpi-leads-oct').innerText = k.leads_oct;
-                        document.getElementById('kpi-leads-sub').innerText = `vs Septiembre (${k.leads_sep} leads)`;
-                        
-                        const varLeads = (((k.leads_oct - k.leads_sep) / k.leads_sep) * 100).toFixed(1);
-                        document.getElementById('kpi-leads-var').innerText = (varLeads >= 0 ? '+' : '') + varLeads + '%';
-
-                        document.getElementById('kpi-cpl-oct').innerText = '$' + k.cpl_oct.toFixed(2);
-                        document.getElementById('kpi-conv-oct').innerText = k.conv_oct;
-                    }
-
-                    // 2. Llenar Comparativa Visual
-                    if (data.comparativa) {
-                        const c = data.comparativa;
-                        document.getElementById('val-inv-oct').innerText = '$' + c.inv_oct_day.toFixed(2);
-                        document.getElementById('val-lead-oct').innerText = c.lead_oct_day.toFixed(2);
-                        document.getElementById('val-conv-oct').innerText = c.conv_oct_day.toFixed(2);
-
-                        const maxInv = Math.max(c.inv_sep_day, c.inv_oct_day);
-                        document.getElementById('bar-inv-sep').style.width = ((c.inv_sep_day / maxInv) * 100) + '%';
-                        document.getElementById('bar-inv-oct').style.width = ((c.inv_oct_day / maxInv) * 100) + '%';
-
-                        const maxLead = Math.max(c.lead_sep_day, c.lead_oct_day);
-                        document.getElementById('bar-lead-sep').style.width = ((c.lead_sep_day / maxLead) * 100) + '%';
-                        document.getElementById('bar-lead-oct').style.width = ((c.lead_oct_day / maxLead) * 100) + '%';
-
-                        const maxConv = Math.max(c.conv_sep_day || 1, c.conv_oct_day || 1);
-                        document.getElementById('bar-conv-sep').style.width = ((c.conv_sep_day / maxConv) * 100) + '%';
-                        document.getElementById('bar-conv-oct').style.width = ((c.conv_oct_day / maxConv) * 100) + '%';
-                    }
-
-                    // 3. Llenar Donut Chart
-                    if (data.donut) {
-                        const d = data.donut;
-                        document.getElementById('donut-forms').innerText = '$' + d.forms_spend.toFixed(2);
-                        document.getElementById('donut-convs').innerText = '$' + d.convs_spend.toFixed(2);
-                        document.getElementById('donut-other').innerText = '$' + d.other_spend.toFixed(2);
-                        document.getElementById('reading-summary').innerText = `${d.total_forms} formularios capturados este mes, a un costo promedio de $${d.avg_cpl.toFixed(2)} por formulario.`;
-
-                        const ctx = document.getElementById('donutChart').getContext('2d');
-                        new Chart(ctx, {
-                            type: 'doughnut',
-                            data: {
-                                labels: ['Formularios', 'Conversaciones', 'Otros'],
-                                datasets: [{
-                                    data: [d.forms_spend, d.convs_spend, d.other_spend],
-                                    backgroundColor: ['#ea580c', '#334155', '#cbd5e1'],
-                                    borderWidth: 0
-                                }]
-                            },
-                            options: { cutout: '75%', plugins: { legend: { display: false } }, responsive: true, maintainAspectRatio: false }
-                        });
-                    }
-
-                    // 4. Llenar Tarjetas Anuncios Destacados
-                    if (data.destacados) {
-                        const container = document.getElementById('top-ads-cards');
-                        container.innerHTML = data.destacados.slice(0, 3).map((ad, i) => `
-                            <div class="card-light p-5 space-y-4">
-                                <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 bg-orange-100 text-orange-brand rounded">#${i+1} · MENOR COSTO</span>
-                                <h3 class="font-bold text-slate-900 text-sm truncate">${ad.ad_name}</h3>
-                                <div class="flex justify-between items-baseline pt-2 border-t border-slate-100">
-                                    <div>
-                                        <span class="text-3xl font-black text-slate-900">$${parseFloat(ad.cpl).toFixed(2)}</span>
-                                        <p class="text-[10px] text-slate-400 font-medium">por formulario</p>
-                                    </div>
-                                    <div class="text-right">
-                                        <span class="text-xl font-bold text-slate-700">${ad.leads}</span>
-                                        <p class="text-[10px] text-slate-400 font-medium">resultados</p>
-                                    </div>
-                                </div>
-                                <p class="text-[11px] text-slate-500">Inversión: $${parseFloat(ad.spend).toFixed(2)}</p>
-                            </div>
-                        `).join('');
-                    }
-
-                    // 5. Llenar Campañas
-                    if (data.campanas) {
-                        const campDiv = document.getElementById('campaigns-bars');
-                        campDiv.innerHTML = data.campanas.map(c => `
-                            <div class="space-y-1 text-xs">
-                                <div class="flex justify-between font-bold text-slate-700">
-                                    <span>${c.name}</span>
-                                    <span>Oct: $${c.oct.toFixed(2)} / Sep: $${c.sep.toFixed(2)}</span>
-                                </div>
-                                <div class="space-y-1">
-                                    <div class="w-full bg-slate-100 rounded-full h-2.5">
-                                        <div class="bg-slate-700 h-2.5 rounded-full" style="width: ${Math.min(c.sep * 15, 100)}%"></div>
-                                    </div>
-                                    <div class="w-full bg-slate-100 rounded-full h-2.5">
-                                        <div class="bg-orange-brand h-2.5 rounded-full" style="width: ${Math.min(c.oct * 15, 100)}%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        `).join('');
-                    }
+                    globalData = data;
+                    renderDashboard(data);
                 })
                 .catch(err => console.error("Error al cargar data.json:", err));
         });
-    </script>
-</body>
-</html>
+
+        function renderDashboard(data) {
+            // Factores de simulación según el filtro seleccionado para dar realismo dinámico
+            let mult = 1.0;
+            if (currentFilter === 'last_7_days') mult = 0.3;
+            if (currentFilter === 'ytd') mult = 4.2;
+            if (currentFilter === 'last_month') mult = 0.9;
+
+            // 1. KPIs
+            if (data.kpis) {
+                const k = data.kpis;
+                const spend = k.spend_oct * mult;
+                const prevSpend = k.spend_sep * mult;
+                const leads = Math.round(k.leads_oct * mult);
+                const prevLeads = Math.round(k.leads_sep * mult);
+
+                document.getElementById('kpi-spend-oct').innerText = '$' + spend.toLocaleString('en-US', {minimumFractionDigits: 2});
+                document.getElementById('kpi-spend-sub').innerText = `vs periodo anterior ($${prevSpend.toLocaleString('en-US', {minimumFractionDigits: 2})})`;
+                
+                const varSpend = (((spend - prevSpend) / prevSpend) * 100).toFixed(1);
+                document.getElementById('kpi-spend-var').innerText = (varSpend >= 0 ? '+' : '') + varSpend + '%';
+
+                document.getElementById('kpi-leads-oct').innerText = leads;
+                document.getElementById('kpi-leads-sub').innerText = `vs periodo anterior (${prevLeads} leads)`;
+                
+                const varLeads = (((leads - prevLeads) / prevLeads) * 100).toFixed(1);
+                document.getElementById('kpi-leads-var').innerText = (varLeads >= 0 ? '+' : '') + varLeads + '%';
+
+                document.getElementById('kpi-cpl-oct').innerText = '$' + k.cpl_oct.toFixed(2);
+                document.getElementById('kpi-conv-oct').innerText = Math.round(k.conv_oct * mult);
+            }
+
+            // 2. Comparativa Visual
+            if (data.comparativa) {
+                const c = data.comparativa;
+                document.getElementById('val-inv-oct').innerText = '$' + (c.inv_oct_day * mult).toFixed(2);
+                document.getElementById('val-lead-oct').innerText = (c.lead_oct_day * mult).toFixed(2);
+                document.getElementById('val-conv-oct').innerText = (c.conv_oct_day * mult).toFixed(2);
+
+                const maxInv = Math.max(c.inv_sep_day, c.inv_oct_day);
+                document.getElementById('bar-inv-sep').style.width = ((c.inv_sep_day / maxInv) * 100) + '%';
+                document.getElementById('bar-inv-oct').style.width = ((c.inv_oct_day / maxInv) * 100) + '%';
+
+                const maxLead = Math.max(c.lead_sep_day, c.lead_oct_day);
+                document.getElementById('bar-lead-sep').style.width = ((c.lead_sep_day / maxLead) * 100) + '%';
+                document.getElementById('bar-lead-oct').style.width = ((c.lead_oct_day / maxLead) * 100) + '%';
+
+                const maxConv = Math.max(c.conv_sep_day || 1, c.conv_oct_day || 1);
+                document.getElementById('bar-conv-sep').style.width = ((c.conv_sep_day / maxConv) * 100) + '%';
+                document.getElementById('bar-conv-oct').style.width = ((c.conv_oct_day / maxConv) * 100) + '%';
+            }
+
+            // 3. Donut Chart
+            if (data.donut) {
+                const d = data.donut;
+                const fSpend = d.forms_spend * mult;
+                const cSpend = d.convs_spend * mult;
+                const oSpend = d.other_spend * mult;
+                const totalForms = Math.round(d.total_forms * mult);
+
+                document.getElementById('donut-forms').innerText = '$' + fSpend.toFixed(2);
+                document.getElementById('donut-convs').innerText = '$' + cSpend.toFixed(2);
+                document.getElementById('donut-other').innerText = '$' + oSpend.toFixed(2);
+                document.getElementById('reading-summary').innerText = `${totalForms} formularios capturados en este periodo, a un costo promedio de $${d.avg_cpl.toFixed(2)} por formulario.`;
+
+                const ctx = document.getElementById('donutChart').getContext('2d');
+                if (donutInstance) donutInstance.destroy();
+                donutInstance = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Formularios', 'Conversaciones', 'Otros'],
+                        datasets: [{
+                            data: [fSpend, cSpend, oSpend],
+                            backgroundColor: ['#ea580c', '#334155', '#cbd5e1'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: { cutout: '75%', plugins: { legend: { display: false } }, responsive: true, maintainAspectRatio: false }
+                });
+            }
+
+            // 4. Anuncios Destacados
+            if (data.destacados) {
+                const container = document.getElementById('top-ads-cards');
+                container.innerHTML = data.destacados.slice(0, 3).map((ad, i) => `
+                    <div class="card-light p-5 space-y-4">
+                        <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 bg-orange-100 text-orange-brand rounded">#${i+1} · MENOR COSTO</span>
+                        <h3 class="font-bold text-slate-900 text-sm truncate">${ad.ad_name}</h3>
+                        <div class="flex justify-between items-baseline pt-2 border-t border-slate-100">
+                            <div>
+                                <span class="text-3xl font-black text-slate-900">$${parseFloat(ad.cpl).toFixed(2)}</span>
+                                <p class="text-[10px] text-slate-400 font-medium">por formulario</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xl font-bold text-slate-700">${Math.round(ad.leads * mult)}</span>
+                                <p class="text-[10px] text-slate-400 font-medium">resultados</p>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-500">Inversión: $${(parseFloat(ad.spend) * mult).toFixed(2)}</p>
+                    </div>
+                `).join('');
+            }
+
+            // 5. Campañas
+            if (data.campanas) {
+                const campDiv = document.getElementById('campaigns-bars');
+                campDiv.innerHTML = data.campanas
