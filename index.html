@@ -49,7 +49,7 @@
                 </button>
                 <button onclick="scrollToSection('sec-comparativa')" class="sidebar-btn text-slate-400 hover:text-white hover:bg-[#181a22] w-full flex items-center space-x-3 px-4 py-3 text-left">
                     <span class="text-base">📊</span>
-                    <span>COMPARATIVA SEP VS OCT</span>
+                    <span>COMPARATIVA MES A MES</span>
                 </button>
                 <button onclick="scrollToSection('sec-diaria')" class="sidebar-btn text-slate-400 hover:text-white hover:bg-[#181a22] w-full flex items-center space-x-3 px-4 py-3 text-left">
                     <span class="text-base">🎯</span>
@@ -72,7 +72,7 @@
 
         <div class="p-4 border-t border-[#21232d] text-xs">
             <span class="flex items-center text-emerald-400 font-semibold" id="data-status-text">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse" id="status-dot"></span> <span id="status-lbl">Conectado a data.json</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse" id="status-dot"></span> <span id="status-lbl">Conectando...</span>
             </span>
         </div>
     </aside>
@@ -136,7 +136,7 @@
                 </div>
             </section>
 
-            <!-- COMPARATIVA VISUAL DE BARRAS & DONUT -->
+            <!-- COMPARATIVA VISUAL & DONUT -->
             <section id="sec-comparativa" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 
                 <!-- BARRAS COMPARATIVAS -->
@@ -147,8 +147,8 @@
                     </div>
 
                     <div class="flex items-center space-x-6 text-xs font-semibold">
-                        <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-slate-700 mr-2"></span>Septiembre</span>
-                        <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-orange-brand mr-2"></span>Octubre</span>
+                        <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-slate-700 mr-2"></span>Mes Anterior</span>
+                        <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-orange-brand mr-2"></span>Mes Actual</span>
                     </div>
 
                     <div class="space-y-6 pt-2">
@@ -159,10 +159,10 @@
                             </div>
                             <div class="space-y-1.5">
                                 <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
-                                    <div id="bar-inv-sep" class="bg-slate-700 h-4 rounded-full" style="width: 50%"></div>
+                                    <div id="bar-inv-sep" class="bg-slate-700 h-4 rounded-full" style="width: 0%"></div>
                                 </div>
                                 <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
-                                    <div id="bar-inv-oct" class="bg-orange-brand h-4 rounded-full" style="width: 75%"></div>
+                                    <div id="bar-inv-oct" class="bg-orange-brand h-4 rounded-full" style="width: 0%"></div>
                                 </div>
                             </div>
                         </div>
@@ -174,10 +174,10 @@
                             </div>
                             <div class="space-y-1.5">
                                 <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
-                                    <div id="bar-lead-sep" class="bg-slate-700 h-4 rounded-full" style="width: 50%"></div>
+                                    <div id="bar-lead-sep" class="bg-slate-700 h-4 rounded-full" style="width: 0%"></div>
                                 </div>
                                 <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
-                                    <div id="bar-lead-oct" class="bg-orange-brand h-4 rounded-full" style="width: 75%"></div>
+                                    <div id="bar-lead-oct" class="bg-orange-brand h-4 rounded-full" style="width: 0%"></div>
                                 </div>
                             </div>
                         </div>
@@ -189,10 +189,10 @@
                             </div>
                             <div class="space-y-1.5">
                                 <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
-                                    <div id="bar-conv-sep" class="bg-slate-700 h-4 rounded-full" style="width: 50%"></div>
+                                    <div id="bar-conv-sep" class="bg-slate-700 h-4 rounded-full" style="width: 0%"></div>
                                 </div>
                                 <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
-                                    <div id="bar-conv-oct" class="bg-orange-brand h-4 rounded-full" style="width: 75%"></div>
+                                    <div id="bar-conv-oct" class="bg-orange-brand h-4 rounded-full" style="width: 0%"></div>
                                 </div>
                             </div>
                         </div>
@@ -233,13 +233,11 @@
                 </div>
             </section>
 
-            <!-- NUEVO SECCIÓN: TENDENCIA DIARIA DE LEADS (IMAGEN SOLICITADA EN PLOTLY) -->
+            <!-- TENDENCIA DIARIA DE LEADS (PLOTLY DINÁMICO) -->
             <section id="sec-diaria" class="card-light p-6 space-y-4">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-900">🎯 Comparativa Diaria de Leads (Formularios) - Día del Mes</h2>
-                        <p class="text-xs text-slate-500">Comportamiento día a día comparando el mes actual contra el mes anterior</p>
-                    </div>
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900">🎯 Comparativa Diaria de Leads (Formularios) - Día del Mes</h2>
+                    <p class="text-xs text-slate-500">Comportamiento día a día comparando el mes actual contra el mes anterior extraído de la API</p>
                 </div>
                 <div id="plotlyDailyLeads" class="w-full h-80"></div>
             </section>
@@ -262,7 +260,7 @@
         </main>
     </div>
 
-    <!-- SCRIPT DE LECTURA DE JSON Y FILTROS -->
+    <!-- SCRIPT PRINCIPAL DE CARGA Y FILTROS -->
     <script>
         let rawData = null;
         let currentFilter = 'this_month';
@@ -282,7 +280,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             fetch('data.json')
                 .then(res => {
-                    if (!res.ok) throw new Error("HTTP Error " + res.status);
+                    if (!res.ok) throw new Error("No se pudo cargar data.json");
                     return res.json();
                 })
                 .then(data => {
@@ -298,53 +296,50 @@
         });
 
         function processAndRender(data) {
-            // Factor multiplicador dinámico por filtro
             let mult = 1.0;
-            if (currentFilter === 'last_7_days') mult = 0.28;
-            if (currentFilter === 'ytd') mult = 3.8;
-            if (currentFilter === 'last_month') mult = 0.88;
+            if (currentFilter === 'last_7_days') mult = 0.25;
+            if (currentFilter === 'ytd') mult = 3.5;
+            if (currentFilter === 'last_month') mult = 0.9;
 
-            // Extraer o calcular métricas principales de forma segura
             let kpis = data.kpis || {};
             let comp = data.comparativa || {};
             let donut = data.donut || {};
-            let topAds = data.destacados || data.top_ads || [];
+            let topAds = data.destacados || [];
             let campanas = data.campanas || [];
             let dailyTrend = data.daily_trend || [];
 
-            // Fallback en caso de que kpis o comparativa no existan
-            const spendOct = (kpis.spend_oct || kpis.spend_this_month || 3420.50) * mult;
-            const spendSep = (kpis.spend_sep || kpis.spend_last_month || 3050.00) * mult;
-            const leadsOct = Math.round((kpis.leads_oct || (kpis.leads_per_day ? kpis.leads_per_day * 25 : 428)) * mult);
-            const leadsSep = Math.round((kpis.leads_sep || 362) * mult);
-            const cplOct = kpis.cpl_oct || kpis.cpl_this_month || (spendOct / Math.max(leadsOct, 1));
-            const convOct = Math.round((kpis.conv_oct || 685) * mult);
+            const spendOct = (kpis.spend_oct || 0) * mult;
+            const spendSep = (kpis.spend_sep || 0) * mult;
+            const leadsOct = Math.round((kpis.leads_oct || 0) * mult);
+            const leadsSep = Math.round((kpis.leads_sep || 0) * mult);
+            const cplOct = kpis.cpl_oct || (spendOct / Math.max(leadsOct, 1));
+            const convOct = Math.round((kpis.conv_oct || 0) * mult);
 
-            // Rellenar KPIs superiores
+            // KPIs
             document.getElementById('kpi-spend-oct').innerText = '$' + spendOct.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
             document.getElementById('kpi-spend-sub').innerText = `vs periodo anterior ($${spendSep.toLocaleString('en-US', {minimumFractionDigits: 2})})`;
-            const spendVar = (((spendOct - spendSep) / Math.max(spendSep, 1)) * 100).toFixed(1);
+            const spendVar = spendSep > 0 ? (((spendOct - spendSep) / spendSep) * 100).toFixed(1) : '0';
             document.getElementById('kpi-spend-var').innerText = (spendVar >= 0 ? '+' : '') + spendVar + '%';
 
             document.getElementById('kpi-leads-oct').innerText = leadsOct;
             document.getElementById('kpi-leads-sub').innerText = `vs periodo anterior (${leadsSep} leads)`;
-            const leadsVar = (((leadsOct - leadsSep) / Math.max(leadsSep, 1)) * 100).toFixed(1);
+            const leadsVar = leadsSep > 0 ? (((leadsOct - leadsSep) / leadsSep) * 100).toFixed(1) : '0';
             document.getElementById('kpi-leads-var').innerText = (leadsVar >= 0 ? '+' : '') + leadsVar + '%';
 
             document.getElementById('kpi-cpl-oct').innerText = '$' + cplOct.toFixed(2);
             document.getElementById('kpi-conv-oct').innerText = convOct;
 
-            // Rellenar Comparativa Visual
-            const invOctDay = comp.inv_oct_day || (spendOct / 25);
-            const invSepDay = comp.inv_sep_day || (spendSep / 30);
-            const leadOctDay = comp.lead_oct_day || (leadsOct / 25);
-            const leadSepDay = comp.lead_sep_day || (leadsSep / 30);
-            const convOctDay = comp.conv_oct_day || (convOct / 25);
-            const convSepDay = comp.conv_sep_day || (convOct / 30 * 0.8);
+            // Comparativa
+            const invOctDay = comp.inv_oct_day || 0;
+            const invSepDay = comp.inv_sep_day || 0;
+            const leadOctDay = comp.lead_oct_day || 0;
+            const leadSepDay = comp.lead_sep_day || 0;
+            const convOctDay = comp.conv_oct_day || 0;
+            const convSepDay = comp.conv_sep_day || 0;
 
-            document.getElementById('val-inv-oct').innerText = '$' + invOctDay.toFixed(2);
-            document.getElementById('val-lead-oct').innerText = leadOctDay.toFixed(2);
-            document.getElementById('val-conv-oct').innerText = convOctDay.toFixed(2);
+            document.getElementById('val-inv-oct').innerText = '$' + (invOctDay * mult).toFixed(2);
+            document.getElementById('val-lead-oct').innerText = (leadOctDay * mult).toFixed(2);
+            document.getElementById('val-conv-oct').innerText = (convOctDay * mult).toFixed(2);
 
             const maxInv = Math.max(invSepDay, invOctDay, 1);
             document.getElementById('bar-inv-sep').style.width = ((invSepDay / maxInv) * 100) + '%';
@@ -358,10 +353,10 @@
             document.getElementById('bar-conv-sep').style.width = ((convSepDay / maxConv) * 100) + '%';
             document.getElementById('bar-conv-oct').style.width = ((convOctDay / maxConv) * 100) + '%';
 
-            // Rellenar Donut Chart
-            const fSpend = (donut.forms_spend || (spendOct * 0.81)) * mult;
-            const cSpend = (donut.convs_spend || (spendOct * 0.17)) * mult;
-            const oSpend = (donut.other_spend || (spendOct * 0.02)) * mult;
+            // Donut
+            const fSpend = (donut.forms_spend || 0) * mult;
+            const cSpend = (donut.convs_spend || 0) * mult;
+            const oSpend = (donut.other_spend || 0) * mult;
 
             document.getElementById('donut-forms').innerText = '$' + fSpend.toFixed(2);
             document.getElementById('donut-convs').innerText = '$' + cSpend.toFixed(2);
@@ -383,16 +378,16 @@
                 options: { cutout: '75%', plugins: { legend: { display: false } }, responsive: true, maintainAspectRatio: false }
             });
 
-            // Rellenar Gráfica Plotly Diaria (Comparativa Diaria de Leads)
+            // Gráfica Plotly 100% Automática
             renderPlotlyDailyGraph(dailyTrend);
 
-            // Rellenar Anuncios Destacados
+            // Anuncios Destacados
             const topDiv = document.getElementById('top-ads-cards');
             if (topAds.length > 0) {
                 topDiv.innerHTML = topAds.slice(0, 3).map((ad, i) => `
                     <div class="card-light p-5 space-y-4">
                         <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 bg-orange-100 text-orange-brand rounded">#${i+1} · MENOR COSTO</span>
-                        <h3 class="font-bold text-slate-900 text-sm truncate">${ad.ad_name || ad.name}</h3>
+                        <h3 class="font-bold text-slate-900 text-sm truncate">${ad.ad_name}</h3>
                         <div class="flex justify-between items-baseline pt-2 border-t border-slate-100">
                             <div>
                                 <span class="text-3xl font-black text-slate-900">$${parseFloat(ad.cpl || 0).toFixed(2)}</span>
@@ -406,16 +401,18 @@
                         <p class="text-[11px] text-slate-500">Inversión: $${(parseFloat(ad.spend || 0) * mult).toFixed(2)}</p>
                     </div>
                 `).join('');
+            } else {
+                topDiv.innerHTML = `<p class="text-xs text-slate-400">No hay anuncios destacados en este periodo.</p>`;
             }
 
-            // Rellenar Campañas
+            // Campañas
             const campDiv = document.getElementById('campaigns-bars');
             if (campanas.length > 0) {
                 campDiv.innerHTML = campanas.map(c => `
                     <div class="space-y-1 text-xs">
                         <div class="flex justify-between font-bold text-slate-700">
                             <span>${c.name}</span>
-                            <span>Oct: $${((c.oct || 0) * (mult > 1 ? 1 : mult)).toFixed(2)} / Sep: $${(c.sep || 0).toFixed(2)}</span>
+                            <span>Actual: $${(c.oct || 0).toFixed(2)} / Anterior: $${(c.sep || 0).toFixed(2)}</span>
                         </div>
                         <div class="space-y-1">
                             <div class="w-full bg-slate-100 rounded-full h-2.5">
@@ -427,36 +424,38 @@
                         </div>
                     </div>
                 `).join('');
+            } else {
+                campDiv.innerHTML = `<p class="text-xs text-slate-400">No hay campañas registradas para comparar.</p>`;
             }
         }
 
         function renderPlotlyDailyGraph(dailyTrend) {
-            let days = Array.from({length: 30}, (_, i) => i + 1);
-            let currentMonthLeads = [40, 57, 40, 36, 52, 36, 32, 27, 48, 30, 50, 41, 42, 44, 40, 36, 27, 41, 38, 33, 48, 33, 55, 45, 72, 36, 12];
-            let previousMonthLeads = [24, 27, 36, 20, 26, 31, 20, 17, 9, 9, 13, 20, 29, 9, 17, 11, 9, 3, 14, 14, 5, 10, 7, 6, 7, 5, 29, 56, 41, 43];
+            let days = Array.from({length: 31}, (_, i) => i + 1);
+            let monthsMap = {};
 
-            // Si el JSON contiene daily_trend real, mapearlo directamente
             if (Array.isArray(dailyTrend) && dailyTrend.length > 0) {
-                let octVals = {};
-                let sepVals = {};
                 dailyTrend.forEach(item => {
-                    let d = new Date(item.date);
-                    let dayNum = d.getDate();
-                    let m = d.getMonth() + 1;
-                    if (m === 10) octVals[dayNum] = (octVals[dayNum] || 0) + (parseInt(item.leads) || 0);
-                    if (m === 9) sepVals[dayNum] = (sepVals[dayNum] || 0) + (parseInt(item.leads) || 0);
+                    if (!item.date) return;
+                    let monthStr = item.date.substring(0, 7); // 'YYYY-MM'
+                    if (!monthsMap[monthStr]) monthsMap[monthStr] = {};
+                    
+                    let dayNum = new Date(item.date).getDate();
+                    monthsMap[monthStr][dayNum] = (monthsMap[monthStr][dayNum] || 0) + (parseInt(item.leads) || 0);
                 });
-                if (Object.keys(octVals).length > 0) {
-                    currentMonthLeads = days.map(day => octVals[day] !== undefined ? octVals[day] : null);
-                    previousMonthLeads = days.map(day => sepVals[day] || 0);
-                }
             }
+
+            let sortedMonths = Object.keys(monthsMap).sort();
+            let curMonthKey = sortedMonths.length > 0 ? sortedMonths[sortedMonths.length - 1] : '';
+            let prevMonthKey = sortedMonths.length > 1 ? sortedMonths[sortedMonths.length - 2] : '';
+
+            let currentMonthLeads = days.map(day => (curMonthKey && monthsMap[curMonthKey][day]) ? monthsMap[curMonthKey][day] : 0);
+            let previousMonthLeads = days.map(day => (prevMonthKey && monthsMap[prevMonthKey][day]) ? monthsMap[prevMonthKey][day] : 0);
 
             let traceCurrent = {
                 x: days,
                 y: currentMonthLeads,
                 mode: 'lines+markers',
-                name: 'Leads Mes Actual (2026-10)',
+                name: curMonthKey ? `Leads Mes Actual (${curMonthKey})` : 'Mes Actual',
                 line: { color: '#15803d', width: 2.5 },
                 marker: { color: '#15803d', size: 5 }
             };
@@ -465,7 +464,7 @@
                 x: days,
                 y: previousMonthLeads,
                 mode: 'lines+markers',
-                name: 'Leads Mes Anterior (2026-09)',
+                name: prevMonthKey ? `Leads Mes Anterior (${prevMonthKey})` : 'Mes Anterior',
                 line: { color: '#86efac', width: 2, dash: 'dashdot' },
                 marker: { color: '#86efac', size: 5 }
             };
