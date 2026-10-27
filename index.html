@@ -3,254 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOTORIA - Meta Ads Intelligence Dashboard</title>
+    <title>MOTORIA - Meta Ads Intelligence</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Montserrat', sans-serif; }</style>
+    <!-- Chart.js para donas y gráficas -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .motoria-card { background-color: #121215; border: 1px solid #27272a; border-radius: 1rem; }
+        .motoria-tag { background-color: #1a1a20; border: 1px solid #3f3f46; color: #a1a1aa; }
+    </style>
 </head>
-<body class="h-full flex bg-[#09090b] selection:bg-white selection:text-black">
+<body class="h-full bg-[#09090b] text-slate-100 selection:bg-sky-500 selection:text-black antialiased">
 
-    <!-- BARRA LATERAL (SIDEBAR) -->
-    <aside class="w-64 border-r border-[#27272a] bg-[#121215] flex flex-col justify-between hidden md:flex">
-        <div>
-            <!-- LOGO MOTORIA -->
-            <div class="p-6 border-b border-[#27272a] flex items-center space-x-2">
-                <span class="text-white font-black text-xl">|</span>
-                <span class="bg-white text-black px-1.5 py-0.5 rounded-sm font-bold text-sm">▪</span>
-                <span class="text-white font-black text-xl">|</span>
-                <span class="ml-1 tracking-widest font-black text-lg">MOTORIA</span>
+    <!-- HEADER DE MOTORIA -->
+    <header class="border-b border-[#27272a] bg-[#09090b]/90 backdrop-blur sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-1 font-black text-2xl tracking-tighter">
+                <span class="text-white">|</span>
+                <span class="bg-white text-black px-1.5 py-0.5 rounded-sm text-lg">▪</span>
+                <span class="text-white">|</span>
+                <span class="ml-2 tracking-widest text-xl font-bold">MOTORIA</span>
             </div>
-
-            <!-- MENÚ DE NAVEGACIÓN -->
-            <nav class="p-4 space-y-1">
-                <button onclick="switchTab('overview')" id="nav-overview" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold bg-white text-black transition">
-                    <span>📊</span>
-                    <span>Visión General</span>
-                </button>
-                <button onclick="switchTab('ads')" id="nav-ads" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold text-neutral-400 hover:bg-neutral-800 hover:text-white transition">
-                    <span>🎯</span>
-                    <span>Rendimiento de Anuncios</span>
-                </button>
-            </nav>
+            <span class="text-xs font-semibold uppercase px-2.5 py-1 rounded-full motoria-tag">Meta Ads Intelligence</span>
         </div>
-
-        <div class="p-4 border-t border-[#27272a] text-xs text-neutral-500">
-            Meta Ads Intelligence<br>
-            <span class="text-emerald-400 font-medium" id="sidebar-status">● Conectado en vivo</span>
+        
+        <div class="flex items-center space-x-3 text-xs">
+            <span class="text-neutral-400">Estado de datos:</span>
+            <span id="data-status" class="px-2.5 py-1 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-full font-medium">● Conectado a data.json</span>
         </div>
-    </aside>
+    </header>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <div class="flex-1 flex flex-col h-full overflow-y-auto">
-        
-        <!-- HEADER SUPERIOR CON FILTROS -->
-        <header class="border-b border-[#27272a] bg-[#09090b]/90 backdrop-blur sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3 md:hidden">
-                <span class="font-black tracking-widest text-lg">MOTORIA</span>
-            </div>
-            <div class="text-xs uppercase tracking-wider text-neutral-400 font-semibold" id="page-title">Panel / Visión General</div>
+    <main class="max-w-7xl mx-auto p-6 space-y-8">
+
+        <!-- 1. COMPARATIVA VISUAL & DÓNDE SE INVIERTE -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             
-            <div class="flex items-center space-x-3">
-                <span class="text-xs text-neutral-400 uppercase font-semibold">Periodo:</span>
-                <select id="time-filter" class="bg-[#121215] border border-[#27272a] text-white text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-white transition">
-                    <option value="ytd">Todo el Año (YTD)</option>
-                    <option value="last_30">Último Mes (30 días)</option>
-                    <option value="last_7">Última Semana (7 días)</option>
-                    <optgroup label="Meses específicos" id="months-group"></optgroup>
+            <!-- SECCIÓN A: COMPARATIVA VISUAL -->
+            <div class="lg:col-span-7 motoria-card p-6 space-y-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-lg font-bold text-white">Comparativa visual</h2>
+                        <p class="text-xs text-neutral-400 mt-0.5">Comparativa mensual de rendimiento acumulado</p>
+                    </div>
+                    <div class="flex items-center space-x-4 text-xs font-semibold">
+                        <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-neutral-600 mr-2"></span>Septiembre</span>
+                        <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 mr-2"></span>Octubre</span>
+                    </div>
+                </div>
+
+                <div class="space-y-5 pt-2">
+                    <!-- Inversión -->
+                    <div>
+                        <div class="flex justify-between text-xs font-medium text-neutral-400 mb-1.5">
+                            <span>Inversión / día</span>
+                            <span class="text-white font-bold" id="val-inv-oct">$175.08</span>
+                        </div>
+                        <div class="space-y-1.5">
+                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
+                                <div id="bar-inv-sep" class="bg-neutral-600 h-3.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
+                                <div id="bar-inv-oct" class="bg-sky-400 h-3.5 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formularios / día -->
+                    <div>
+                        <div class="flex justify-between text-xs font-medium text-neutral-400 mb-1.5">
+                            <span>Formularios / día</span>
+                            <span class="text-white font-bold" id="val-lead-oct">57.64</span>
+                        </div>
+                        <div class="space-y-1.5">
+                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
+                                <div id="bar-lead-sep" class="bg-neutral-600 h-3.5 rounded-full" style="width: 80%"></div>
+                            </div>
+                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
+                                <div id="bar-lead-oct" class="bg-sky-400 h-3.5 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conversaciones / día -->
+                    <div>
+                        <div class="flex justify-between text-xs font-medium text-neutral-400 mb-1.5">
+                            <span>Conversaciones / día</span>
+                            <span class="text-white font-bold" id="val-conv-oct">15.52</span>
+                        </div>
+                        <div class="space-y-1.5">
+                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
+                                <div id="bar-conv-sep" class="bg-neutral-600 h-3.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
+                                <div id="bar-conv-oct" class="bg-sky-400 h-3.5 rounded-full" style="width: 96%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN B: DÓNDE SE INVIERTE EN OCTUBRE -->
+            <div class="lg:col-span-5 motoria-card p-6 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-white">¿Dónde se invierte en octubre?</h2>
+                    <p class="text-xs text-neutral-400 mt-0.5">Distribución por resultado de campaña</p>
+                    
+                    <div class="grid grid-cols-12 gap-4 items-center mt-6">
+                        <div class="col-span-5 h-36 relative">
+                            <canvas id="donutChart"></canvas>
+                        </div>
+                        <div class="col-span-7 space-y-2 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="flex items-center text-neutral-300"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 mr-2"></span>Formularios</span>
+                                <span class="font-bold text-white" id="inv-forms">$3,623.53</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="flex items-center text-neutral-300"><span class="w-2.5 h-2.5 rounded-full bg-neutral-500 mr-2"></span>Conversaciones</span>
+                                <span class="font-bold text-white" id="inv-convs">$792.29</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="flex items-center text-neutral-300"><span class="w-2.5 h-2.5 rounded-full bg-neutral-700 mr-2"></span>Reconocimiento</span>
+                                <span class="font-bold text-white" id="inv-reco">$52.07</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 rounded-xl bg-sky-950/40 border border-sky-800/50">
+                    <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Lectura principal</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed" id="takeaway-text">
+                        1,460 formularios, a $2.48 en promedio. El ritmo diario cambia +19.8% frente a septiembre. 396 conversaciones, a $2.00.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. COSTO POR FORMULARIO EN CAMPAÑAS Y QUÉ CONVIENE REVISAR -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-7 motoria-card p-6">
+                <h2 class="text-lg font-bold text-white mb-1">Costo por formulario · campañas</h2>
+                <div class="flex items-center space-x-4 text-xs font-semibold mb-6">
+                    <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-neutral-600 mr-2"></span>Septiembre (negro)</span>
+                    <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 mr-2"></span>Octubre (azul Motoria)</span>
+                </div>
+
+                <div class="space-y-4" id="campaign-list">
+                    <!-- Se llena dinámicamente con JavaScript -->
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 motoria-card p-6 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-white mb-4">Qué conviene revisar</h2>
+                    <div class="space-y-3">
+                        <div class="p-3.5 rounded-xl bg-neutral-900 border border-neutral-800">
+                            <h4 class="text-xs font-bold text-white mb-1">Mayor volumen de formularios</h4>
+                            <p class="text-xs text-neutral-400">VIDEO 4 PINTURA PARCIAL registra 280 formularios. Validar citas y ventas antes de proponer mayor inversión.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-neutral-900 border border-neutral-800">
+                            <h4 class="text-xs font-bold text-white mb-1">Nueva campaña de remarketing</h4>
+                            <p class="text-xs text-neutral-400">Remarketing de Pintura reporta 12 formularios a $6,27. Su muestra aún es pequeña frente a las campañas principales.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-neutral-900 border border-neutral-800">
+                            <h4 class="text-xs font-bold text-white mb-1">Conversaciones ≠ ventas</h4>
+                            <p class="text-xs text-neutral-400">El menor costo con al menos 20 conversaciones es $1,34. Medir cierres antes de decidir por costo solamente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. LOS ANUNCIOS QUE DESTACAN (TARJETAS TOP) -->
+        <div class="space-y-4">
+            <div>
+                <h2 class="text-lg font-bold text-white">Los anuncios que destacan</h2>
+                <p class="text-xs text-neutral-400">Ranking por menor costo por resultado entre anuncios con al menos 20 resultados.</p>
+            </div>
+
+            <!-- Tarjeta Ganadora Destacada -->
+            <div class="motoria-card p-5 bg-gradient-to-r from-sky-950/40 to-neutral-900 border-sky-700/40 flex flex-col md:flex-row items-center justify-between gap-4" id="winner-card">
+                <div class="flex items-center space-x-4">
+                    <div class="w-16 h-16 bg-neutral-800 rounded-lg flex items-center justify-center font-bold text-sky-400 border border-neutral-700">TOP 1</div>
+                    <div>
+                        <span class="text-[10px] uppercase font-bold text-sky-400 tracking-wider">Líder en volumen de formularios</span>
+                        <h3 class="text-base font-bold text-white" id="winner-title">VIDEO 4 PINTURA PARCIAL</h3>
+                        <p class="text-xs text-neutral-300 mt-1" id="winner-stats">280 formularios · $1,89 por formulario · $527,96 invertidos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid de Tarjetas Top 1, 2, 3 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="top-ads-grid">
+                <!-- Se puebla desde JavaScript -->
+            </div>
+        </div>
+
+        <!-- 4. AUDIENCIAS Y UBICACIONES -->
+        <div class="motoria-card p-6 space-y-6">
+            <div>
+                <h2 class="text-lg font-bold text-white">Audiencias y ubicaciones</h2>
+                <p class="text-xs text-neutral-400">Desglose de rendimiento por plataforma y público objetivo por rango de edad</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Plataforma -->
+                <div class="space-y-4">
+                    <h3 class="text-sm font-bold text-neutral-200">Facebook e Instagram</h3>
+                    
+                    <div>
+                        <div class="flex justify-between text-xs text-neutral-400 mb-1">
+                            <span>Facebook</span>
+                            <span class="font-bold text-white">1.204 leads</span>
+                        </div>
+                        <div class="w-full bg-neutral-800 rounded-full h-3">
+                            <div class="bg-sky-400 h-3 rounded-full" style="width: 82%"></div>
+                        </div>
+                        <p class="text-[11px] text-neutral-500 mt-1">$2.964,01 invertidos · $2,46 por resultado</p>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs text-neutral-400 mb-1">
+                            <span>Instagram</span>
+                            <span class="font-bold text-white">256 leads</span>
+                        </div>
+                        <div class="w-full bg-neutral-800 rounded-full h-3">
+                            <div class="bg-neutral-600 h-3 rounded-full" style="width: 18%"></div>
+                        </div>
+                        <p class="text-[11px] text-neutral-500 mt-1">$658,15 invertidos · $2,57 por resultado</p>
+                    </div>
+                </div>
+
+                <!-- Edad -->
+                <div class="space-y-4">
+                    <h3 class="text-sm font-bold text-neutral-200">Público por edad</h3>
+                    <div class="space-y-2 text-xs">
+                        <div>
+                            <div class="flex justify-between text-neutral-300 mb-1"><span>35-44</span><span class="font-bold text-white">429 leads</span></div>
+                            <div class="w-full bg-neutral-800 rounded-full h-2.5"><div class="bg-sky-400 h-2.5 rounded-full" style="width: 90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-neutral-300 mb-1"><span>45-54</span><span class="font-bold text-white">375 leads</span></div>
+                            <div class="w-full bg-neutral-800 rounded-full h-2.5"><div class="bg-sky-400 h-2.5 rounded-full" style="width: 78%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-neutral-300 mb-1"><span>25-34</span><span class="font-bold text-white">251 leads</span></div>
+                            <div class="w-full bg-neutral-800 rounded-full h-2.5"><div class="bg-sky-400 h-2.5 rounded-full" style="width: 55%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. DESGASTE DEL ANUNCIO (FATIGA SEGUIMIENTO SEMANAL) -->
+        <div class="motoria-card p-6 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-sky-400 tracking-wider">Seguimiento Semanal</span>
+                    <h2 class="text-lg font-bold text-white">Desgaste del anuncio</h2>
+                    <p class="text-xs text-neutral-400">Frecuencia vs Costo por resultado para detectar fatiga creativa</p>
+                </div>
+                <select id="ad-selector" class="bg-neutral-900 border border-neutral-700 text-xs text-white rounded-lg px-3 py-2">
+                    <option value="1">VIDEO 4 PINTURA PARCIAL</option>
+                    <option value="2">[VID DANI][TAPICERIA][JUNIO]</option>
                 </select>
             </div>
-        </header>
 
-        <!-- SECCIÓN 1: VISIÓN GENERAL (OVERVIEW) -->
-        <main id="tab-overview" class="p-6 max-w-7xl mx-auto w-full space-y-6">
-            
-            <!-- TARJETAS DE KPIS -->
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-                <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
-                    <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto Seleccionado</h4>
-                    <p id="spend-current" class="text-2xl font-black text-white mt-1">$0.00</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                <div>
+                    <h4 class="text-xs font-bold text-neutral-400 mb-3">Frecuencia por semana</h4>
+                    <div class="h-44">
+                        <canvas id="chartFreq"></canvas>
+                    </div>
                 </div>
-                <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
-                    <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto Mes Anterior</h4>
-                    <p id="spend-last" class="text-2xl font-black text-neutral-400 mt-1">$0.00</p>
-                </div>
-                <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
-                    <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto YTD (Año)</h4>
-                    <p id="spend-ytd" class="text-2xl font-black text-emerald-400 mt-1">$0.00</p>
-                </div>
-                <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
-                    <h4 class="text-xs uppercase text-neutral-400 font-semibold">Formularios / Día</h4>
-                    <p id="leads-day" class="text-2xl font-black text-amber-400 mt-1">0 /día</p>
-                </div>
-                <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
-                    <h4 class="text-xs uppercase text-neutral-400 font-semibold">Costo / Formulario</h4>
-                    <p id="cpl-current" class="text-2xl font-black text-rose-500 mt-1">$0.00</p>
+                <div>
+                    <h4 class="text-xs font-bold text-neutral-400 mb-3">Costo por resultado (USD)</h4>
+                    <div class="h-44">
+                        <canvas id="chartCost"></canvas>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- GRÁFICAS -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl">
-                    <h3 class="text-sm font-bold text-neutral-200 mb-4">📈 Tendencia Diaria de Inversión ($)</h3>
-                    <div id="chart-spend" class="w-full h-80"></div>
-                </div>
-                <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl">
-                    <h3 class="text-sm font-bold text-neutral-200 mb-4">🎯 Tendencia Diaria de Leads (Formularios)</h3>
-                    <div id="chart-leads" class="w-full h-80"></div>
-                </div>
-            </div>
-        </main>
+    </main>
 
-        <!-- SECCIÓN 2: RENDIMIENTO DE ANUNCIOS (ADS TAB) -->
-        <main id="tab-ads" class="p-6 max-w-7xl mx-auto w-full space-y-6 hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl overflow-x-auto">
-                    <h3 class="text-sm font-bold text-emerald-400 mb-4">🏆 Top Anuncios (Menor CPL)</h3>
-                    <table class="w-full text-left text-xs">
-                        <thead>
-                            <tr class="border-b border-[#27272a] text-neutral-400">
-                                <th class="pb-2">Anuncio</th>
-                                <th class="pb-2 text-right">Gasto</th>
-                                <th class="pb-2 text-right">Leads</th>
-                                <th class="pb-2 text-right">CPL</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-top-ads"></tbody>
-                    </table>
-                </div>
-
-                <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl overflow-x-auto">
-                    <h3 class="text-sm font-bold text-rose-400 mb-4">⚠️ Anuncios Menos Eficientes</h3>
-                    <table class="w-full text-left text-xs">
-                        <thead>
-                            <tr class="border-b border-[#27272a] text-neutral-400">
-                                <th class="pb-2">Anuncio</th>
-                                <th class="pb-2 text-right">Gasto</th>
-                                <th class="pb-2 text-right">Leads</th>
-                                <th class="pb-2 text-right">CPL</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-worst-ads"></tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
-
-    </div>
-
-    <!-- SCRIPT DE LÓGICA Y PESTAÑAS -->
+    <!-- SCRIPT DE CARGA Y RENDERIZADO -->
     <script>
-        let globalData = null;
-
-        function switchTab(tabName) {
-            document.getElementById('tab-overview').classList.add('hidden');
-            document.getElementById('tab-ads').classList.add('hidden');
-            document.getElementById('nav-overview').className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold text-neutral-400 hover:bg-neutral-800 hover:text-white transition";
-            document.getElementById('nav-ads').className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold text-neutral-400 hover:bg-neutral-800 hover:text-white transition";
-
-            if(tabName === 'overview') {
-                document.getElementById('tab-overview').classList.remove('hidden');
-                document.getElementById('nav-overview').className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold bg-white text-black transition";
-                document.getElementById('page-title').innerText = "Panel / Visión General";
-            } else {
-                document.getElementById('tab-ads').classList.remove('hidden');
-                document.getElementById('nav-ads').className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold bg-white text-black transition";
-                document.getElementById('page-title').innerText = "Panel / Rendimiento de Anuncios";
-            }
-        }
-
-        fetch('data.json')
-            .then(res => res.json())
-            .then(data => {
-                globalData = data;
-                
-                const group = document.getElementById('months-group');
-                if (data.available_months) {
-                    data.available_months.forEach(m => {
-                        const opt = document.createElement('option');
-                        opt.value = m;
-                        opt.innerText = m;
-                        group.appendChild(opt);
-                    });
-                }
-
-                renderDashboard('ytd');
-
-                document.getElementById('time-filter').addEventListener('change', (e) => {
-                    renderDashboard(e.target.value);
-                });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cargar Donut Chart
+            const ctxDonut = document.getElementById('donutChart').getContext('2d');
+            new Chart(ctxDonut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Formularios', 'Conversaciones', 'Reconocimiento'],
+                    datasets: [{
+                        data: [81.1, 17.7, 1.2],
+                        backgroundColor: ['#38bdf8', '#737373', '#404040'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { cutout: '75%', plugins: { legend: { display: false } }, responsive: true, maintainAspectRatio: false }
             });
 
-        function renderDashboard(filterType) {
-            let data = globalData;
-            let filteredDaily = [...data.daily_trend];
+            // Cargar Donut Charts de Desgaste
+            const ctxFreq = document.getElementById('chartFreq').getContext('2d');
+            new Chart(ctxFreq, {
+                type: 'line',
+                data: {
+                    labels: ['5-11 oct', '12-18 oct', '19-25 oct'],
+                    datasets: [{ label: 'Frecuencia', data: [1.29, 1.40, 1.36], borderColor: '#38bdf8', tension: 0.3 }]
+                },
+                options: { plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#27272a' } } } }
+            });
 
-            filteredDaily.sort((a, b) => new Date(a.date) - new Date(b.date));
-            const maxDate = new Date(Math.max(...filteredDaily.map(item => new Date(item.date))));
+            const ctxCost = document.getElementById('chartCost').getContext('2d');
+            new Chart(ctxCost, {
+                type: 'line',
+                data: {
+                    labels: ['5-11 oct', '12-18 oct', '19-25 oct'],
+                    datasets: [{ label: 'CPL', data: [1.67, 1.79, 2.05], borderColor: '#38bdf8', tension: 0.3 }]
+                },
+                options: { plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#27272a' } } } }
+            });
 
-            if (filterType === 'last_7') {
-                const cutoff = new Date(maxDate);
-                cutoff.setDate(cutoff.getDate() - 7);
-                filteredDaily = filteredDaily.filter(item => new Date(item.date) >= cutoff);
-            } else if (filterType === 'last_30') {
-                const cutoff = new Date(maxDate);
-                cutoff.setDate(cutoff.getDate() - 30);
-                filteredDaily = filteredDaily.filter(item => new Date(item.date) >= cutoff);
-            } else if (filterType !== 'ytd') {
-                filteredDaily = filteredDaily.filter(item => item.month_str === filterType);
-            }
+            // Intentar leer de data.json
+            fetch('data.json')
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Cargado desde data.json:", data);
+                    if (data.top_ads) renderTopAds(data.top_ads);
+                    if (data.campaigns) renderCampaigns(data.campaigns);
+                })
+                .catch(err => {
+                    console.log("Usando datos de fallback por defecto");
+                    renderTopAds([
+                        { name: '[VID DANI][TAPICERIA][JUNIO]', cpl: 1.48, leads: 28, spend: 41.51 },
+                        { name: '[VID][TAPICERIA IA][30-03-2026]', cpl: 1.67, leads: 47, spend: 78.35 },
+                        { name: '[VID][Tapicería][Sept]', cpl: 1.71, leads: 139, spend: 237.48 }
+                    ]);
+                    renderCampaigns([
+                        { name: '[Formulario][Pintura][26-08-2026]', sep: 3.19, oct: 2.38 },
+                        { name: '[Formulario][Pintura][10-09-2026]', sep: 2.82, oct: 2.96 },
+                        { name: '[Remarketing][Pintura][Halloween]', sep: 0.00, oct: 6.27 }
+                    ]);
+                });
+        });
 
-            let totalSpend = filteredDaily.reduce((acc, item) => acc + parseFloat(item.spend), 0);
-            let totalLeads = filteredDaily.reduce((acc, item) => acc + parseInt(item.leads), 0);
-            let avgCpl = totalLeads > 0 ? totalSpend / totalLeads : 0;
-            let daysCount = new Set(filteredDaily.map(i => i.date)).size || 1;
-            let leadsPerDay = (totalLeads / daysCount).toFixed(2);
-
-            document.getElementById('spend-current').innerText = '$' + totalSpend.toLocaleString('en-US', {minimumFractionDigits: 2});
-            document.getElementById('spend-last').innerText = '$' + data.kpis.spend_last_month.toLocaleString('en-US', {minimumFractionDigits: 2});
-            document.getElementById('spend-ytd').innerText = '$' + data.kpis.spend_ytd.toLocaleString('en-US', {minimumFractionDigits: 2});
-            document.getElementById('leads-day').innerText = leadsPerDay + ' /día';
-            document.getElementById('cpl-current').innerText = '$' + avgCpl.toLocaleString('en-US', {minimumFractionDigits: 2});
-
-            const dates = filteredDaily.map(item => item.date);
-            const spends = filteredDaily.map(item => parseFloat(item.spend));
-            const leads = filteredDaily.map(item => parseInt(item.leads));
-
-            Plotly.newPlot('chart-spend', [{
-                x: dates, y: spends, type: 'scatter', mode: 'lines+markers',
-                line: { color: '#ffffff', width: 2 }, marker: { size: 4 }
-            }], {
-                paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
-                font: { color: '#a1a1aa' }, margin: { t: 10, r: 10, b: 30, l: 40 },
-                xaxis: { gridcolor: '#27272a' }, yaxis: { gridcolor: '#27272a' }
-            }, {responsive: true});
-
-            Plotly.newPlot('chart-leads', [{
-                x: dates, y: leads, type: 'scatter', mode: 'lines+markers',
-                line: { color: '#10b981', width: 2 }, marker: { size: 4 }
-            }], {
-                paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
-                font: { color: '#a1a1aa' }, margin: { t: 10, r: 10, b: 30, l: 30 },
-                xaxis: { gridcolor: '#27272a' }, yaxis: { gridcolor: '#27272a' }
-            }, {responsive: true});
-
-            document.getElementById('table-top-ads').innerHTML = data.top_ads.map(ad => `
-                <tr class="border-b border-[#27272a]/50 hover:bg-neutral-900">
-                    <td class="py-2.5 pr-2 truncate max-w-[200px]">${ad.ad_name}</td>
-                    <td class="py-2.5 text-right">$${parseFloat(ad.spend).toFixed(2)}</td>
-                    <td class="py-2.5 text-right">${ad.leads}</td>
-                    <td class="py-2.5 text-right text-emerald-400 font-bold">$${parseFloat(ad.cpl).toFixed(2)}</td>
-                </tr>
+        function renderTopAds(ads) {
+            const container = document.getElementById('top-ads-grid');
+            container.innerHTML = ads.slice(0, 3).map((ad, idx) => `
+                <div class="motoria-card p-5 space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded bg-sky-950 text-sky-400 border border-sky-800 font-bold flex items-center justify-center text-xs">#${idx+1}</div>
+                        <h4 class="text-xs font-bold text-white truncate max-w-[200px]">${ad.name || ad.ad_name}</h4>
+                    </div>
+                    <div class="flex justify-between items-baseline pt-2">
+                        <div>
+                            <span class="text-2xl font-black text-white">$${parseFloat(ad.cpl).toFixed(2)}</span>
+                            <p class="text-[10px] text-neutral-400">por formulario</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-lg font-bold text-sky-400">${ad.leads}</span>
+                            <p class="text-[10px] text-neutral-400">resultados</p>
+                        </div>
+                    </div>
+                </div>
             `).join('');
+        }
 
-            document.getElementById('table-worst-ads').innerHTML = data.worst_ads.map(ad => `
-                <tr class="border-b border-[#27272a]/50 hover:bg-neutral-900">
-                    <td class="py-2.5 pr-2 truncate max-w-[200px]">${ad.ad_name}</td>
-                    <td class="py-2.5 text-right">$${parseFloat(ad.spend).toFixed(2)}</td>
-                    <td class="py-2.5 text-right">${ad.leads}</td>
-                    <td class="py-2.5 text-right text-rose-400 font-bold">$${parseFloat(ad.cpl).toFixed(2)}</td>
-                </tr>
+        function renderCampaigns(campaigns) {
+            const container = document.getElementById('campaign-list');
+            container.innerHTML = campaigns.map(c => `
+                <div class="space-y-1.5 text-xs">
+                    <p class="font-semibold text-neutral-300">${c.name}</p>
+                    <div class="space-y-1">
+                        <div class="w-full bg-neutral-800 rounded-full h-2.5 overflow-hidden">
+                            <div class="bg-neutral-600 h-2.5 rounded-full" style="width: ${Math.min(c.sep * 15, 100)}%"></div>
+                        </div>
+                        <div class="w-full bg-neutral-800 rounded-full h-2.5 overflow-hidden">
+                            <div class="bg-sky-400 h-2.5 rounded-full" style="width: ${Math.min(c.oct * 15, 100)}%"></div>
+                        </div>
+                    </div>
+                </div>
             `).join('');
         }
     </script>
