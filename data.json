@@ -1,101 +1,101 @@
 {
     "kpis": {
-        "spend_oct": 3430.3100000000004,
-        "spend_sep": 2175.95,
-        "leads_oct": 1095,
-        "leads_sep": 567,
-        "cpl_oct": 3.13,
-        "cpl_sep": 3.84,
-        "conv_oct": 55,
-        "conv_sep": 108
+        "spend_oct": 7673.74,
+        "spend_sep": 397.02,
+        "leads_oct": 1725,
+        "leads_sep": 28,
+        "cpl_oct": 4.45,
+        "cpl_sep": 14.18,
+        "conv_oct": 50,
+        "conv_sep": 0
     },
     "comparativa": {
-        "inv_sep_day": 72.53,
-        "inv_oct_day": 127.05,
-        "lead_sep_day": 18.9,
-        "lead_oct_day": 40.56,
-        "conv_sep_day": 3.6,
-        "conv_oct_day": 2.04
+        "inv_sep_day": 66.17,
+        "inv_oct_day": 284.21,
+        "lead_sep_day": 4.67,
+        "lead_oct_day": 63.89,
+        "conv_sep_day": 0.0,
+        "conv_oct_day": 1.85
     },
     "donut": {
-        "forms_spend": 3027.17,
-        "convs_spend": 317.49,
-        "other_spend": 345.68,
-        "total_forms": 1095,
-        "avg_cpl": 3.13
+        "forms_spend": 7478.41,
+        "convs_spend": 588.69,
+        "other_spend": 71.28,
+        "total_forms": 1725,
+        "avg_cpl": 4.45
     },
     "campanas": [
         {
+            "name": "[Reconocimiento][AgenciaJetourAmericas][Abril][NS]",
+            "sep": 265.78,
+            "oct": 0
+        },
+        {
             "name": "[Leads][Dashing Jetour][Abril 2026][NS]",
-            "sep": 2.78,
-            "oct": 0
+            "sep": 2.04,
+            "oct": 2.78
         },
         {
-            "name": "[Ventas][Karry][Asesores Digitales][Junio]",
-            "sep": 64.86,
-            "oct": 0
+            "name": "[Leads][X50 Jetour][Abril 2026][NS]",
+            "sep": 7.55,
+            "oct": 3.69
         },
         {
-            "name": "[Leads][Rely][Julio]",
-            "sep": 2.42,
-            "oct": 0
+            "name": "[Leads][X70 Jetour][Abril 2026][NS]",
+            "sep": 3.64,
+            "oct": 4.77
         },
         {
-            "name": "[Leads Karry][Julio]",
-            "sep": 4.33,
-            "oct": 0
+            "name": "[Leads][T1 Jetour][Abril 2026][NS]",
+            "sep": 14.42,
+            "oct": 6.08
         },
         {
-            "name": "[Interacción][Feria Verano][Motoria][Agosto]",
-            "sep": 72.47,
-            "oct": 0
-        },
-        {
-            "name": "[Leads][X50][Agosto]",
-            "sep": 4.73,
-            "oct": 0
+            "name": "[Leads][T2 Jetour][Abril 2026][NS]",
+            "sep": 13.66,
+            "oct": 10.57
         }
     ],
     "destacados": [
         {
-            "ad_name": "VIDEO KARRY MINI VAN",
-            "spend": 48.23,
-            "leads": 32.0,
-            "clicks": "10591428323326122429221833152329223426303318218",
-            "impressions": "1359916519141954048940332561348641952362435841170897049247958268528327159",
-            "cpl": 1.5071875
+            "ad_name": "[Leads][Rely][Mayo][NS]",
+            "spend": 140.32,
+            "leads": 67.0,
+            "clicks": "199183252292167201",
+            "impressions": "797279101048613824768210330",
+            "cpl": 2.094328358208955
         },
         {
-            "ad_name": "VIDEO KARRY TRUCK Andrea",
-            "spend": 8.05,
-            "leads": 5.0,
-            "clicks": "3041035131013122070200001300",
-            "impressions": "3131821541721542661255049015987391112445103351425092581",
-            "cpl": 1.61
+            "ad_name": "Arte Marca Estático Dashing",
+            "spend": 1237.11,
+            "leads": 462.0,
+            "clicks": "2331786115523932920131733834425731138939829127233018584154183292223351359327276",
+            "impressions": "1366513317394511376217162847315109189032288430977252592902823869239372036025426402562438585851721120813322662670645021440683873028130",
+            "cpl": 2.6777272727272723
         },
         {
-            "ad_name": "VIDEO KARRY TRUCK - Copia",
-            "spend": 56.42,
-            "leads": 33.0,
-            "clicks": "815624930131627162329382321383637313935212326195",
-            "impressions": "111300140611471025329414641704538848957557449721104711508781005105572150769771383",
-            "cpl": 1.7096969696969697
+            "ad_name": "[VIDEOS][Rely][Mayo][NS]",
+            "spend": 44.26,
+            "leads": 16.0,
+            "clicks": "4614297513824",
+            "impressions": "9463037242515811355482",
+            "cpl": 2.76625
         },
         {
-            "ad_name": "VIDEO KARRY TRUCK",
-            "spend": 322.43,
-            "leads": 170.0,
-            "clicks": "19430723018322816712414016118419613016719619512814315912212313413412014214",
-            "impressions": "5762103278134631278866481474048535248573273655308659159425967490648165257487843034636437942864520673",
-            "cpl": 1.8966470588235294
+            "ad_name": "VIDEO Jetour T1 | Marco",
+            "spend": 453.58,
+            "leads": 129.0,
+            "clicks": "268256205190244239291298254178",
+            "impressions": "120621224294229973106751161017422184971536211254",
+            "cpl": 3.516124031007752
         },
         {
-            "ad_name": "ESTÁTICO RELY R8 - Copia",
-            "spend": 5.88,
-            "leads": 3.0,
-            "clicks": "023624001300000220114726464",
-            "impressions": "358942596310945517245411116917166766742281647119790331104",
-            "cpl": 1.96
+            "ad_name": "Estático 1 X50",
+            "spend": 1330.45,
+            "leads": 361.0,
+            "clicks": "130143341041545264343328176162202270258171227288170180176174144168252245168227",
+            "impressions": "12860137814036115451831255385475206162157012210110891109412499139329587129681817613645141541546416243152271627518535186811592014586",
+            "cpl": 3.6854570637119113
         }
     ],
     "daily_trend": [
@@ -293,927 +293,9 @@
         },
         {
             "date": "2026-05-27",
-            "spend": 213.12,
-            "leads": 69,
-            "conversations": 1
-        },
-        {
-            "date": "2026-05-28",
-            "spend": 167.49,
-            "leads": 56,
-            "conversations": 0
-        },
-        {
-            "date": "2026-05-29",
-            "spend": 161.71,
-            "leads": 47,
-            "conversations": 0
-        },
-        {
-            "date": "2026-05-30",
-            "spend": 163.54,
-            "leads": 49,
-            "conversations": 1
-        },
-        {
-            "date": "2026-05-31",
-            "spend": 195.32,
-            "leads": 80,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-01",
-            "spend": 178.41,
-            "leads": 55,
-            "conversations": 0
-        },
-        {
-            "date": "2026-06-02",
-            "spend": 167.5,
-            "leads": 50,
-            "conversations": 0
-        },
-        {
-            "date": "2026-06-03",
-            "spend": 154.01,
-            "leads": 53,
-            "conversations": 0
-        },
-        {
-            "date": "2026-06-04",
-            "spend": 129.09,
-            "leads": 34,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-05",
-            "spend": 149.47,
-            "leads": 56,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-06",
-            "spend": 246.83,
-            "leads": 91,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-07",
-            "spend": 262.04,
-            "leads": 91,
-            "conversations": 3
-        },
-        {
-            "date": "2026-06-08",
-            "spend": 186.05,
-            "leads": 78,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-09",
-            "spend": 163.44,
-            "leads": 59,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-10",
-            "spend": 166.89,
-            "leads": 69,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-11",
-            "spend": 148.77,
-            "leads": 47,
-            "conversations": 2
-        },
-        {
-            "date": "2026-06-12",
-            "spend": 161.08,
-            "leads": 49,
-            "conversations": 5
-        },
-        {
-            "date": "2026-06-13",
-            "spend": 146.3,
-            "leads": 36,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-14",
-            "spend": 165.92,
-            "leads": 53,
-            "conversations": 2
-        },
-        {
-            "date": "2026-06-15",
-            "spend": 152.19,
-            "leads": 22,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-16",
-            "spend": 198.86,
-            "leads": 36,
-            "conversations": 2
-        },
-        {
-            "date": "2026-06-17",
-            "spend": 237.52,
+            "spend": 145.62,
             "leads": 45,
-            "conversations": 2
-        },
-        {
-            "date": "2026-06-18",
-            "spend": 262.74,
-            "leads": 49,
-            "conversations": 2
-        },
-        {
-            "date": "2026-06-19",
-            "spend": 251.47,
-            "leads": 22,
             "conversations": 1
-        },
-        {
-            "date": "2026-06-20",
-            "spend": 361.48,
-            "leads": 24,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-21",
-            "spend": 376.44,
-            "leads": 32,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-22",
-            "spend": 366.62,
-            "leads": 40,
-            "conversations": 1
-        },
-        {
-            "date": "2026-06-23",
-            "spend": 279.07,
-            "leads": 30,
-            "conversations": 12
-        },
-        {
-            "date": "2026-06-24",
-            "spend": 168.38,
-            "leads": 23,
-            "conversations": 13
-        },
-        {
-            "date": "2026-06-25",
-            "spend": 197.66,
-            "leads": 19,
-            "conversations": 35
-        },
-        {
-            "date": "2026-06-26",
-            "spend": 193.24,
-            "leads": 23,
-            "conversations": 49
-        },
-        {
-            "date": "2026-06-27",
-            "spend": 178.26,
-            "leads": 29,
-            "conversations": 34
-        },
-        {
-            "date": "2026-06-28",
-            "spend": 178.26,
-            "leads": 35,
-            "conversations": 15
-        },
-        {
-            "date": "2026-06-29",
-            "spend": 156.67,
-            "leads": 17,
-            "conversations": 17
-        },
-        {
-            "date": "2026-06-30",
-            "spend": 161.39,
-            "leads": 21,
-            "conversations": 15
-        },
-        {
-            "date": "2026-07-01",
-            "spend": 157.6,
-            "leads": 29,
-            "conversations": 18
-        },
-        {
-            "date": "2026-07-02",
-            "spend": 151.35,
-            "leads": 28,
-            "conversations": 16
-        },
-        {
-            "date": "2026-07-03",
-            "spend": 146.18,
-            "leads": 26,
-            "conversations": 28
-        },
-        {
-            "date": "2026-07-04",
-            "spend": 126.2,
-            "leads": 23,
-            "conversations": 21
-        },
-        {
-            "date": "2026-07-05",
-            "spend": 123.7,
-            "leads": 16,
-            "conversations": 17
-        },
-        {
-            "date": "2026-07-06",
-            "spend": 147.63,
-            "leads": 12,
-            "conversations": 16
-        },
-        {
-            "date": "2026-07-07",
-            "spend": 147.72,
-            "leads": 19,
-            "conversations": 23
-        },
-        {
-            "date": "2026-07-08",
-            "spend": 137.25,
-            "leads": 13,
-            "conversations": 19
-        },
-        {
-            "date": "2026-07-09",
-            "spend": 138.46,
-            "leads": 12,
-            "conversations": 26
-        },
-        {
-            "date": "2026-07-10",
-            "spend": 151.54,
-            "leads": 17,
-            "conversations": 31
-        },
-        {
-            "date": "2026-07-11",
-            "spend": 138.63,
-            "leads": 13,
-            "conversations": 30
-        },
-        {
-            "date": "2026-07-12",
-            "spend": 159.72,
-            "leads": 14,
-            "conversations": 31
-        },
-        {
-            "date": "2026-07-13",
-            "spend": 170.38,
-            "leads": 19,
-            "conversations": 27
-        },
-        {
-            "date": "2026-07-14",
-            "spend": 137.93,
-            "leads": 11,
-            "conversations": 35
-        },
-        {
-            "date": "2026-07-15",
-            "spend": 123.38,
-            "leads": 15,
-            "conversations": 15
-        },
-        {
-            "date": "2026-07-16",
-            "spend": 117.8,
-            "leads": 18,
-            "conversations": 17
-        },
-        {
-            "date": "2026-07-17",
-            "spend": 114.05,
-            "leads": 11,
-            "conversations": 22
-        },
-        {
-            "date": "2026-07-18",
-            "spend": 110.9,
-            "leads": 16,
-            "conversations": 19
-        },
-        {
-            "date": "2026-07-19",
-            "spend": 121.36,
-            "leads": 18,
-            "conversations": 11
-        },
-        {
-            "date": "2026-07-20",
-            "spend": 139.22,
-            "leads": 23,
-            "conversations": 15
-        },
-        {
-            "date": "2026-07-21",
-            "spend": 164.79,
-            "leads": 20,
-            "conversations": 29
-        },
-        {
-            "date": "2026-07-22",
-            "spend": 150.14,
-            "leads": 18,
-            "conversations": 17
-        },
-        {
-            "date": "2026-07-23",
-            "spend": 131.84,
-            "leads": 21,
-            "conversations": 17
-        },
-        {
-            "date": "2026-07-24",
-            "spend": 116.04,
-            "leads": 21,
-            "conversations": 12
-        },
-        {
-            "date": "2026-07-25",
-            "spend": 101.05,
-            "leads": 29,
-            "conversations": 7
-        },
-        {
-            "date": "2026-07-26",
-            "spend": 120.29,
-            "leads": 30,
-            "conversations": 12
-        },
-        {
-            "date": "2026-07-27",
-            "spend": 137.46,
-            "leads": 20,
-            "conversations": 13
-        },
-        {
-            "date": "2026-07-28",
-            "spend": 134.37,
-            "leads": 30,
-            "conversations": 16
-        },
-        {
-            "date": "2026-07-29",
-            "spend": 133.2,
-            "leads": 25,
-            "conversations": 7
-        },
-        {
-            "date": "2026-07-30",
-            "spend": 120.88,
-            "leads": 17,
-            "conversations": 13
-        },
-        {
-            "date": "2026-07-31",
-            "spend": 132.89,
-            "leads": 32,
-            "conversations": 17
-        },
-        {
-            "date": "2026-08-01",
-            "spend": 146.41,
-            "leads": 28,
-            "conversations": 19
-        },
-        {
-            "date": "2026-08-02",
-            "spend": 167.02,
-            "leads": 49,
-            "conversations": 15
-        },
-        {
-            "date": "2026-08-03",
-            "spend": 145.95,
-            "leads": 35,
-            "conversations": 19
-        },
-        {
-            "date": "2026-08-04",
-            "spend": 131.61,
-            "leads": 23,
-            "conversations": 12
-        },
-        {
-            "date": "2026-08-05",
-            "spend": 132.17,
-            "leads": 23,
-            "conversations": 17
-        },
-        {
-            "date": "2026-08-06",
-            "spend": 135.87,
-            "leads": 21,
-            "conversations": 8
-        },
-        {
-            "date": "2026-08-07",
-            "spend": 122.4,
-            "leads": 32,
-            "conversations": 13
-        },
-        {
-            "date": "2026-08-08",
-            "spend": 143.74,
-            "leads": 17,
-            "conversations": 8
-        },
-        {
-            "date": "2026-08-09",
-            "spend": 156.36,
-            "leads": 24,
-            "conversations": 13
-        },
-        {
-            "date": "2026-08-10",
-            "spend": 145.88,
-            "leads": 22,
-            "conversations": 14
-        },
-        {
-            "date": "2026-08-11",
-            "spend": 131.87,
-            "leads": 20,
-            "conversations": 11
-        },
-        {
-            "date": "2026-08-12",
-            "spend": 138.46,
-            "leads": 20,
-            "conversations": 12
-        },
-        {
-            "date": "2026-08-13",
-            "spend": 112.62,
-            "leads": 21,
-            "conversations": 15
-        },
-        {
-            "date": "2026-08-14",
-            "spend": 96.99,
-            "leads": 18,
-            "conversations": 15
-        },
-        {
-            "date": "2026-08-15",
-            "spend": 118.25,
-            "leads": 24,
-            "conversations": 14
-        },
-        {
-            "date": "2026-08-16",
-            "spend": 129.23,
-            "leads": 26,
-            "conversations": 13
-        },
-        {
-            "date": "2026-08-17",
-            "spend": 103.11,
-            "leads": 22,
-            "conversations": 13
-        },
-        {
-            "date": "2026-08-18",
-            "spend": 100.08,
-            "leads": 23,
-            "conversations": 18
-        },
-        {
-            "date": "2026-08-19",
-            "spend": 91.24,
-            "leads": 16,
-            "conversations": 5
-        },
-        {
-            "date": "2026-08-20",
-            "spend": 93.37,
-            "leads": 14,
-            "conversations": 14
-        },
-        {
-            "date": "2026-08-21",
-            "spend": 93.08,
-            "leads": 17,
-            "conversations": 4
-        },
-        {
-            "date": "2026-08-22",
-            "spend": 92.62,
-            "leads": 13,
-            "conversations": 11
-        },
-        {
-            "date": "2026-08-23",
-            "spend": 114.18,
-            "leads": 23,
-            "conversations": 11
-        },
-        {
-            "date": "2026-08-24",
-            "spend": 102.03,
-            "leads": 12,
-            "conversations": 8
-        },
-        {
-            "date": "2026-08-25",
-            "spend": 101.94,
-            "leads": 24,
-            "conversations": 8
-        },
-        {
-            "date": "2026-08-26",
-            "spend": 119.58,
-            "leads": 22,
-            "conversations": 17
-        },
-        {
-            "date": "2026-08-27",
-            "spend": 118.19,
-            "leads": 17,
-            "conversations": 20
-        },
-        {
-            "date": "2026-08-28",
-            "spend": 107.41,
-            "leads": 23,
-            "conversations": 15
-        },
-        {
-            "date": "2026-08-29",
-            "spend": 107.66,
-            "leads": 15,
-            "conversations": 18
-        },
-        {
-            "date": "2026-08-30",
-            "spend": 149.15,
-            "leads": 23,
-            "conversations": 19
-        },
-        {
-            "date": "2026-08-31",
-            "spend": 131.02,
-            "leads": 21,
-            "conversations": 21
-        },
-        {
-            "date": "2026-09-01",
-            "spend": 141.45,
-            "leads": 24,
-            "conversations": 12
-        },
-        {
-            "date": "2026-09-02",
-            "spend": 118.37,
-            "leads": 27,
-            "conversations": 15
-        },
-        {
-            "date": "2026-09-03",
-            "spend": 104.24,
-            "leads": 36,
-            "conversations": 7
-        },
-        {
-            "date": "2026-09-04",
-            "spend": 76.52,
-            "leads": 20,
-            "conversations": 2
-        },
-        {
-            "date": "2026-09-05",
-            "spend": 81.68,
-            "leads": 26,
-            "conversations": 1
-        },
-        {
-            "date": "2026-09-06",
-            "spend": 109.79,
-            "leads": 31,
-            "conversations": 1
-        },
-        {
-            "date": "2026-09-07",
-            "spend": 79.75,
-            "leads": 20,
-            "conversations": 4
-        },
-        {
-            "date": "2026-09-08",
-            "spend": 86.7,
-            "leads": 17,
-            "conversations": 5
-        },
-        {
-            "date": "2026-09-09",
-            "spend": 66.98,
-            "leads": 9,
-            "conversations": 7
-        },
-        {
-            "date": "2026-09-10",
-            "spend": 57.54,
-            "leads": 9,
-            "conversations": 4
-        },
-        {
-            "date": "2026-09-11",
-            "spend": 51.41,
-            "leads": 13,
-            "conversations": 0
-        },
-        {
-            "date": "2026-09-12",
-            "spend": 47.36,
-            "leads": 20,
-            "conversations": 0
-        },
-        {
-            "date": "2026-09-13",
-            "spend": 68.31,
-            "leads": 29,
-            "conversations": 0
-        },
-        {
-            "date": "2026-09-14",
-            "spend": 42.56,
-            "leads": 9,
-            "conversations": 0
-        },
-        {
-            "date": "2026-09-15",
-            "spend": 48.52,
-            "leads": 17,
-            "conversations": 1
-        },
-        {
-            "date": "2026-09-16",
-            "spend": 49.5,
-            "leads": 11,
-            "conversations": 0
-        },
-        {
-            "date": "2026-09-17",
-            "spend": 46.86,
-            "leads": 9,
-            "conversations": 0
-        },
-        {
-            "date": "2026-09-18",
-            "spend": 42.41,
-            "leads": 3,
-            "conversations": 3
-        },
-        {
-            "date": "2026-09-19",
-            "spend": 51.53,
-            "leads": 14,
-            "conversations": 0
-        },
-        {
-            "date": "2026-09-20",
-            "spend": 74.78,
-            "leads": 14,
-            "conversations": 8
-        },
-        {
-            "date": "2026-09-21",
-            "spend": 65.71,
-            "leads": 5,
-            "conversations": 8
-        },
-        {
-            "date": "2026-09-22",
-            "spend": 73.54,
-            "leads": 10,
-            "conversations": 4
-        },
-        {
-            "date": "2026-09-23",
-            "spend": 52.48,
-            "leads": 7,
-            "conversations": 7
-        },
-        {
-            "date": "2026-09-24",
-            "spend": 52.02,
-            "leads": 6,
-            "conversations": 4
-        },
-        {
-            "date": "2026-09-25",
-            "spend": 58.62,
-            "leads": 7,
-            "conversations": 4
-        },
-        {
-            "date": "2026-09-26",
-            "spend": 61.16,
-            "leads": 5,
-            "conversations": 5
-        },
-        {
-            "date": "2026-09-27",
-            "spend": 73.52,
-            "leads": 29,
-            "conversations": 2
-        },
-        {
-            "date": "2026-09-28",
-            "spend": 107.59,
-            "leads": 56,
-            "conversations": 2
-        },
-        {
-            "date": "2026-09-29",
-            "spend": 90.73,
-            "leads": 41,
-            "conversations": 2
-        },
-        {
-            "date": "2026-09-30",
-            "spend": 94.32,
-            "leads": 43,
-            "conversations": 0
-        },
-        {
-            "date": "2026-10-01",
-            "spend": 71.52,
-            "leads": 40,
-            "conversations": 0
-        },
-        {
-            "date": "2026-10-02",
-            "spend": 134.07,
-            "leads": 57,
-            "conversations": 2
-        },
-        {
-            "date": "2026-10-03",
-            "spend": 83.32,
-            "leads": 40,
-            "conversations": 1
-        },
-        {
-            "date": "2026-10-04",
-            "spend": 109.9,
-            "leads": 36,
-            "conversations": 0
-        },
-        {
-            "date": "2026-10-05",
-            "spend": 86.64,
-            "leads": 52,
-            "conversations": 0
-        },
-        {
-            "date": "2026-10-06",
-            "spend": 100.78,
-            "leads": 36,
-            "conversations": 0
-        },
-        {
-            "date": "2026-10-07",
-            "spend": 98.48,
-            "leads": 32,
-            "conversations": 2
-        },
-        {
-            "date": "2026-10-08",
-            "spend": 88.83,
-            "leads": 27,
-            "conversations": 1
-        },
-        {
-            "date": "2026-10-09",
-            "spend": 102.81,
-            "leads": 48,
-            "conversations": 1
-        },
-        {
-            "date": "2026-10-10",
-            "spend": 94.07,
-            "leads": 30,
-            "conversations": 2
-        },
-        {
-            "date": "2026-10-11",
-            "spend": 118.34,
-            "leads": 50,
-            "conversations": 0
-        },
-        {
-            "date": "2026-10-12",
-            "spend": 93.26,
-            "leads": 41,
-            "conversations": 1
-        },
-        {
-            "date": "2026-10-13",
-            "spend": 102.0,
-            "leads": 42,
-            "conversations": 0
-        },
-        {
-            "date": "2026-10-14",
-            "spend": 93.82,
-            "leads": 44,
-            "conversations": 1
-        },
-        {
-            "date": "2026-10-15",
-            "spend": 95.76,
-            "leads": 40,
-            "conversations": 2
-        },
-        {
-            "date": "2026-10-16",
-            "spend": 99.56,
-            "leads": 36,
-            "conversations": 2
-        },
-        {
-            "date": "2026-10-17",
-            "spend": 131.64,
-            "leads": 27,
-            "conversations": 4
-        },
-        {
-            "date": "2026-10-18",
-            "spend": 137.45,
-            "leads": 41,
-            "conversations": 7
-        },
-        {
-            "date": "2026-10-19",
-            "spend": 108.5,
-            "leads": 38,
-            "conversations": 2
-        },
-        {
-            "date": "2026-10-20",
-            "spend": 134.61,
-            "leads": 33,
-            "conversations": 4
-        },
-        {
-            "date": "2026-10-21",
-            "spend": 179.57,
-            "leads": 48,
-            "conversations": 2
-        },
-        {
-            "date": "2026-10-22",
-            "spend": 180.28,
-            "leads": 33,
-            "conversations": 4
-        },
-        {
-            "date": "2026-10-23",
-            "spend": 208.33,
-            "leads": 55,
-            "conversations": 6
-        },
-        {
-            "date": "2026-10-24",
-            "spend": 227.07,
-            "leads": 45,
-            "conversations": 3
-        },
-        {
-            "date": "2026-10-25",
-            "spend": 265.15,
-            "leads": 72,
-            "conversations": 4
-        },
-        {
-            "date": "2026-10-26",
-            "spend": 187.35,
-            "leads": 36,
-            "conversations": 2
-        },
-        {
-            "date": "2026-10-27",
-            "spend": 97.2,
-            "leads": 16,
-            "conversations": 2
         }
     ]
 }
