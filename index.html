@@ -9,116 +9,162 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>body { font-family: 'Montserrat', sans-serif; }</style>
 </head>
-<body class="h-full flex flex-col selection:bg-white selection:text-black">
+<body class="h-full flex bg-[#09090b] selection:bg-white selection:text-black">
 
-    <!-- HEADER / LOGO MOTORIA -->
-    <header class="border-b border-[#27272a] bg-[#09090b]/90 backdrop-blur sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-            <div class="flex items-center space-x-1 font-black text-2xl tracking-tighter">
-                <span class="text-white">|</span>
-                <span class="bg-white text-black px-1.5 py-0.5 rounded-sm text-lg">▪</span>
-                <span class="text-white">|</span>
-                <span class="ml-2 tracking-widest text-xl font-bold">MOTORIA</span>
+    <!-- BARRA LATERAL (SIDEBAR) -->
+    <aside class="w-64 border-r border-[#27272a] bg-[#121215] flex flex-col justify-between hidden md:flex">
+        <div>
+            <!-- LOGO MOTORIA -->
+            <div class="p-6 border-b border-[#27272a] flex items-center space-x-2">
+                <span class="text-white font-black text-xl">|</span>
+                <span class="bg-white text-black px-1.5 py-0.5 rounded-sm font-bold text-sm">▪</span>
+                <span class="text-white font-black text-xl">|</span>
+                <span class="ml-1 tracking-widest font-black text-lg">MOTORIA</span>
             </div>
-            <span class="text-xs uppercase px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded border border-neutral-700">Meta Ads Intelligence</span>
+
+            <!-- MENÚ DE NAVEGACIÓN -->
+            <nav class="p-4 space-y-1">
+                <button onclick="switchTab('overview')" id="nav-overview" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold bg-white text-black transition">
+                    <span>📊</span>
+                    <span>Visión General</span>
+                </button>
+                <button onclick="switchTab('ads')" id="nav-ads" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold text-neutral-400 hover:bg-neutral-800 hover:text-white transition">
+                    <span>🎯</span>
+                    <span>Rendimiento de Anuncios</span>
+                </button>
+            </nav>
         </div>
-        
-        <!-- SELECTOR DE FILTROS DE TEMPORALIDAD -->
-        <div class="flex items-center space-x-3">
-            <span class="text-xs text-neutral-400 uppercase font-semibold">Periodo:</span>
-            <select id="time-filter" class="bg-[#121215] border border-[#27272a] text-white text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-white transition">
-                <option value="ytd">Todo el Año (YTD)</option>
-                <option value="last_30">Último Mes (30 días)</option>
-                <option value="last_7">Última Semana (7 días)</option>
-                <optgroup label="Meses específicos" id="months-group"></optgroup>
-            </select>
-            <span class="text-xs text-emerald-400 font-medium ml-2" id="last-updated">🟢 Conectado en vivo</span>
+
+        <div class="p-4 border-t border-[#27272a] text-xs text-neutral-500">
+            Meta Ads Intelligence<br>
+            <span class="text-emerald-400 font-medium" id="sidebar-status">● Conectado en vivo</span>
         </div>
-    </header>
+    </aside>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="flex-1 p-6 max-w-7xl mx-auto w-full space-y-6">
+    <div class="flex-1 flex flex-col h-full overflow-y-auto">
         
-        <!-- TARJETAS DE KPIS DINÁMICAS -->
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
-                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto Seleccionado</h4>
-                <p id="spend-current" class="text-2xl font-black text-white mt-1">$0.00</p>
+        <!-- HEADER SUPERIOR CON FILTROS -->
+        <header class="border-b border-[#27272a] bg-[#09090b]/90 backdrop-blur sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3 md:hidden">
+                <span class="font-black tracking-widest text-lg">MOTORIA</span>
             </div>
-            <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
-                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto Mes Anterior</h4>
-                <p id="spend-last" class="text-2xl font-black text-neutral-400 mt-1">$0.00</p>
+            <div class="text-xs uppercase tracking-wider text-neutral-400 font-semibold" id="page-title">Panel / Visión General</div>
+            
+            <div class="flex items-center space-x-3">
+                <span class="text-xs text-neutral-400 uppercase font-semibold">Periodo:</span>
+                <select id="time-filter" class="bg-[#121215] border border-[#27272a] text-white text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-white transition">
+                    <option value="ytd">Todo el Año (YTD)</option>
+                    <option value="last_30">Último Mes (30 días)</option>
+                    <option value="last_7">Última Semana (7 días)</option>
+                    <optgroup label="Meses específicos" id="months-group"></optgroup>
+                </select>
             </div>
-            <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
-                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto YTD (Año)</h4>
-                <p id="spend-ytd" class="text-2xl font-black text-emerald-400 mt-1">$0.00</p>
-            </div>
-            <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
-                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Formularios / Día</h4>
-                <p id="leads-day" class="text-2xl font-black text-amber-400 mt-1">0 /día</p>
-            </div>
-            <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
-                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Costo / Formulario</h4>
-                <p id="cpl-current" class="text-2xl font-black text-rose-500 mt-1">$0.00</p>
-            </div>
-        </div>
+        </header>
 
-        <!-- GRÁFICAS -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl">
-                <h3 class="text-sm font-bold text-neutral-200 mb-4">📈 Tendencia Diaria de Inversión ($)</h3>
-                <div id="chart-spend" class="w-full h-80"></div>
-            </div>
-            <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl">
-                <h3 class="text-sm font-bold text-neutral-200 mb-4">🎯 Tendencia Diaria de Leads (Formularios)</h3>
-                <div id="chart-leads" class="w-full h-80"></div>
-            </div>
-        </div>
-
-        <!-- TABLAS DE RANKING DE ANUNCIOS -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl overflow-x-auto">
-                <h3 class="text-sm font-bold text-emerald-400 mb-4">🏆 Top Anuncios (Menor CPL)</h3>
-                <table class="w-full text-left text-xs">
-                    <thead>
-                        <tr class="border-b border-[#27272a] text-neutral-400">
-                            <th class="pb-2">Anuncio</th>
-                            <th class="pb-2 text-right">Gasto</th>
-                            <th class="pb-2 text-right">Leads</th>
-                            <th class="pb-2 text-right">CPL</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-top-ads"></tbody>
-                </table>
+        <!-- SECCIÓN 1: VISIÓN GENERAL (OVERVIEW) -->
+        <main id="tab-overview" class="p-6 max-w-7xl mx-auto w-full space-y-6">
+            
+            <!-- TARJETAS DE KPIS -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
+                    <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto Seleccionado</h4>
+                    <p id="spend-current" class="text-2xl font-black text-white mt-1">$0.00</p>
+                </div>
+                <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
+                    <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto Mes Anterior</h4>
+                    <p id="spend-last" class="text-2xl font-black text-neutral-400 mt-1">$0.00</p>
+                </div>
+                <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
+                    <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto YTD (Año)</h4>
+                    <p id="spend-ytd" class="text-2xl font-black text-emerald-400 mt-1">$0.00</p>
+                </div>
+                <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
+                    <h4 class="text-xs uppercase text-neutral-400 font-semibold">Formularios / Día</h4>
+                    <p id="leads-day" class="text-2xl font-black text-amber-400 mt-1">0 /día</p>
+                </div>
+                <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
+                    <h4 class="text-xs uppercase text-neutral-400 font-semibold">Costo / Formulario</h4>
+                    <p id="cpl-current" class="text-2xl font-black text-rose-500 mt-1">$0.00</p>
+                </div>
             </div>
 
-            <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl overflow-x-auto">
-                <h3 class="text-sm font-bold text-rose-400 mb-4">⚠️ Anuncios Menos Eficientes</h3>
-                <table class="w-full text-left text-xs">
-                    <thead>
-                        <tr class="border-b border-[#27272a] text-neutral-400">
-                            <th class="pb-2">Anuncio</th>
-                            <th class="pb-2 text-right">Gasto</th>
-                            <th class="pb-2 text-right">Leads</th>
-                            <th class="pb-2 text-right">CPL</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-worst-ads"></tbody>
-                </table>
+            <!-- GRÁFICAS -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl">
+                    <h3 class="text-sm font-bold text-neutral-200 mb-4">📈 Tendencia Diaria de Inversión ($)</h3>
+                    <div id="chart-spend" class="w-full h-80"></div>
+                </div>
+                <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl">
+                    <h3 class="text-sm font-bold text-neutral-200 mb-4">🎯 Tendencia Diaria de Leads (Formularios)</h3>
+                    <div id="chart-leads" class="w-full h-80"></div>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
 
-    <!-- SCRIPT DE LÓGICA DE FILTROS -->
+        <!-- SECCIÓN 2: RENDIMIENTO DE ANUNCIOS (ADS TAB) -->
+        <main id="tab-ads" class="p-6 max-w-7xl mx-auto w-full space-y-6 hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl overflow-x-auto">
+                    <h3 class="text-sm font-bold text-emerald-400 mb-4">🏆 Top Anuncios (Menor CPL)</h3>
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="border-b border-[#27272a] text-neutral-400">
+                                <th class="pb-2">Anuncio</th>
+                                <th class="pb-2 text-right">Gasto</th>
+                                <th class="pb-2 text-right">Leads</th>
+                                <th class="pb-2 text-right">CPL</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-top-ads"></tbody>
+                    </table>
+                </div>
+
+                <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl overflow-x-auto">
+                    <h3 class="text-sm font-bold text-rose-400 mb-4">⚠️ Anuncios Menos Eficientes</h3>
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="border-b border-[#27272a] text-neutral-400">
+                                <th class="pb-2">Anuncio</th>
+                                <th class="pb-2 text-right">Gasto</th>
+                                <th class="pb-2 text-right">Leads</th>
+                                <th class="pb-2 text-right">CPL</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-worst-ads"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- SCRIPT DE LÓGICA Y PESTAÑAS -->
     <script>
         let globalData = null;
+
+        function switchTab(tabName) {
+            document.getElementById('tab-overview').classList.add('hidden');
+            document.getElementById('tab-ads').classList.add('hidden');
+            document.getElementById('nav-overview').className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold text-neutral-400 hover:bg-neutral-800 hover:text-white transition";
+            document.getElementById('nav-ads').className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold text-neutral-400 hover:bg-neutral-800 hover:text-white transition";
+
+            if(tabName === 'overview') {
+                document.getElementById('tab-overview').classList.remove('hidden');
+                document.getElementById('nav-overview').className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold bg-white text-black transition";
+                document.getElementById('page-title').innerText = "Panel / Visión General";
+            } else {
+                document.getElementById('tab-ads').classList.remove('hidden');
+                document.getElementById('nav-ads').className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-semibold bg-white text-black transition";
+                document.getElementById('page-title').innerText = "Panel / Rendimiento de Anuncios";
+            }
+        }
 
         fetch('data.json')
             .then(res => res.json())
             .then(data => {
                 globalData = data;
                 
-                // Poblar meses específicos en el selector
                 const group = document.getElementById('months-group');
                 if (data.available_months) {
                     data.available_months.forEach(m => {
@@ -131,7 +177,6 @@
 
                 renderDashboard('ytd');
 
-                // Escuchar eventos de cambio de filtro
                 document.getElementById('time-filter').addEventListener('change', (e) => {
                     renderDashboard(e.target.value);
                 });
@@ -141,12 +186,9 @@
             let data = globalData;
             let filteredDaily = [...data.daily_trend];
 
-            // Ordenar por fecha
             filteredDaily.sort((a, b) => new Date(a.date) - new Date(b.date));
-
             const maxDate = new Date(Math.max(...filteredDaily.map(item => new Date(item.date))));
 
-            // Aplicar lógica según el filtro seleccionado
             if (filterType === 'last_7') {
                 const cutoff = new Date(maxDate);
                 cutoff.setDate(cutoff.getDate() - 7);
@@ -156,25 +198,21 @@
                 cutoff.setDate(cutoff.getDate() - 30);
                 filteredDaily = filteredDaily.filter(item => new Date(item.date) >= cutoff);
             } else if (filterType !== 'ytd') {
-                // Es un mes en formato YYYY-MM
                 filteredDaily = filteredDaily.filter(item => item.month_str === filterType);
             }
 
-            // Recalcular métricas
             let totalSpend = filteredDaily.reduce((acc, item) => acc + parseFloat(item.spend), 0);
             let totalLeads = filteredDaily.reduce((acc, item) => acc + parseInt(item.leads), 0);
             let avgCpl = totalLeads > 0 ? totalSpend / totalLeads : 0;
             let daysCount = new Set(filteredDaily.map(i => i.date)).size || 1;
             let leadsPerDay = (totalLeads / daysCount).toFixed(2);
 
-            // Actualizar tarjetas de KPI
             document.getElementById('spend-current').innerText = '$' + totalSpend.toLocaleString('en-US', {minimumFractionDigits: 2});
             document.getElementById('spend-last').innerText = '$' + data.kpis.spend_last_month.toLocaleString('en-US', {minimumFractionDigits: 2});
             document.getElementById('spend-ytd').innerText = '$' + data.kpis.spend_ytd.toLocaleString('en-US', {minimumFractionDigits: 2});
             document.getElementById('leads-day').innerText = leadsPerDay + ' /día';
             document.getElementById('cpl-current').innerText = '$' + avgCpl.toLocaleString('en-US', {minimumFractionDigits: 2});
 
-            // Gráficas
             const dates = filteredDaily.map(item => item.date);
             const spends = filteredDaily.map(item => parseFloat(item.spend));
             const leads = filteredDaily.map(item => parseInt(item.leads));
@@ -197,7 +235,6 @@
                 xaxis: { gridcolor: '#27272a' }, yaxis: { gridcolor: '#27272a' }
             }, {responsive: true});
 
-            // Tablas de Anuncios
             document.getElementById('table-top-ads').innerHTML = data.top_ads.map(ad => `
                 <tr class="border-b border-[#27272a]/50 hover:bg-neutral-900">
                     <td class="py-2.5 pr-2 truncate max-w-[200px]">${ad.ad_name}</td>
