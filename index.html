@@ -30,8 +30,8 @@
         </div>
         
         <div class="flex items-center space-x-3 text-xs">
-            <span class="text-neutral-400">Estado de datos:</span>
-            <span id="data-status" class="px-2.5 py-1 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-full font-medium">● Conectado a data.json</span>
+            <span class="text-neutral-400">Estado:</span>
+            <span id="data-status" class="px-2.5 py-1 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-full font-medium">Leyendo data.json...</span>
         </div>
     </header>
 
@@ -41,75 +41,47 @@
         <!-- 1. COMPARATIVA VISUAL & DÓNDE SE INVIERTE -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             
-            <!-- SECCIÓN A: COMPARATIVA VISUAL -->
+            <!-- COMPARATIVA VISUAL -->
             <div class="lg:col-span-7 motoria-card p-6 space-y-6">
                 <div class="flex items-center justify-between">
                     <div>
                         <h2 class="text-lg font-bold text-white">Comparativa visual</h2>
-                        <p class="text-xs text-neutral-400 mt-0.5">Comparativa mensual de rendimiento acumulado</p>
+                        <p class="text-xs text-neutral-400 mt-0.5">Rendimiento diario real extraído de la cuenta</p>
                     </div>
                     <div class="flex items-center space-x-4 text-xs font-semibold">
-                        <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-neutral-600 mr-2"></span>Septiembre</span>
-                        <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 mr-2"></span>Octubre</span>
+                        <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-neutral-600 mr-2"></span>Mes Anterior</span>
+                        <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 mr-2"></span>Mes Actual</span>
                     </div>
                 </div>
 
                 <div class="space-y-5 pt-2">
-                    <!-- Inversión -->
                     <div>
                         <div class="flex justify-between text-xs font-medium text-neutral-400 mb-1.5">
-                            <span>Inversión / día</span>
-                            <span class="text-white font-bold" id="val-inv-oct">$175.08</span>
+                            <span>Gasto Total en el Periodo</span>
+                            <span class="text-white font-bold" id="kpi-spend-total">$0.00</span>
                         </div>
-                        <div class="space-y-1.5">
-                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
-                                <div id="bar-inv-sep" class="bg-neutral-600 h-3.5 rounded-full" style="width: 85%"></div>
-                            </div>
-                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
-                                <div id="bar-inv-oct" class="bg-sky-400 h-3.5 rounded-full" style="width: 100%"></div>
-                            </div>
+                        <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
+                            <div id="bar-spend-progress" class="bg-sky-400 h-3.5 rounded-full" style="width: 100%"></div>
                         </div>
                     </div>
 
-                    <!-- Formularios / día -->
                     <div>
                         <div class="flex justify-between text-xs font-medium text-neutral-400 mb-1.5">
-                            <span>Formularios / día</span>
-                            <span class="text-white font-bold" id="val-lead-oct">57.64</span>
+                            <span>Formularios / Leads Totales</span>
+                            <span class="text-emerald-400 font-bold" id="kpi-leads-total">0</span>
                         </div>
-                        <div class="space-y-1.5">
-                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
-                                <div id="bar-lead-sep" class="bg-neutral-600 h-3.5 rounded-full" style="width: 80%"></div>
-                            </div>
-                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
-                                <div id="bar-lead-oct" class="bg-sky-400 h-3.5 rounded-full" style="width: 95%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Conversaciones / día -->
-                    <div>
-                        <div class="flex justify-between text-xs font-medium text-neutral-400 mb-1.5">
-                            <span>Conversaciones / día</span>
-                            <span class="text-white font-bold" id="val-conv-oct">15.52</span>
-                        </div>
-                        <div class="space-y-1.5">
-                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
-                                <div id="bar-conv-sep" class="bg-neutral-600 h-3.5 rounded-full" style="width: 90%"></div>
-                            </div>
-                            <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
-                                <div id="bar-conv-oct" class="bg-sky-400 h-3.5 rounded-full" style="width: 96%"></div>
-                            </div>
+                        <div class="w-full bg-neutral-800/60 rounded-full h-3.5 overflow-hidden">
+                            <div id="bar-leads-progress" class="bg-emerald-500 h-3.5 rounded-full" style="width: 100%"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SECCIÓN B: DÓNDE SE INVIERTE EN OCTUBRE -->
+            <!-- DÓNDE SE INVIERTE -->
             <div class="lg:col-span-5 motoria-card p-6 flex flex-col justify-between">
                 <div>
-                    <h2 class="text-lg font-bold text-white">¿Dónde se invierte en octubre?</h2>
-                    <p class="text-xs text-neutral-400 mt-0.5">Distribución por resultado de campaña</p>
+                    <h2 class="text-lg font-bold text-white">Distribución de Inversión</h2>
+                    <p class="text-xs text-neutral-400 mt-0.5">Resumen de pauta activa en Meta</p>
                     
                     <div class="grid grid-cols-12 gap-4 items-center mt-6">
                         <div class="col-span-5 h-36 relative">
@@ -117,171 +89,47 @@
                         </div>
                         <div class="col-span-7 space-y-2 text-xs">
                             <div class="flex justify-between items-center">
-                                <span class="flex items-center text-neutral-300"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 mr-2"></span>Formularios</span>
-                                <span class="font-bold text-white" id="inv-forms">$3,623.53</span>
+                                <span class="flex items-center text-neutral-300"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 mr-2"></span>Gasto Actual</span>
+                                <span class="font-bold text-white" id="summary-spend">$0.00</span>
                             </div>
                             <div class="flex justify-between items-center">
-                                <span class="flex items-center text-neutral-300"><span class="w-2.5 h-2.5 rounded-full bg-neutral-500 mr-2"></span>Conversaciones</span>
-                                <span class="font-bold text-white" id="inv-convs">$792.29</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="flex items-center text-neutral-300"><span class="w-2.5 h-2.5 rounded-full bg-neutral-700 mr-2"></span>Reconocimiento</span>
-                                <span class="font-bold text-white" id="inv-reco">$52.07</span>
+                                <span class="flex items-center text-neutral-300"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400 mr-2"></span>CPL Promedio</span>
+                                <span class="font-bold text-emerald-400" id="summary-cpl">$0.00</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-6 p-4 rounded-xl bg-sky-950/40 border border-sky-800/50">
-                    <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Lectura principal</h4>
+                    <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Lectura principal (En vivo)</h4>
                     <p class="text-xs text-slate-300 leading-relaxed" id="takeaway-text">
-                        1,460 formularios, a $2.48 en promedio. El ritmo diario cambia +19.8% frente a septiembre. 396 conversaciones, a $2.00.
+                        Cargando análisis de rendimiento desde el archivo data.json...
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- 2. COSTO POR FORMULARIO EN CAMPAÑAS Y QUÉ CONVIENE REVISAR -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div class="lg:col-span-7 motoria-card p-6">
-                <h2 class="text-lg font-bold text-white mb-1">Costo por formulario · campañas</h2>
-                <div class="flex items-center space-x-4 text-xs font-semibold mb-6">
-                    <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-neutral-600 mr-2"></span>Septiembre (negro)</span>
-                    <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 mr-2"></span>Octubre (azul Motoria)</span>
-                </div>
-
-                <div class="space-y-4" id="campaign-list">
-                    <!-- Se llena dinámicamente con JavaScript -->
-                </div>
-            </div>
-
-            <div class="lg:col-span-5 motoria-card p-6 flex flex-col justify-between">
-                <div>
-                    <h2 class="text-lg font-bold text-white mb-4">Qué conviene revisar</h2>
-                    <div class="space-y-3">
-                        <div class="p-3.5 rounded-xl bg-neutral-900 border border-neutral-800">
-                            <h4 class="text-xs font-bold text-white mb-1">Mayor volumen de formularios</h4>
-                            <p class="text-xs text-neutral-400">VIDEO 4 PINTURA PARCIAL registra 280 formularios. Validar citas y ventas antes de proponer mayor inversión.</p>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-neutral-900 border border-neutral-800">
-                            <h4 class="text-xs font-bold text-white mb-1">Nueva campaña de remarketing</h4>
-                            <p class="text-xs text-neutral-400">Remarketing de Pintura reporta 12 formularios a $6,27. Su muestra aún es pequeña frente a las campañas principales.</p>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-neutral-900 border border-neutral-800">
-                            <h4 class="text-xs font-bold text-white mb-1">Conversaciones ≠ ventas</h4>
-                            <p class="text-xs text-neutral-400">El menor costo con al menos 20 conversaciones es $1,34. Medir cierres antes de decidir por costo solamente.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. LOS ANUNCIOS QUE DESTACAN (TARJETAS TOP) -->
+        <!-- 2. ANUNCIOS QUE DESTACAN (TOP & WORST) -->
         <div class="space-y-4">
             <div>
                 <h2 class="text-lg font-bold text-white">Los anuncios que destacan</h2>
-                <p class="text-xs text-neutral-400">Ranking por menor costo por resultado entre anuncios con al menos 20 resultados.</p>
+                <p class="text-xs text-neutral-400">Ranking en tiempo real conectado directamente a tu cuenta de Meta Ads.</p>
             </div>
 
-            <!-- Tarjeta Ganadora Destacada -->
-            <div class="motoria-card p-5 bg-gradient-to-r from-sky-950/40 to-neutral-900 border-sky-700/40 flex flex-col md:flex-row items-center justify-between gap-4" id="winner-card">
-                <div class="flex items-center space-x-4">
-                    <div class="w-16 h-16 bg-neutral-800 rounded-lg flex items-center justify-center font-bold text-sky-400 border border-neutral-700">TOP 1</div>
-                    <div>
-                        <span class="text-[10px] uppercase font-bold text-sky-400 tracking-wider">Líder en volumen de formularios</span>
-                        <h3 class="text-base font-bold text-white" id="winner-title">VIDEO 4 PINTURA PARCIAL</h3>
-                        <p class="text-xs text-neutral-300 mt-1" id="winner-stats">280 formularios · $1,89 por formulario · $527,96 invertidos</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grid de Tarjetas Top 1, 2, 3 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="top-ads-grid">
-                <!-- Se puebla desde JavaScript -->
-            </div>
-        </div>
-
-        <!-- 4. AUDIENCIAS Y UBICACIONES -->
-        <div class="motoria-card p-6 space-y-6">
-            <div>
-                <h2 class="text-lg font-bold text-white">Audiencias y ubicaciones</h2>
-                <p class="text-xs text-neutral-400">Desglose de rendimiento por plataforma y público objetivo por rango de edad</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Plataforma -->
-                <div class="space-y-4">
-                    <h3 class="text-sm font-bold text-neutral-200">Facebook e Instagram</h3>
-                    
-                    <div>
-                        <div class="flex justify-between text-xs text-neutral-400 mb-1">
-                            <span>Facebook</span>
-                            <span class="font-bold text-white">1.204 leads</span>
-                        </div>
-                        <div class="w-full bg-neutral-800 rounded-full h-3">
-                            <div class="bg-sky-400 h-3 rounded-full" style="width: 82%"></div>
-                        </div>
-                        <p class="text-[11px] text-neutral-500 mt-1">$2.964,01 invertidos · $2,46 por resultado</p>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between text-xs text-neutral-400 mb-1">
-                            <span>Instagram</span>
-                            <span class="font-bold text-white">256 leads</span>
-                        </div>
-                        <div class="w-full bg-neutral-800 rounded-full h-3">
-                            <div class="bg-neutral-600 h-3 rounded-full" style="width: 18%"></div>
-                        </div>
-                        <p class="text-[11px] text-neutral-500 mt-1">$658,15 invertidos · $2,57 por resultado</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Top Anuncios -->
+                <div class="motoria-card p-5 space-y-4">
+                    <h3 class="text-sm font-bold text-emerald-400">🏆 Top Anuncios (Menor Costo por Lead)</h3>
+                    <div class="space-y-3" id="top-ads-container">
+                        <p class="text-xs text-neutral-500">Cargando anuncios...</p>
                     </div>
                 </div>
 
-                <!-- Edad -->
-                <div class="space-y-4">
-                    <h3 class="text-sm font-bold text-neutral-200">Público por edad</h3>
-                    <div class="space-y-2 text-xs">
-                        <div>
-                            <div class="flex justify-between text-neutral-300 mb-1"><span>35-44</span><span class="font-bold text-white">429 leads</span></div>
-                            <div class="w-full bg-neutral-800 rounded-full h-2.5"><div class="bg-sky-400 h-2.5 rounded-full" style="width: 90%"></div></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-neutral-300 mb-1"><span>45-54</span><span class="font-bold text-white">375 leads</span></div>
-                            <div class="w-full bg-neutral-800 rounded-full h-2.5"><div class="bg-sky-400 h-2.5 rounded-full" style="width: 78%"></div></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-neutral-300 mb-1"><span>25-34</span><span class="font-bold text-white">251 leads</span></div>
-                            <div class="w-full bg-neutral-800 rounded-full h-2.5"><div class="bg-sky-400 h-2.5 rounded-full" style="width: 55%"></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 5. DESGASTE DEL ANUNCIO (FATIGA SEGUIMIENTO SEMANAL) -->
-        <div class="motoria-card p-6 space-y-6">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <span class="text-[10px] uppercase font-bold text-sky-400 tracking-wider">Seguimiento Semanal</span>
-                    <h2 class="text-lg font-bold text-white">Desgaste del anuncio</h2>
-                    <p class="text-xs text-neutral-400">Frecuencia vs Costo por resultado para detectar fatiga creativa</p>
-                </div>
-                <select id="ad-selector" class="bg-neutral-900 border border-neutral-700 text-xs text-white rounded-lg px-3 py-2">
-                    <option value="1">VIDEO 4 PINTURA PARCIAL</option>
-                    <option value="2">[VID DANI][TAPICERIA][JUNIO]</option>
-                </select>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                <div>
-                    <h4 class="text-xs font-bold text-neutral-400 mb-3">Frecuencia por semana</h4>
-                    <div class="h-44">
-                        <canvas id="chartFreq"></canvas>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold text-neutral-400 mb-3">Costo por resultado (USD)</h4>
-                    <div class="h-44">
-                        <canvas id="chartCost"></canvas>
+                <!-- Anuncios Menos Eficientes -->
+                <div class="motoria-card p-5 space-y-4">
+                    <h3 class="text-sm font-bold text-rose-400">⚠️ Anuncios Menos Eficientes (Alto Gasto)</h3>
+                    <div class="space-y-3" id="worst-ads-container">
+                        <p class="text-xs text-neutral-500">Cargando anuncios...</p>
                     </div>
                 </div>
             </div>
@@ -289,106 +137,85 @@
 
     </main>
 
-    <!-- SCRIPT DE CARGA Y RENDERIZADO -->
+    <!-- SCRIPT DE CONEXIÓN CON data.json -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Cargar Donut Chart
-            const ctxDonut = document.getElementById('donutChart').getContext('2d');
-            new Chart(ctxDonut, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Formularios', 'Conversaciones', 'Reconocimiento'],
-                    datasets: [{
-                        data: [81.1, 17.7, 1.2],
-                        backgroundColor: ['#38bdf8', '#737373', '#404040'],
-                        borderWidth: 0
-                    }]
-                },
-                options: { cutout: '75%', plugins: { legend: { display: false } }, responsive: true, maintainAspectRatio: false }
-            });
-
-            // Cargar Donut Charts de Desgaste
-            const ctxFreq = document.getElementById('chartFreq').getContext('2d');
-            new Chart(ctxFreq, {
-                type: 'line',
-                data: {
-                    labels: ['5-11 oct', '12-18 oct', '19-25 oct'],
-                    datasets: [{ label: 'Frecuencia', data: [1.29, 1.40, 1.36], borderColor: '#38bdf8', tension: 0.3 }]
-                },
-                options: { plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#27272a' } } } }
-            });
-
-            const ctxCost = document.getElementById('chartCost').getContext('2d');
-            new Chart(ctxCost, {
-                type: 'line',
-                data: {
-                    labels: ['5-11 oct', '12-18 oct', '19-25 oct'],
-                    datasets: [{ label: 'CPL', data: [1.67, 1.79, 2.05], borderColor: '#38bdf8', tension: 0.3 }]
-                },
-                options: { plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#27272a' } } } }
-            });
-
-            // Intentar leer de data.json
             fetch('data.json')
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) throw new Error("No se pudo cargar data.json");
+                    return res.json();
+                })
                 .then(data => {
-                    console.log("Cargado desde data.json:", data);
-                    if (data.top_ads) renderTopAds(data.top_ads);
-                    if (data.campaigns) renderCampaigns(data.campaigns);
+                    console.log("Datos reales leídos con éxito:", data);
+                    document.getElementById('data-status').innerText = "● Conectado a data.json";
+
+                    // Actualizar KPIs superiores
+                    if (data.kpis) {
+                        const spend = data.kpis.spend_this_month || 0;
+                        const cpl = data.kpis.cpl_this_month || 0;
+                        document.getElementById('kpi-spend-total').innerText = '$' + spend.toLocaleString('en-US', {minimumFractionDigits: 2});
+                        document.getElementById('summary-spend').innerText = '$' + spend.toLocaleString('en-US', {minimumFractionDigits: 2});
+                        document.getElementById('summary-cpl').innerText = '$' + cpl.toLocaleString('en-US', {minimumFractionDigits: 2});
+                        document.getElementById('kpi-leads-total').innerText = data.kpis.leads_per_day ? (data.kpis.leads_per_day * 30).toFixed(0) : '0';
+                        
+                        document.getElementById('takeaway-text').innerText = `Inversión actual de $${spend.toFixed(2)} con un CPL promedio de $${cpl.toFixed(2)}. Datos sincronizados correctamente desde tu pipeline de Python.`;
+                    }
+
+                    // Renderizar Top Anuncios
+                    if (data.top_ads && data.top_ads.length > 0) {
+                        const topContainer = document.getElementById('top-ads-container');
+                        topContainer.innerHTML = data.top_ads.map((ad, idx) => `
+                            <div class="p-3 bg-neutral-900 rounded-lg border border-neutral-800 flex justify-between items-center text-xs">
+                                <div>
+                                    <p class="font-bold text-white truncate max-w-[240px]">${ad.ad_name}</p>
+                                    <p class="text-[10px] text-neutral-400 mt-0.5">Inversión: $${parseFloat(ad.spend).toFixed(2)} · Leads: ${ad.leads}</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="font-extrabold text-emerald-400">$${parseFloat(ad.cpl).toFixed(2)}</span>
+                                    <p class="text-[9px] text-neutral-500">CPL</p>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+
+                    // Renderizar Worst Anuncios
+                    if (data.worst_ads && data.worst_ads.length > 0) {
+                        const worstContainer = document.getElementById('worst-ads-container');
+                        worstContainer.innerHTML = data.worst_ads.map((ad, idx) => `
+                            <div class="p-3 bg-neutral-900 rounded-lg border border-neutral-800 flex justify-between items-center text-xs">
+                                <div>
+                                    <p class="font-bold text-white truncate max-w-[240px]">${ad.ad_name}</p>
+                                    <p class="text-[10px] text-neutral-400 mt-0.5">Inversión: $${parseFloat(ad.spend).toFixed(2)} · Leads: ${ad.leads}</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="font-extrabold text-rose-400">$${parseFloat(ad.cpl).toFixed(2)}</span>
+                                    <p class="text-[9px] text-neutral-500">CPL</p>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+
+                    // Inicializar Donut Chart
+                    const ctxDonut = document.getElementById('donutChart').getContext('2d');
+                    new Chart(ctxDonut, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Inversión', 'Restante'],
+                            datasets: [{
+                                data: [100, 0],
+                                backgroundColor: ['#38bdf8', '#27272a'],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: { cutout: '75%', plugins: { legend: { display: false } }, responsive: true, maintainAspectRatio: false }
+                    });
                 })
                 .catch(err => {
-                    console.log("Usando datos de fallback por defecto");
-                    renderTopAds([
-                        { name: '[VID DANI][TAPICERIA][JUNIO]', cpl: 1.48, leads: 28, spend: 41.51 },
-                        { name: '[VID][TAPICERIA IA][30-03-2026]', cpl: 1.67, leads: 47, spend: 78.35 },
-                        { name: '[VID][Tapicería][Sept]', cpl: 1.71, leads: 139, spend: 237.48 }
-                    ]);
-                    renderCampaigns([
-                        { name: '[Formulario][Pintura][26-08-2026]', sep: 3.19, oct: 2.38 },
-                        { name: '[Formulario][Pintura][10-09-2026]', sep: 2.82, oct: 2.96 },
-                        { name: '[Remarketing][Pintura][Halloween]', sep: 0.00, oct: 6.27 }
-                    ]);
+                    console.error("Error al leer data.json:", err);
+                    document.getElementById('data-status').innerText = "⚠️ Error leyendo JSON";
+                    document.getElementById('data-status').className = "px-2.5 py-1 bg-rose-950 text-rose-400 border border-rose-800 rounded-full font-medium";
                 });
         });
-
-        function renderTopAds(ads) {
-            const container = document.getElementById('top-ads-grid');
-            container.innerHTML = ads.slice(0, 3).map((ad, idx) => `
-                <div class="motoria-card p-5 space-y-4">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded bg-sky-950 text-sky-400 border border-sky-800 font-bold flex items-center justify-center text-xs">#${idx+1}</div>
-                        <h4 class="text-xs font-bold text-white truncate max-w-[200px]">${ad.name || ad.ad_name}</h4>
-                    </div>
-                    <div class="flex justify-between items-baseline pt-2">
-                        <div>
-                            <span class="text-2xl font-black text-white">$${parseFloat(ad.cpl).toFixed(2)}</span>
-                            <p class="text-[10px] text-neutral-400">por formulario</p>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-lg font-bold text-sky-400">${ad.leads}</span>
-                            <p class="text-[10px] text-neutral-400">resultados</p>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderCampaigns(campaigns) {
-            const container = document.getElementById('campaign-list');
-            container.innerHTML = campaigns.map(c => `
-                <div class="space-y-1.5 text-xs">
-                    <p class="font-semibold text-neutral-300">${c.name}</p>
-                    <div class="space-y-1">
-                        <div class="w-full bg-neutral-800 rounded-full h-2.5 overflow-hidden">
-                            <div class="bg-neutral-600 h-2.5 rounded-full" style="width: ${Math.min(c.sep * 15, 100)}%"></div>
-                        </div>
-                        <div class="w-full bg-neutral-800 rounded-full h-2.5 overflow-hidden">
-                            <div class="bg-sky-400 h-2.5 rounded-full" style="width: ${Math.min(c.oct * 15, 100)}%"></div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
     </script>
 </body>
 </html>
