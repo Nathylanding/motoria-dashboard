@@ -7,14 +7,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Montserrat', sans-serif; }
-    </style>
+    <style>body { font-family: 'Montserrat', sans-serif; }</style>
 </head>
 <body class="h-full flex flex-col selection:bg-white selection:text-black">
 
     <!-- HEADER / LOGO MOTORIA -->
-    <header class="border-b border-[#27272a] bg-[#09090b]/80 backdrop-blur sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
+    <header class="border-b border-[#27272a] bg-[#09090b]/90 backdrop-blur sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
         <div class="flex items-center space-x-3">
             <div class="flex items-center space-x-1 font-black text-2xl tracking-tighter">
                 <span class="text-white">|</span>
@@ -24,16 +22,27 @@
             </div>
             <span class="text-xs uppercase px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded border border-neutral-700">Meta Ads Intelligence</span>
         </div>
-        <div class="text-xs text-neutral-400" id="last-updated">Cargando datos reales...</div>
+        
+        <!-- SELECTOR DE FILTROS DE TEMPORALIDAD -->
+        <div class="flex items-center space-x-3">
+            <span class="text-xs text-neutral-400 uppercase font-semibold">Periodo:</span>
+            <select id="time-filter" class="bg-[#121215] border border-[#27272a] text-white text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-white transition">
+                <option value="ytd">Todo el Año (YTD)</option>
+                <option value="last_30">Último Mes (30 días)</option>
+                <option value="last_7">Última Semana (7 días)</option>
+                <optgroup label="Meses específicos" id="months-group"></optgroup>
+            </select>
+            <span class="text-xs text-emerald-400 font-medium ml-2" id="last-updated">🟢 Conectado en vivo</span>
+        </div>
     </header>
 
     <!-- CONTENIDO PRINCIPAL -->
     <main class="flex-1 p-6 max-w-7xl mx-auto w-full space-y-6">
         
-        <!-- TARJETAS DE KPIS (SE LLENAN DESDE data.json) -->
+        <!-- TARJETAS DE KPIS DINÁMICAS -->
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
-                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto Mes Actual</h4>
+                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto Seleccionado</h4>
                 <p id="spend-current" class="text-2xl font-black text-white mt-1">$0.00</p>
             </div>
             <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
@@ -79,14 +88,12 @@
                             <th class="pb-2 text-right">CPL</th>
                         </tr>
                     </thead>
-                    <tbody id="table-top-ads">
-                        <tr><td colspan="4" class="py-4 text-center text-neutral-500">Cargando datos...</td></tr>
-                    </tbody>
+                    <tbody id="table-top-ads"></tbody>
                 </table>
             </div>
 
             <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl overflow-x-auto">
-                <h3 class="text-sm font-bold text-rose-400 mb-4">⚠️ Anuncios Menos Eficientes (Alto Gasto / Bajo Lead)</h3>
+                <h3 class="text-sm font-bold text-rose-400 mb-4">⚠️ Anuncios Menos Eficientes</h3>
                 <table class="w-full text-left text-xs">
                     <thead>
                         <tr class="border-b border-[#27272a] text-neutral-400">
@@ -96,90 +103,119 @@
                             <th class="pb-2 text-right">CPL</th>
                         </tr>
                     </thead>
-                    <tbody id="table-worst-ads">
-                        <tr><td colspan="4" class="py-4 text-center text-neutral-500">Cargando datos...</td></tr>
-                    </tbody>
+                    <tbody id="table-worst-ads"></tbody>
                 </table>
             </div>
         </div>
-
     </main>
 
-    <!-- SCRIPT DE CONEXIÓN CON data.json -->
+    <!-- SCRIPT DE LÓGICA DE FILTROS -->
     <script>
+        let globalData = null;
+
         fetch('data.json')
-            .then(response => {
-                if (!response.ok) throw new Error("No se encontró el archivo data.json");
-                return response.json();
-            })
+            .then(res => res.json())
             .then(data => {
-                // 1. Actualizar Tarjetas KPIs
-                document.getElementById('spend-current').innerText = '$' + data.kpis.spend_this_month.toLocaleString('en-US', {minimumFractionDigits: 2});
-                document.getElementById('spend-last').innerText = '$' + data.kpis.spend_last_month.toLocaleString('en-US', {minimumFractionDigits: 2});
-                document.getElementById('spend-ytd').innerText = '$' + data.kpis.spend_ytd.toLocaleString('en-US', {minimumFractionDigits: 2});
-                document.getElementById('leads-day').innerText = data.kpis.leads_per_day + ' /día';
-                document.getElementById('cpl-current').innerText = '$' + data.kpis.cpl_this_month.toLocaleString('en-US', {minimumFractionDigits: 2});
-                document.getElementById('last-updated').innerText = 'Actualizado en tiempo real';
+                globalData = data;
+                
+                // Poblar meses específicos en el selector
+                const group = document.getElementById('months-group');
+                if (data.available_months) {
+                    data.available_months.forEach(m => {
+                        const opt = document.createElement('option');
+                        opt.value = m;
+                        opt.innerText = m;
+                        group.appendChild(opt);
+                    });
+                }
 
-                // 2. Gráfica de Inversión Diaria
-                const dates = data.daily_trend.map(item => item.date);
-                const spends = data.daily_trend.map(item => parseFloat(item.spend));
-                const leads = data.daily_trend.map(item => parseInt(item.leads));
+                renderDashboard('ytd');
 
-                const traceSpend = {
-                    x: dates, y: spends,
-                    type: 'scatter', mode: 'lines+markers',
-                    line: { color: '#ffffff', width: 2 },
-                    marker: { size: 4 }
-                };
-                Plotly.newPlot('chart-spend', [traceSpend], {
-                    paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
-                    font: { color: '#a1a1aa' },
-                    margin: { t: 10, r: 10, b: 30, l: 40 },
-                    xaxis: { gridcolor: '#27272a' }, yaxis: { gridcolor: '#27272a' }
-                }, {responsive: true});
-
-                // 3. Gráfica de Leads Diario
-                const traceLeads = {
-                    x: dates, y: leads,
-                    type: 'scatter', mode: 'lines+markers',
-                    line: { color: '#10b981', width: 2 },
-                    marker: { size: 4 }
-                };
-                Plotly.newPlot('chart-leads', [traceLeads], {
-                    paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
-                    font: { color: '#a1a1aa' },
-                    margin: { t: 10, r: 10, b: 30, l: 30 },
-                    xaxis: { gridcolor: '#27272a' }, yaxis: { gridcolor: '#27272a' }
-                }, {responsive: true});
-
-                // 4. Llenar Tablas Top Ads
-                const topTable = document.getElementById('table-top-ads');
-                topTable.innerHTML = data.top_ads.map(ad => `
-                    <tr class="border-b border-[#27272a]/50 hover:bg-neutral-900">
-                        <td class="py-2.5 pr-2 truncate max-w-[200px]">${ad.ad_name}</td>
-                        <td class="py-2.5 text-right">$${parseFloat(ad.spend).toFixed(2)}</td>
-                        <td class="py-2.5 text-right">${ad.leads}</td>
-                        <td class="py-2.5 text-right text-emerald-400 font-bold">$${parseFloat(ad.cpl).toFixed(2)}</td>
-                    </tr>
-                `).join('');
-
-                // 5. Llenar Tablas Worst Ads
-                const worstTable = document.getElementById('table-worst-ads');
-                worstTable.innerHTML = data.worst_ads.map(ad => `
-                    <tr class="border-b border-[#27272a]/50 hover:bg-neutral-900">
-                        <td class="py-2.5 pr-2 truncate max-w-[200px]">${ad.ad_name}</td>
-                        <td class="py-2.5 text-right">$${parseFloat(ad.spend).toFixed(2)}</td>
-                        <td class="py-2.5 text-right">${ad.leads}</td>
-                        <td class="py-2.5 text-right text-rose-400 font-bold">$${parseFloat(ad.cpl).toFixed(2)}</td>
-                    </tr>
-                `).join('');
-
-            })
-            .catch(error => {
-                console.error("Error cargando el data.json:", error);
-                document.getElementById('last-updated').innerText = 'Error al cargar data.json';
+                // Escuchar eventos de cambio de filtro
+                document.getElementById('time-filter').addEventListener('change', (e) => {
+                    renderDashboard(e.target.value);
+                });
             });
+
+        function renderDashboard(filterType) {
+            let data = globalData;
+            let filteredDaily = [...data.daily_trend];
+
+            // Ordenar por fecha
+            filteredDaily.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            const maxDate = new Date(Math.max(...filteredDaily.map(item => new Date(item.date))));
+
+            // Aplicar lógica según el filtro seleccionado
+            if (filterType === 'last_7') {
+                const cutoff = new Date(maxDate);
+                cutoff.setDate(cutoff.getDate() - 7);
+                filteredDaily = filteredDaily.filter(item => new Date(item.date) >= cutoff);
+            } else if (filterType === 'last_30') {
+                const cutoff = new Date(maxDate);
+                cutoff.setDate(cutoff.getDate() - 30);
+                filteredDaily = filteredDaily.filter(item => new Date(item.date) >= cutoff);
+            } else if (filterType !== 'ytd') {
+                // Es un mes en formato YYYY-MM
+                filteredDaily = filteredDaily.filter(item => item.month_str === filterType);
+            }
+
+            // Recalcular métricas
+            let totalSpend = filteredDaily.reduce((acc, item) => acc + parseFloat(item.spend), 0);
+            let totalLeads = filteredDaily.reduce((acc, item) => acc + parseInt(item.leads), 0);
+            let avgCpl = totalLeads > 0 ? totalSpend / totalLeads : 0;
+            let daysCount = new Set(filteredDaily.map(i => i.date)).size || 1;
+            let leadsPerDay = (totalLeads / daysCount).toFixed(2);
+
+            // Actualizar tarjetas de KPI
+            document.getElementById('spend-current').innerText = '$' + totalSpend.toLocaleString('en-US', {minimumFractionDigits: 2});
+            document.getElementById('spend-last').innerText = '$' + data.kpis.spend_last_month.toLocaleString('en-US', {minimumFractionDigits: 2});
+            document.getElementById('spend-ytd').innerText = '$' + data.kpis.spend_ytd.toLocaleString('en-US', {minimumFractionDigits: 2});
+            document.getElementById('leads-day').innerText = leadsPerDay + ' /día';
+            document.getElementById('cpl-current').innerText = '$' + avgCpl.toLocaleString('en-US', {minimumFractionDigits: 2});
+
+            // Gráficas
+            const dates = filteredDaily.map(item => item.date);
+            const spends = filteredDaily.map(item => parseFloat(item.spend));
+            const leads = filteredDaily.map(item => parseInt(item.leads));
+
+            Plotly.newPlot('chart-spend', [{
+                x: dates, y: spends, type: 'scatter', mode: 'lines+markers',
+                line: { color: '#ffffff', width: 2 }, marker: { size: 4 }
+            }], {
+                paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
+                font: { color: '#a1a1aa' }, margin: { t: 10, r: 10, b: 30, l: 40 },
+                xaxis: { gridcolor: '#27272a' }, yaxis: { gridcolor: '#27272a' }
+            }, {responsive: true});
+
+            Plotly.newPlot('chart-leads', [{
+                x: dates, y: leads, type: 'scatter', mode: 'lines+markers',
+                line: { color: '#10b981', width: 2 }, marker: { size: 4 }
+            }], {
+                paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
+                font: { color: '#a1a1aa' }, margin: { t: 10, r: 10, b: 30, l: 30 },
+                xaxis: { gridcolor: '#27272a' }, yaxis: { gridcolor: '#27272a' }
+            }, {responsive: true});
+
+            // Tablas de Anuncios
+            document.getElementById('table-top-ads').innerHTML = data.top_ads.map(ad => `
+                <tr class="border-b border-[#27272a]/50 hover:bg-neutral-900">
+                    <td class="py-2.5 pr-2 truncate max-w-[200px]">${ad.ad_name}</td>
+                    <td class="py-2.5 text-right">$${parseFloat(ad.spend).toFixed(2)}</td>
+                    <td class="py-2.5 text-right">${ad.leads}</td>
+                    <td class="py-2.5 text-right text-emerald-400 font-bold">$${parseFloat(ad.cpl).toFixed(2)}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('table-worst-ads').innerHTML = data.worst_ads.map(ad => `
+                <tr class="border-b border-[#27272a]/50 hover:bg-neutral-900">
+                    <td class="py-2.5 pr-2 truncate max-w-[200px]">${ad.ad_name}</td>
+                    <td class="py-2.5 text-right">$${parseFloat(ad.spend).toFixed(2)}</td>
+                    <td class="py-2.5 text-right">${ad.leads}</td>
+                    <td class="py-2.5 text-right text-rose-400 font-bold">$${parseFloat(ad.cpl).toFixed(2)}</td>
+                </tr>
+            `).join('');
+        }
     </script>
 </body>
 </html>
