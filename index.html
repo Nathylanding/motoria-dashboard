@@ -1,709 +1,185 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full bg-slate-950 text-slate-100">
+<html lang="es" class="h-full bg-[#09090b] text-slate-100">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOTORIA - Meta Ads Intelligence Dashboard</title>
-
-    <!-- Google Fonts & Tailwind CSS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        motoria: {
-                            black: '#09090b',
-                            dark: '#121215',
-                            card: '#18181c',
-                            border: '#27272a',
-                            accent: '#ffffff',
-                            highlight: '#38bdf8',
-                            emerald: '#10b981',
-                            amber: '#f59e0b',
-                            rose: '#f43f5e'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- FontAwesome & Plotly -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Montserrat', sans-serif; background-color: #09090b; }
-        .glass-panel {
-            background: rgba(24, 24, 28, 0.85);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .pulse-live {
-            box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
-            animation: pulse-ring 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
-        }
-        @keyframes pulse-ring {
-            to { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
-        }
-        .motoria-letter-spacing {
-            letter-spacing: 0.35em;
-        }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #09090b; }
-        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+        body { font-family: 'Montserrat', sans-serif; }
     </style>
 </head>
-<body class="h-full flex flex-col font-sans antialiased bg-motoria-black text-slate-100 overflow-x-hidden">
+<body class="h-full flex flex-col selection:bg-white selection:text-black">
 
-    <!-- Top Header -->
-    <header class="glass-panel sticky top-0 z-50 border-b border-motoria-border px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-4">
-        <div class="flex items-center gap-4">
-            <!-- MOTORIA Geometric SVG Emblem -->
-            <div class="flex items-center gap-3">
-                <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
-                    <rect x="18" y="15" width="18" height="70" fill="white" />
-                    <rect x="64" y="15" width="18" height="70" fill="white" />
-                    <rect x="42" y="38" width="16" height="24" fill="white" />
-                </svg>
-                <div>
-                    <h1 class="font-black text-lg sm:text-xl text-white motoria-letter-spacing uppercase tracking-widest leading-none">MOTORIA</h1>
-                    <p class="text-[10px] text-slate-400 font-semibold tracking-wider uppercase mt-1 flex items-center gap-1.5">
-                        <span>Meta Ads Intelligence</span>
-                        <span class="inline-block w-1 h-1 rounded-full bg-slate-600"></span>
-                        <span class="text-motoria-highlight font-mono text-[10px]" id="last-sync-time">Sincronizado hoy</span>
-                    </p>
-                </div>
+    <!-- HEADER / LOGO MOTORIA -->
+    <header class="border-b border-[#27272a] bg-[#09090b]/80 backdrop-blur sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-1 font-black text-2xl tracking-tighter">
+                <span class="text-white">|</span>
+                <span class="bg-white text-black px-1.5 py-0.5 rounded-sm text-lg">▪</span>
+                <span class="text-white">|</span>
+                <span class="ml-2 tracking-widest text-xl font-bold">MOTORIA</span>
             </div>
+            <span class="text-xs uppercase px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded border border-neutral-700">Meta Ads Intelligence</span>
         </div>
-
-        <!-- Right Controls & Sync Status -->
-        <div class="flex items-center gap-3 flex-wrap">
-            <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-motoria-dark border border-motoria-border text-xs">
-                <span class="relative flex h-2.5 w-2.5">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                </span>
-                <span class="font-medium text-emerald-400 text-[11px]" id="live-indicator">API Simulación Activa</span>
-            </div>
-
-            <button id="toggle-sim-btn" onclick="toggleSimulation()" class="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-200 text-black font-bold text-xs shadow-md transition-all flex items-center gap-1.5">
-                <i class="fa-solid fa-pause" id="sim-icon"></i>
-                <span id="sim-btn-text">Pausar Simulación</span>
-            </button>
-
-            <button onclick="openPythonModal()" class="px-3 py-1.5 rounded-lg bg-motoria-dark hover:bg-slate-800 border border-motoria-border text-slate-200 text-xs font-semibold transition-all flex items-center gap-1.5">
-                <i class="fa-brands fa-python text-amber-400"></i>
-                <span>Conectar Python</span>
-            </button>
-        </div>
+        <div class="text-xs text-neutral-400" id="last-updated">Cargando datos reales...</div>
     </header>
 
-    <div class="flex flex-1 overflow-hidden">
-
-        <!-- Sidebar Navigation -->
-        <aside class="w-16 md:w-64 bg-motoria-dark border-r border-motoria-border flex flex-col justify-between shrink-0 transition-all">
-            <nav class="p-2 md:p-4 space-y-1.5">
-                <a href="#ads" id="nav-ads" onclick="switchTab('ads')" class="tab-nav-btn active flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all text-white bg-white/10 border border-white/20">
-                    <i class="fa-solid fa-chart-line text-white text-base w-5 text-center"></i>
-                    <span class="hidden md:inline uppercase">Resumen Pauta</span>
-                </a>
-                <a href="#leads" id="nav-leads" onclick="switchTab('leads')" class="tab-nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all text-slate-400 hover:text-white hover:bg-white/5">
-                    <i class="fa-solid fa-user-check text-emerald-400 text-base w-5 text-center"></i>
-                    <span class="hidden md:inline uppercase">Leads & Conversiones</span>
-                </a>
-                <a href="#demographics" id="nav-demographics" onclick="switchTab('demographics')" class="tab-nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all text-slate-400 hover:text-white hover:bg-white/5">
-                    <i class="fa-solid fa-users text-sky-400 text-base w-5 text-center"></i>
-                    <span class="hidden md:inline uppercase">Audiencias</span>
-                </a>
-                <a href="#campaigns" id="nav-campaigns" onclick="switchTab('campaigns')" class="tab-nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all text-slate-400 hover:text-white hover:bg-white/5">
-                    <i class="fa-solid fa-bullhorn text-amber-400 text-base w-5 text-center"></i>
-                    <span class="hidden md:inline uppercase">Campañas & Ads</span>
-                </a>
-            </nav>
-
-            <!-- Bottom Ad Fatigue Status Card -->
-            <div class="hidden md:block p-4 m-3 rounded-xl glass-panel border border-amber-500/20 bg-amber-500/5">
-                <div class="flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-triangle-exclamation text-amber-400 text-xs"></i>
-                    <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wider">Control de Frecuencia</span>
-                </div>
-                <p class="text-[11px] text-slate-400 leading-relaxed mb-2">2 creativos registran Frecuencia > 3.8 en el segmento "Motoria Performance".</p>
-                <div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
-                    <div class="bg-amber-400 h-full w-3/4 rounded-full"></div>
-                </div>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-1 p-6 max-w-7xl mx-auto w-full space-y-6">
+        
+        <!-- TARJETAS DE KPIS (SE LLENAN DESDE data.json) -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
+                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto Mes Actual</h4>
+                <p id="spend-current" class="text-2xl font-black text-white mt-1">$0.00</p>
             </div>
-        </aside>
-
-        <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
-
-            <!-- Global Filter Bar -->
-            <section class="glass-panel p-4 rounded-2xl flex flex-wrap items-center justify-between gap-4">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-sliders text-slate-400 text-xs"></i>
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Filtros de Análisis:</span>
-                </div>
-
-                <div class="flex flex-wrap items-center gap-3">
-                    <select id="filter-month" onchange="applyFilters()" class="bg-motoria-dark border border-motoria-border text-xs rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-white">
-                        <option value="october">Octubre 2026 (Mes Actual)</option>
-                        <option value="september">Septiembre 2026</option>
-                        <option value="ytd">Año 2026 (YTD)</option>
-                    </select>
-
-                    <select id="filter-campaign" onchange="applyFilters()" class="bg-motoria-dark border border-motoria-border text-xs rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-white">
-                        <option value="all">Todas las Campañas MOTORIA</option>
-                        <option value="colisiones">Centro de Colisiones Quito</option>
-                        <option value="mecanica">Mecánica Express & Asistencia 24/7</option>
-                        <option value="mantenimiento">Mantenimiento Preventivo VIP</option>
-                    </select>
-
-                    <select id="filter-placement" onchange="applyFilters()" class="bg-motoria-dark border border-motoria-border text-xs rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-white">
-                        <option value="all">Todas las Ubicaciones</option>
-                        <option value="facebook">Facebook Feed & Stories</option>
-                        <option value="instagram">Instagram Reels & Feed</option>
-                    </select>
-                </div>
-            </section>
-
-            <!-- KPI Cards Summary Grid -->
-            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                <!-- KPI 1 -->
-                <div class="glass-panel p-4 rounded-2xl relative overflow-hidden group border-l-2 border-l-white">
-                    <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Inversión Octubre</p>
-                    <div class="flex items-baseline justify-between mt-1">
-                        <h2 class="text-2xl font-bold text-white tracking-tight" id="kpi-spend">$3,420.50</h2>
-                        <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded flex items-center gap-1">
-                            <i class="fa-solid fa-arrow-up text-[9px]"></i> +12%
-                        </span>
-                    </div>
-                    <p class="text-[10px] text-slate-500 mt-2">Vs $3,050.00 Mes anterior</p>
-                </div>
-
-                <!-- KPI 2 -->
-                <div class="glass-panel p-4 rounded-2xl relative overflow-hidden group border-l-2 border-l-emerald-500">
-                    <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Total Leads (Octubre)</p>
-                    <div class="flex items-baseline justify-between mt-1">
-                        <h2 class="text-2xl font-bold text-white tracking-tight" id="kpi-leads">428</h2>
-                        <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded flex items-center gap-1">
-                            <i class="fa-solid fa-arrow-up text-[9px]"></i> +18%
-                        </span>
-                    </div>
-                    <p class="text-[10px] text-slate-500 mt-2">Vs 362 Mes anterior</p>
-                </div>
-
-                <!-- KPI 3 -->
-                <div class="glass-panel p-4 rounded-2xl relative overflow-hidden group border-l-2 border-l-sky-400">
-                    <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Formularios / Día</p>
-                    <div class="flex items-baseline justify-between mt-1">
-                        <h2 class="text-2xl font-bold text-white tracking-tight" id="kpi-leads-day">15.8 /día</h2>
-                        <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded flex items-center gap-1">
-                            <i class="fa-solid fa-arrow-up text-[9px]"></i> +2.1
-                        </span>
-                    </div>
-                    <p class="text-[10px] text-slate-500 mt-2">Meta: > 12.0 / día</p>
-                </div>
-
-                <!-- KPI 4 -->
-                <div class="glass-panel p-4 rounded-2xl relative overflow-hidden group border-l-2 border-l-amber-500">
-                    <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Costo / Lead (CPL)</p>
-                    <div class="flex items-baseline justify-between mt-1">
-                        <h2 class="text-2xl font-bold text-white tracking-tight" id="kpi-cpl">$7.99</h2>
-                        <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded flex items-center gap-1">
-                            <i class="fa-solid fa-arrow-down text-[9px]"></i> -5%
-                        </span>
-                    </div>
-                    <p class="text-[10px] text-slate-500 mt-2">Vs $8.42 Mes anterior</p>
-                </div>
-
-                <!-- KPI 5 -->
-                <div class="glass-panel p-4 rounded-2xl relative overflow-hidden group border-l-2 border-l-purple-500">
-                    <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Inversión YTD (2026)</p>
-                    <div class="flex items-baseline justify-between mt-1">
-                        <h2 class="text-2xl font-bold text-white tracking-tight" id="kpi-ytd">$31,850.00</h2>
-                        <span class="text-[11px] font-semibold text-slate-300 bg-slate-800 px-2 py-0.5 rounded">
-                            10 Meses
-                        </span>
-                    </div>
-                    <p class="text-[10px] text-slate-500 mt-2">Total Leads: 3,890</p>
-                </div>
-            </section>
-
-            <!-- TAB 1: ADS RESUMEN -->
-            <div id="tab-ads" class="tab-content space-y-6">
-                <!-- Daily Comparative Charts -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Daily Spend Comparison -->
-                    <div class="glass-panel p-5 rounded-2xl">
-                        <div class="flex items-center justify-between mb-4">
-                            <div>
-                                <h3 class="font-bold text-white text-sm flex items-center gap-2">
-                                    <i class="fa-solid fa-chart-area text-motoria-highlight"></i>
-                                    Comparativa Diaria de Inversión ($)
-                                </h3>
-                                <p class="text-xs text-slate-400">Octubre 2026 vs Septiembre 2026</p>
-                            </div>
-                            <span class="text-[10px] bg-motoria-dark border border-motoria-border px-2.5 py-1 rounded text-slate-300 uppercase font-medium">Día 1 al 27</span>
-                        </div>
-                        <div id="chart-daily-spend" class="w-full h-72"></div>
-                    </div>
-
-                    <!-- Daily Leads Comparison -->
-                    <div class="glass-panel p-5 rounded-2xl">
-                        <div class="flex items-center justify-between mb-4">
-                            <div>
-                                <h3 class="font-bold text-white text-sm flex items-center gap-2">
-                                    <i class="fa-solid fa-chart-bar text-emerald-400"></i>
-                                    Comparativa Diaria de Leads
-                                </h3>
-                                <p class="text-xs text-slate-400">Generación diaria de leads capturados</p>
-                            </div>
-                            <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded font-medium uppercase">Alta Conversión</span>
-                        </div>
-                        <div id="chart-daily-leads" class="w-full h-72"></div>
-                    </div>
-                </div>
-
-                <!-- Placement & Budget Allocation -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="glass-panel p-5 rounded-2xl lg:col-span-1">
-                        <h3 class="font-bold text-white text-sm mb-1 flex items-center gap-2">
-                            <i class="fa-solid fa-pie-chart text-sky-400"></i>
-                            Distribución de Pauta
-                        </h3>
-                        <p class="text-xs text-slate-400 mb-4">Distribución por plataforma y ubicación</p>
-                        <div id="chart-placements" class="w-full h-64"></div>
-                    </div>
-
-                    <!-- Executive Insights & Actionable Recommendations -->
-                    <div class="glass-panel p-5 rounded-2xl lg:col-span-2 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-white text-sm mb-3 flex items-center gap-2">
-                                <i class="fa-solid fa-lightbulb text-amber-400"></i>
-                                Auditoría de Pauta MOTORIA
-                            </h3>
-
-                            <div class="space-y-3 text-xs">
-                                <div class="p-3 rounded-xl bg-motoria-dark border border-motoria-border flex items-start gap-3">
-                                    <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg shrink-0 mt-0.5">
-                                        <i class="fa-solid fa-circle-check"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-slate-200">Campañas con Mayor Rendimiento</h4>
-                                        <p class="text-slate-400 mt-0.5">El segmento de <strong>"Centro de Colisiones Quito"</strong> tiene un CPL promedio de $6.20, un 22% más económico que el promedio general.</p>
-                                    </div>
-                                </div>
-
-                                <div class="p-3 rounded-xl bg-motoria-dark border border-motoria-border flex items-start gap-3">
-                                    <div class="p-2 bg-amber-500/10 text-amber-400 rounded-lg shrink-0 mt-0.5">
-                                        <i class="fa-solid fa-triangle-exclamation"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-slate-200">Alertas de Desgaste (Creative Fatigue)</h4>
-                                        <p class="text-slate-400 mt-0.5">El video <em>"Mecánica Inmediata 24h - Caso Real"</em> superó una frecuencia de 4.2. Se sugiere renovar el primer gancho (hook) de 3 segundos.</p>
-                                    </div>
-                                </div>
-
-                                <div class="p-3 rounded-xl bg-motoria-dark border border-motoria-border flex items-start gap-3">
-                                    <div class="p-2 bg-sky-500/10 text-sky-400 rounded-lg shrink-0 mt-0.5">
-                                        <i class="fa-solid fa-mobile-screen"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-slate-200">Optimización de Ubicación</h4>
-                                        <p class="text-slate-400 mt-0.5">Instagram Reels genera el 62% de los formularios de emergencia directa por WhatsApp durante el horario nocturno (20:00 - 06:00).</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 pt-3 border-t border-motoria-border flex items-center justify-between text-xs text-slate-400">
-                            <span>Sugerencia: Incrementar presupuesto en horario 18:00 - 23:00</span>
-                            <span class="text-white font-semibold cursor-pointer hover:underline" onclick="switchTab('campaigns')">Ver Creativos →</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
+                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto Mes Anterior</h4>
+                <p id="spend-last" class="text-2xl font-black text-neutral-400 mt-1">$0.00</p>
             </div>
-
-            <!-- TAB 2: LEADS & FORMULARIOS -->
-            <div id="tab-leads" class="tab-content hidden space-y-6">
-                <div class="glass-panel p-5 rounded-2xl">
-                    <h3 class="font-bold text-white text-sm mb-1">Conversiones de Formularios y Conversaciones Octubre</h3>
-                    <p class="text-xs text-slate-400 mb-4">Desglose de leads capturados por canal de entrada directo</p>
-                    <div id="chart-leads-breakdown" class="w-full h-80"></div>
-                </div>
+            <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
+                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Gasto YTD (Año)</h4>
+                <p id="spend-ytd" class="text-2xl font-black text-emerald-400 mt-1">$0.00</p>
             </div>
-
-            <!-- TAB 3: DEMOGRAPHICS -->
-            <div id="tab-demographics" class="tab-content hidden space-y-6">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="glass-panel p-5 rounded-2xl">
-                        <h3 class="font-bold text-white text-sm mb-1">Público por Edad y Género</h3>
-                        <p class="text-xs text-slate-400 mb-4">Inversión y respuesta según rango demográfico en Quito</p>
-                        <div id="chart-demo-age" class="w-full h-80"></div>
-                    </div>
-
-                    <div class="glass-panel p-5 rounded-2xl">
-                        <h3 class="font-bold text-white text-sm mb-1">Rendimiento CPL por Rango Etario</h3>
-                        <p class="text-xs text-slate-400 mb-4">Identificación de segmentos con menor costo por conversión</p>
-                        <div id="chart-demo-cpl" class="w-full h-80"></div>
-                    </div>
-                </div>
+            <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
+                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Formularios / Día</h4>
+                <p id="leads-day" class="text-2xl font-black text-amber-400 mt-1">0 /día</p>
             </div>
-
-            <!-- TAB 4: CAMPAIGNS & CREATIVES -->
-            <div id="tab-campaigns" class="tab-content hidden space-y-6">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Top Ads -->
-                    <div class="glass-panel p-5 rounded-2xl border-t-2 border-t-emerald-500">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-bold text-white text-sm flex items-center gap-2">
-                                <i class="fa-solid fa-trophy text-amber-400"></i>
-                                Anuncios Top Rendimiento (MOTORIA)
-                            </h3>
-                            <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-bold uppercase">Top ROI</span>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs text-slate-300">
-                                <thead class="bg-motoria-dark text-slate-400 uppercase text-[10px] tracking-wider">
-                                    <tr>
-                                        <th class="p-2.5">Anuncio / Creativo</th>
-                                        <th class="p-2.5">Inversión</th>
-                                        <th class="p-2.5">Leads</th>
-                                        <th class="p-2.5">CPL ($)</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-motoria-border" id="table-top-ads">
-                                    <!-- Dynamic Rows -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Worst / Fatigued Ads -->
-                    <div class="glass-panel p-5 rounded-2xl border-t-2 border-t-rose-500">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-bold text-white text-sm flex items-center gap-2">
-                                <i class="fa-solid fa-triangle-exclamation text-rose-500"></i>
-                                Creativos con Alta Frecuencia / Bajo Rendimiento
-                            </h3>
-                            <span class="text-[10px] bg-rose-500/10 text-rose-400 px-2 py-0.5 rounded font-bold uppercase">Optimizar</span>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs text-slate-300">
-                                <thead class="bg-motoria-dark text-slate-400 uppercase text-[10px] tracking-wider">
-                                    <tr>
-                                        <th class="p-2.5">Anuncio / Creativo</th>
-                                        <th class="p-2.5">Inversión</th>
-                                        <th class="p-2.5">Leads</th>
-                                        <th class="p-2.5">Frecuencia</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-motoria-border" id="table-worst-ads">
-                                    <!-- Dynamic Rows -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </main>
-    </div>
-
-    <!-- Modal Instructions: Python Sync Setup for GitHub Pages -->
-    <div id="python-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
-        <div class="glass-panel w-full max-w-2xl rounded-2xl p-6 relative border border-motoria-border shadow-2xl">
-            <button onclick="closePythonModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="flex items-center gap-3 mb-4">
-                <div class="p-3 bg-white/10 rounded-xl text-white">
-                    <i class="fa-brands fa-python text-2xl"></i>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-white">Integración Python & MOTORIA Dashboard</h3>
-                    <p class="text-xs text-slate-400">Sincroniza la API de Meta Ads directo a GitHub Pages.</p>
-                </div>
-            </div>
-
-            <div class="space-y-4 text-xs text-slate-300">
-                <div class="p-3 rounded-xl bg-motoria-dark border border-motoria-border">
-                    <p class="font-semibold text-white mb-1">¿Cómo actualizar este dashboard en GitHub Pages?</p>
-                    <ol class="list-decimal list-inside space-y-1 text-slate-400">
-                        <li>Usa tu script de Python para consultar la API oficial de Meta Ads.</li>
-                        <li>Exporta las métricas actualizadas como un archivo <code class="text-sky-400 bg-black px-1 py-0.5 rounded">data.json</code>.</li>
-                        <li>Configura un <strong>GitHub Action</strong> gratuito que ejecute el script diariamente y actualice el repo.</li>
-                    </ol>
-                </div>
-
-                <div class="relative">
-                    <pre class="bg-black p-3 rounded-xl border border-motoria-border text-[11px] font-mono text-emerald-400 overflow-x-auto">
-# Script de actualización para MOTORIA Meta Ads Dashboard
-import json
-
-metrics_data = {
-    "brand": "MOTORIA",
-    "spend_october": gasto_mes_actual,
-    "leads_october": leads_mes_actual,
-    "cpl": cpl_actual,
-    "daily_series": df_daily.to_dict(orient="records")
-}
-
-with open("data.json", "w") as f:
-    json.dump(metrics_data, f, indent=4)
-                    </pre>
-                </div>
-            </div>
-
-            <div class="mt-6 flex justify-end">
-                <button onclick="closePythonModal()" class="px-4 py-2 bg-white text-black font-bold text-xs rounded-xl hover:bg-slate-200 transition-all">
-                    Entendido, cerrar
-                </button>
+            <div class="bg-[#121215] border border-[#27272a] p-4 rounded-xl">
+                <h4 class="text-xs uppercase text-neutral-400 font-semibold">Costo / Formulario</h4>
+                <p id="cpl-current" class="text-2xl font-black text-rose-500 mt-1">$0.00</p>
             </div>
         </div>
-    </div>
 
-    <!-- Application Script -->
+        <!-- GRÁFICAS -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl">
+                <h3 class="text-sm font-bold text-neutral-200 mb-4">📈 Tendencia Diaria de Inversión ($)</h3>
+                <div id="chart-spend" class="w-full h-80"></div>
+            </div>
+            <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl">
+                <h3 class="text-sm font-bold text-neutral-200 mb-4">🎯 Tendencia Diaria de Leads (Formularios)</h3>
+                <div id="chart-leads" class="w-full h-80"></div>
+            </div>
+        </div>
+
+        <!-- TABLAS DE RANKING DE ANUNCIOS -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl overflow-x-auto">
+                <h3 class="text-sm font-bold text-emerald-400 mb-4">🏆 Top Anuncios (Menor CPL)</h3>
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="border-b border-[#27272a] text-neutral-400">
+                            <th class="pb-2">Anuncio</th>
+                            <th class="pb-2 text-right">Gasto</th>
+                            <th class="pb-2 text-right">Leads</th>
+                            <th class="pb-2 text-right">CPL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-top-ads">
+                        <tr><td colspan="4" class="py-4 text-center text-neutral-500">Cargando datos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-[#121215] border border-[#27272a] p-5 rounded-xl overflow-x-auto">
+                <h3 class="text-sm font-bold text-rose-400 mb-4">⚠️ Anuncios Menos Eficientes (Alto Gasto / Bajo Lead)</h3>
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="border-b border-[#27272a] text-neutral-400">
+                            <th class="pb-2">Anuncio</th>
+                            <th class="pb-2 text-right">Gasto</th>
+                            <th class="pb-2 text-right">Leads</th>
+                            <th class="pb-2 text-right">CPL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-worst-ads">
+                        <tr><td colspan="4" class="py-4 text-center text-neutral-500">Cargando datos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DE CONEXIÓN CON data.json -->
     <script>
-        // --- DATA STATE (Base data for simulation & rendering) ---
-        let state = {
-            simulating: true,
-            simInterval: null,
-            spend: 3420.50,
-            leads: 428,
-            cpl: 7.99,
-            dailyDays: Array.from({length: 27}, (_, i) => `Día ${i+1}`),
-            dailySpendCurr: [110, 125, 95, 140, 130, 150, 160, 120, 115, 135, 145, 125, 130, 140, 155, 130, 120, 110, 125, 135, 140, 145, 150, 130, 125, 135, 140],
-            dailySpendPrev: [90, 100, 105, 110, 95, 120, 125, 110, 100, 115, 120, 105, 110, 115, 120, 110, 105, 100, 110, 115, 120, 125, 130, 115, 110, 120, 125],
-            dailyLeadsCurr: [12, 15, 10, 18, 16, 19, 21, 14, 13, 17, 18, 15, 16, 17, 20, 16, 14, 13, 15, 17, 18, 19, 20, 16, 15, 17, 18],
-            dailyLeadsPrev: [9, 11, 12, 13, 10, 14, 15, 13, 11, 13, 14, 12, 13, 14, 15, 13, 12, 11, 13, 14, 15, 15, 16, 14, 13, 14, 15],
-            topAds: [
-                { name: "MOTORIA Enderezado & Pintura Garantizada", spend: 820.00, leads: 125, cpl: 6.56 },
-                { name: "Mecánica Express 24h - Galo Plaza", spend: 640.50, leads: 92, cpl: 6.96 },
-                { name: "Centro Colisiones Quito Peritaje VIP", spend: 750.00, leads: 98, cpl: 7.65 },
-                { name: "Mantenimiento Preventivo Especializado", spend: 410.00, leads: 48, cpl: 8.54 },
-                { name: "Cambio de Aceite & Escaneo Gratis", spend: 320.00, leads: 35, cpl: 9.14 }
-            ],
-            worstAds: [
-                { name: "Promo Frenos - Video Largo 60s", spend: 490.00, leads: 18, freq: "4.4 (Alta)" },
-                { name: "Auxilio Mecánico Nocturno Reel 2", spend: 380.00, leads: 12, freq: "3.9 (Fatiga)" },
-                { name: "Taller Mecánico en Quito General", spend: 290.00, leads: 8, freq: "3.7 (Media)" }
-            ]
-        };
+        fetch('data.json')
+            .then(response => {
+                if (!response.ok) throw new Error("No se encontró el archivo data.json");
+                return response.json();
+            })
+            .then(data => {
+                // 1. Actualizar Tarjetas KPIs
+                document.getElementById('spend-current').innerText = '$' + data.kpis.spend_this_month.toLocaleString('en-US', {minimumFractionDigits: 2});
+                document.getElementById('spend-last').innerText = '$' + data.kpis.spend_last_month.toLocaleString('en-US', {minimumFractionDigits: 2});
+                document.getElementById('spend-ytd').innerText = '$' + data.kpis.spend_ytd.toLocaleString('en-US', {minimumFractionDigits: 2});
+                document.getElementById('leads-day').innerText = data.kpis.leads_per_day + ' /día';
+                document.getElementById('cpl-current').innerText = '$' + data.kpis.cpl_this_month.toLocaleString('en-US', {minimumFractionDigits: 2});
+                document.getElementById('last-updated').innerText = 'Actualizado en tiempo real';
 
-        // Initialize Dashboard
-        window.onload = function() {
-            renderKPIs();
-            renderCharts();
-            renderTables();
-            startLiveSimulation();
-            handleURLHash();
-        };
+                // 2. Gráfica de Inversión Diaria
+                const dates = data.daily_trend.map(item => item.date);
+                const spends = data.daily_trend.map(item => parseFloat(item.spend));
+                const leads = data.daily_trend.map(item => parseInt(item.leads));
 
-        // TAB SWITCHING LOGIC
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-nav-btn').forEach(el => {
-                el.classList.remove('bg-white/10', 'border', 'border-white/20', 'text-white');
-                el.classList.add('text-slate-400');
+                const traceSpend = {
+                    x: dates, y: spends,
+                    type: 'scatter', mode: 'lines+markers',
+                    line: { color: '#ffffff', width: 2 },
+                    marker: { size: 4 }
+                };
+                Plotly.newPlot('chart-spend', [traceSpend], {
+                    paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
+                    font: { color: '#a1a1aa' },
+                    margin: { t: 10, r: 10, b: 30, l: 40 },
+                    xaxis: { gridcolor: '#27272a' }, yaxis: { gridcolor: '#27272a' }
+                }, {responsive: true});
+
+                // 3. Gráfica de Leads Diario
+                const traceLeads = {
+                    x: dates, y: leads,
+                    type: 'scatter', mode: 'lines+markers',
+                    line: { color: '#10b981', width: 2 },
+                    marker: { size: 4 }
+                };
+                Plotly.newPlot('chart-leads', [traceLeads], {
+                    paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
+                    font: { color: '#a1a1aa' },
+                    margin: { t: 10, r: 10, b: 30, l: 30 },
+                    xaxis: { gridcolor: '#27272a' }, yaxis: { gridcolor: '#27272a' }
+                }, {responsive: true});
+
+                // 4. Llenar Tablas Top Ads
+                const topTable = document.getElementById('table-top-ads');
+                topTable.innerHTML = data.top_ads.map(ad => `
+                    <tr class="border-b border-[#27272a]/50 hover:bg-neutral-900">
+                        <td class="py-2.5 pr-2 truncate max-w-[200px]">${ad.ad_name}</td>
+                        <td class="py-2.5 text-right">$${parseFloat(ad.spend).toFixed(2)}</td>
+                        <td class="py-2.5 text-right">${ad.leads}</td>
+                        <td class="py-2.5 text-right text-emerald-400 font-bold">$${parseFloat(ad.cpl).toFixed(2)}</td>
+                    </tr>
+                `).join('');
+
+                // 5. Llenar Tablas Worst Ads
+                const worstTable = document.getElementById('table-worst-ads');
+                worstTable.innerHTML = data.worst_ads.map(ad => `
+                    <tr class="border-b border-[#27272a]/50 hover:bg-neutral-900">
+                        <td class="py-2.5 pr-2 truncate max-w-[200px]">${ad.ad_name}</td>
+                        <td class="py-2.5 text-right">$${parseFloat(ad.spend).toFixed(2)}</td>
+                        <td class="py-2.5 text-right">${ad.leads}</td>
+                        <td class="py-2.5 text-right text-rose-400 font-bold">$${parseFloat(ad.cpl).toFixed(2)}</td>
+                    </tr>
+                `).join('');
+
+            })
+            .catch(error => {
+                console.error("Error cargando el data.json:", error);
+                document.getElementById('last-updated').innerText = 'Error al cargar data.json';
             });
-
-            const activeContent = document.getElementById(`tab-${tabId}`);
-            if (activeContent) activeContent.classList.remove('hidden');
-
-            const activeNav = document.getElementById(`nav-${tabId}`);
-            if (activeNav) {
-                activeNav.classList.add('bg-white/10', 'border', 'border-white/20', 'text-white');
-                activeNav.classList.remove('text-slate-400');
-            }
-
-            window.location.hash = tabId;
-            setTimeout(() => { Plotly.Plots.resize(document.getElementById(`chart-daily-spend`)); }, 100);
-        }
-
-        function handleURLHash() {
-            const hash = window.location.hash.replace('#', '');
-            if (['ads', 'leads', 'demographics', 'campaigns'].includes(hash)) {
-                switchTab(hash);
-            }
-        }
-
-        // RENDER CHARTS WITH PLOTLY (MOTORIA DARK THEME)
-        function renderCharts() {
-            const darkLayout = {
-                paper_bgcolor: 'rgba(0,0,0,0)',
-                plot_bgcolor: 'rgba(0,0,0,0)',
-                font: { color: '#94a3b8', family: 'Montserrat, sans-serif', size: 11 },
-                margin: { t: 10, b: 35, l: 35, r: 10 },
-                xaxis: { gridcolor: '#27272a', showgrid: true },
-                yaxis: { gridcolor: '#27272a', showgrid: true },
-                legend: { orientation: 'h', y: -0.2, font: { color: '#cbd5e1' } }
-            };
-
-            // 1. Daily Spend Chart
-            const traceSpendCurr = {
-                x: state.dailyDays, y: state.dailySpendCurr,
-                mode: 'lines+markers', name: 'Octubre 2026',
-                line: { color: '#ffffff', width: 3, shape: 'spline' },
-                marker: { size: 5, color: '#38bdf8' }
-            };
-            const traceSpendPrev = {
-                x: state.dailyDays, y: state.dailySpendPrev,
-                mode: 'lines', name: 'Septiembre 2026',
-                line: { color: '#52525b', width: 2, dash: 'dot' }
-            };
-            Plotly.newPlot('chart-daily-spend', [traceSpendCurr, traceSpendPrev], darkLayout, {responsive: true, displayModeBar: false});
-
-            // 2. Daily Leads Chart
-            const traceLeadsCurr = {
-                x: state.dailyDays, y: state.dailyLeadsCurr,
-                type: 'bar', name: 'Leads Octubre',
-                marker: { color: '#10b981', opacity: 0.9 }
-            };
-            const traceLeadsPrev = {
-                x: state.dailyDays, y: state.dailyLeadsPrev,
-                type: 'scatter', mode: 'lines', name: 'Leads Septiembre',
-                line: { color: '#a7f3d0', width: 2, dash: 'dash' }
-            };
-            Plotly.newPlot('chart-daily-leads', [traceLeadsCurr, traceLeadsPrev], darkLayout, {responsive: true, displayModeBar: false});
-
-            // 3. Placements Sunburst/Pie
-            const placementData = [{
-                values: [45, 30, 15, 10],
-                labels: ['Instagram Reels', 'Facebook Feed', 'Facebook Stories', 'Audience Network'],
-                type: 'pie',
-                hole: 0.55,
-                marker: { colors: ['#ffffff', '#38bdf8', '#f59e0b', '#71717a'] }
-            }];
-            const placementLayout = { ...darkLayout, margin: { t: 10, b: 10, l: 10, r: 10 }, showlegend: true };
-            Plotly.newPlot('chart-placements', placementData, placementLayout, {responsive: true, displayModeBar: false});
-
-            // 4. Leads Breakdown
-            const leadsBreakdown = [{
-                x: ['WhatsApp Directo', 'Formulario Instantáneo', 'Llamadas Telefónicas', 'Píxel Web'],
-                y: [210, 135, 53, 30],
-                type: 'bar',
-                marker: { color: ['#10b981', '#38bdf8', '#f59e0b', '#a1a1aa'] }
-            }];
-            Plotly.newPlot('chart-leads-breakdown', leadsBreakdown, darkLayout, {responsive: true, displayModeBar: false});
-
-            // 5. Age & Gender
-            const ageData = [
-                { x: ['18-24', '25-34', '35-44', '45-54', '55+'], y: [320, 1150, 980, 620, 350], type: 'bar', name: 'Hombres', marker: { color: '#38bdf8' } },
-                { x: ['18-24', '25-34', '35-44', '45-54', '55+'], y: [180, 620, 540, 310, 160], type: 'bar', name: 'Mujeres', marker: { color: '#f43f5e' } }
-            ];
-            const ageLayout = { ...darkLayout, barmode: 'group' };
-            Plotly.newPlot('chart-demo-age', ageData, ageLayout, {responsive: true, displayModeBar: false});
-
-            // 6. CPL by Age
-            const cplAge = [{
-                x: ['18-24', '25-34', '35-44', '45-54', '55+'],
-                y: [9.20, 6.40, 7.10, 8.50, 10.30],
-                type: 'scatter', mode: 'lines+markers',
-                line: { color: '#f59e0b', width: 3 },
-                marker: { size: 8 }
-            }];
-            Plotly.newPlot('chart-demo-cpl', cplAge, darkLayout, {responsive: true, displayModeBar: false});
-        }
-
-        // RENDER TABLES
-        function renderTables() {
-            const topBody = document.getElementById('table-top-ads');
-            topBody.innerHTML = state.topAds.map(ad => `
-                <tr class="hover:bg-motoria-dark/60">
-                    <td class="p-2.5 font-medium text-slate-200">${ad.name}</td>
-                    <td class="p-2.5">$${ad.spend.toFixed(2)}</td>
-                    <td class="p-2.5 font-bold text-emerald-400">${ad.leads}</td>
-                    <td class="p-2.5 font-bold text-white">$${ad.cpl.toFixed(2)}</td>
-                </tr>
-            `).join('');
-
-            const worstBody = document.getElementById('table-worst-ads');
-            worstBody.innerHTML = state.worstAds.map(ad => `
-                <tr class="hover:bg-motoria-dark/60">
-                    <td class="p-2.5 font-medium text-slate-200">${ad.name}</td>
-                    <td class="p-2.5">$${ad.spend.toFixed(2)}</td>
-                    <td class="p-2.5 text-rose-400 font-bold">${ad.leads}</td>
-                    <td class="p-2.5"><span class="bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded text-[10px] font-bold">${ad.freq}</span></td>
-                </tr>
-            `).join('');
-        }
-
-        // RENDER KPIS
-        function renderKPIs() {
-            document.getElementById('kpi-spend').innerText = `$${state.spend.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
-            document.getElementById('kpi-leads').innerText = state.leads;
-            document.getElementById('kpi-cpl').innerText = `$${(state.spend / state.leads).toFixed(2)}`;
-            document.getElementById('kpi-leads-day').innerText = `${(state.leads / 27).toFixed(1)} /día`;
-        }
-
-        // LIVE SIMULATION UPDATE
-        function startLiveSimulation() {
-            state.simInterval = setInterval(() => {
-                if (!state.simulating) return;
-
-                const newSpendInc = Math.random() * 2.5;
-                const newLeadInc = Math.random() > 0.65 ? 1 : 0;
-
-                state.spend += newSpendInc;
-                state.leads += newLeadInc;
-
-                const lastIdx = state.dailySpendCurr.length - 1;
-                state.dailySpendCurr[lastIdx] += newSpendInc;
-                state.dailyLeadsCurr[lastIdx] += newLeadInc;
-
-                renderKPIs();
-
-                Plotly.update('chart-daily-spend', { y: [state.dailySpendCurr] }, {}, [0]);
-                Plotly.update('chart-daily-leads', { y: [state.dailyLeadsCurr] }, {}, [0]);
-
-                const now = new Date();
-                document.getElementById('last-sync-time').innerText = `Sync: ${now.toLocaleTimeString()}`;
-            }, 3500);
-        }
-
-        function toggleSimulation() {
-            state.simulating = !state.simulating;
-            const btnText = document.getElementById('sim-btn-text');
-            const icon = document.getElementById('sim-icon');
-            const indicator = document.getElementById('live-indicator');
-
-            if (state.simulating) {
-                btnText.innerText = "Pausar Simulación";
-                icon.className = "fa-solid fa-pause";
-                indicator.innerText = "API Simulación Activa";
-                indicator.className = "font-medium text-emerald-400 text-[11px]";
-            } else {
-                btnText.innerText = "Reanudar Simulación";
-                icon.className = "fa-solid fa-play";
-                indicator.innerText = "Simulación Pausada";
-                indicator.className = "font-medium text-amber-400 text-[11px]";
-            }
-        }
-
-        function applyFilters() {
-            renderKPIs();
-        }
-
-        function openPythonModal() {
-            document.getElementById('python-modal').classList.remove('hidden');
-        }
-
-        function closePythonModal() {
-            document.getElementById('python-modal').classList.add('hidden');
-        }
     </script>
 </body>
 </html>
