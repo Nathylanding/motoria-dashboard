@@ -2,8 +2,10 @@ name: Actualizar datos del tablero
 
 on:
   schedule:
-    # Corre todos los días a las 13:00 UTC (08:00 hora de Quito)
-    - cron: "0 13 * * *"
+    # 08:00, 13:00 y 18:00 hora de Quito (UTC-5)
+    - cron: "0 14 * * *"
+    - cron: "0 18 * * *"
+    - cron: "0 23 * * *"
   workflow_dispatch:
 
 permissions:
