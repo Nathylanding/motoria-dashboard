@@ -25,16 +25,16 @@
 
     header {
       display: flex; flex-wrap: wrap; justify-content: space-between;
-      align-items: center; gap: 16px; margin-bottom: 22px;
+      align-items: center; gap: 16px; margin-bottom: 20px;
     }
     header h1 { font-size: 1.45rem; font-weight: 700; }
     header p { color: var(--muted); font-size: 0.88rem; margin-top: 4px; }
 
     .toolbar {
       display: flex; flex-wrap: wrap; justify-content: space-between;
-      align-items: center; gap: 12px; margin-bottom: 22px;
+      align-items: center; gap: 14px; margin-bottom: 22px;
       background: var(--card); border: 1px solid var(--border);
-      padding: 12px 16px; border-radius: 12px;
+      padding: 14px 16px; border-radius: 12px;
     }
     .scope-group {
       display: flex; gap: 6px; background: var(--bg);
@@ -49,9 +49,23 @@
     .scope-btn.active { background: var(--accent); color: #081226; }
 
     .filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .filter-box {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 4px 10px; border-radius: 9px;
+    }
+    .filter-box label {
+      font-size: 0.78rem; font-weight: 700; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.03em;
+    }
     select, input {
-      background: var(--bg); color: var(--text); border: 1px solid var(--border);
-      padding: 8px 12px; border-radius: 8px; font-size: 0.88rem;
+      background: transparent; color: var(--text); border: none;
+      padding: 5px 6px; font-size: 0.88rem; outline: none;
+    }
+    select option { background: var(--card); color: var(--text); }
+    .search-box {
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 8px 12px; border-radius: 9px; font-size: 0.88rem; min-width: 190px;
     }
 
     .kpis {
@@ -127,11 +141,19 @@
       </div>
 
       <div class="filters">
-        <select id="month-filter" title="Seleccionar mes a comparar"></select>
-        <select id="campaign-filter">
-          <option value="ALL">Todas las campañas</option>
-        </select>
-        <input id="search-input" type="text" placeholder="Buscar campaña..." />
+        <div class="filter-box">
+          <label for="month-filter">Mes</label>
+          <select id="month-filter"></select>
+        </div>
+
+        <div class="filter-box">
+          <label for="campaign-filter">Campaña</label>
+          <select id="campaign-filter">
+            <option value="ALL">Todas las campañas</option>
+          </select>
+        </div>
+
+        <input id="search-input" class="search-box" type="text" placeholder="Buscar campaña..." />
       </div>
     </div>
 
@@ -261,7 +283,6 @@
 
     function populateMonthFilter() {
       const sel = document.getElementById("month-filter");
-      // Meses desde septiembre en adelante (agosto queda como base comparativa)
       const months = [...new Set(
         RAW.serie_diaria_leads
           .map(r => r.fecha.slice(0, 7))
@@ -270,11 +291,11 @@
 
       sel.innerHTML = months.map(ym => {
         const prevYm = getPrevMonthYM(ym);
-        return `<option value="${ym}">${labelMonth(ym)} (vs ${labelMonth(prevYm)})</option>`;
+        return `<option value="${ym}">${labelMonth(ym)} vs ${labelMonth(prevYm)}</option>`;
       }).join("");
 
       if (months.length > 0) {
-        sel.value = months[months.length - 1]; // Selecciona el mes más reciente por defecto
+        sel.value = months[months.length - 1];
       }
     }
 
@@ -322,7 +343,6 @@
       });
 
       const curDays = Object.keys(curMap).map(Number);
-      // Si es el mes en curso, corta hasta el último día con datos; si es mes cerrado, toma hasta el último día del mes
       const refLatestYM = RAW.metadata.fecha_referencia.slice(0, 7);
       const refLatestDay = Number(RAW.metadata.fecha_referencia.slice(8, 10));
       const cutoffDay = (selectedYM === refLatestYM)
@@ -336,7 +356,6 @@
       const curSpendArr = days.map(d => (d <= cutoffDay && curMap[d] !== undefined) ? curMap[d].spend : null);
       const prevSpendArr = days.map(d => (prevMap[d] !== undefined) ? prevMap[d].spend : null);
 
-      // Acumulado al día (1..cutoffDay) vs mismo tramo del mes pasado
       let mtdLeadsCur = 0, mtdLeadsPrev = 0, mtdSpendCur = 0, mtdSpendPrev = 0;
       for (let d = 1; d <= cutoffDay; d++) {
         if (curMap[d]) { mtdLeadsCur += curMap[d].leads; mtdSpendCur += curMap[d].spend; }
