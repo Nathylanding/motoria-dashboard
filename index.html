@@ -16,7 +16,6 @@
       --accent: #38bdf8;
       --motoria: #38bdf8;
       --jetour: #f97316;
-      --spend: #facc15;
       --pos: #22c55e;
       --neg: #ef4444;
     }
@@ -37,7 +36,10 @@
       background: var(--card); border: 1px solid var(--border);
       padding: 12px 16px; border-radius: 12px;
     }
-    .scope-group { display: flex; gap: 6px; background: var(--bg); padding: 4px; border-radius: 10px; border: 1px solid var(--border); }
+    .scope-group {
+      display: flex; gap: 6px; background: var(--bg);
+      padding: 4px; border-radius: 10px; border: 1px solid var(--border);
+    }
     .scope-btn {
       background: transparent; color: var(--muted); border: none;
       padding: 8px 14px; border-radius: 7px; font-size: 0.88rem;
@@ -72,7 +74,7 @@
     .kpi .sub { color: var(--muted); font-size: 0.82rem; margin-top: 6px; line-height: 1.35; }
 
     .grid-charts {
-      display: grid; grid-template-columns: 1.65fr 1fr;
+      display: grid; grid-template-columns: 1fr 1fr;
       gap: 16px; margin-bottom: 22px;
     }
     @media (max-width: 1024px) { .grid-charts { grid-template-columns: 1fr; } }
@@ -112,7 +114,7 @@
   <div class="container">
     <header>
       <div>
-        <h1>Comparación Diaria: Presupuesto & Leads — Motoria & Jetour</h1>
+        <h1>Comparativa Diaria de Leads y Presupuesto — Motoria & Jetour</h1>
         <p id="meta-info">Cargando datos desde tablero_leads_motoria_jetour.json...</p>
       </div>
     </header>
@@ -125,6 +127,7 @@
       </div>
 
       <div class="filters">
+        <select id="month-filter" title="Seleccionar mes a comparar"></select>
         <select id="campaign-filter">
           <option value="ALL">Todas las campañas</option>
         </select>
@@ -137,24 +140,24 @@
     <section class="grid-charts">
       <div class="panel">
         <div class="panel-head">
-          <h2>Evolución Diaria: Leads vs Gasto Diario (desde Septiembre)</h2>
-          <span class="hint">Leads (línea azul) · Media móvil 7d (punteada) · Gasto USD (amarillo)</span>
+          <h2>Comparativa Diaria de Leads — Día del Mes (1 al 31)</h2>
+          <span class="hint" id="leads-chart-hint">Mes seleccionado vs Mes pasado</span>
         </div>
-        <div class="chart-wrap"><canvas id="mainChart"></canvas></div>
+        <div class="chart-wrap"><canvas id="leadsDayOfMonthChart"></canvas></div>
       </div>
 
       <div class="panel">
         <div class="panel-head">
-          <h2>Variación Diaria de Leads vs Mes Pasado</h2>
-          <span class="hint">Diferencia absoluta vs mismo día del mes anterior</span>
+          <h2>Comparativa Diaria de Gasto ($) — Día del Mes (1 al 31)</h2>
+          <span class="hint" id="spend-chart-hint">Mes seleccionado vs Mes pasado</span>
         </div>
-        <div class="chart-wrap"><canvas id="deltaChart"></canvas></div>
+        <div class="chart-wrap"><canvas id="spendDayOfMonthChart"></canvas></div>
       </div>
     </section>
 
     <section class="panel">
       <div class="panel-head">
-        <h2>Desglose de Campañas: Presupuesto, Gasto al Día y Leads vs Mes Pasado</h2>
+        <h2>Desglose por Campaña: Presupuesto, Gasto al Día y Leads vs Mes Pasado</h2>
         <span class="hint" id="table-subtitle"></span>
       </div>
       <div class="table-wrap">
@@ -169,8 +172,7 @@
               <th class="num">Var. Gasto vs Mes Ant.</th>
               <th class="num">Leads al Día</th>
               <th class="num">Var. Leads vs Mes Ant.</th>
-              <th class="num">Total Sept+</th>
-              <th class="num">CPL Prom.</th>
+              <th class="num">CPL al Día</th>
             </tr>
           </thead>
           <tbody id="campaigns-tbody"></tbody>
@@ -182,11 +184,37 @@
   <script>
     let RAW = null;
     let currentScope = "Juntos";
-    let mainChart = null;
-    let deltaChart = null;
+    let leadsChart = null;
+    let spendChart = null;
+
+    const MONTH_NAMES = {
+      "01": "Enero", "02": "Febrero", "03": "Marzo", "04": "Abril",
+      "05": "Mayo", "06": "Junio", "07": "Julio", "08": "Agosto",
+      "09": "Septiembre", "10": "Octubre", "11": "Noviembre", "12": "Diciembre"
+    };
 
     const fmtInt = (n) => (n === null || n === undefined) ? "-" : Math.round(Number(n)).toLocaleString("es-EC");
     const fmtMoney = (n) => (n === null || n === undefined) ? "-" : "$" + Number(n).toLocaleString("es-EC", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    function labelMonth(ym) {
+      if (!ym) return "-";
+      const [y, m] = ym.split("-");
+      return `${MONTH_NAMES[m] || m} ${y}`;
+    }
+
+    function getPrevMonthYM(ym) {
+      const [y, m] = ym.split("-").map(Number);
+      const d = new Date(y, m - 2, 1);
+      const py = d.getFullYear();
+      const pm = String(d.getMonth() + 1).padStart(2, "0");
+      return `${py}-${pm}`;
+    }
+
+    function calcVar(cur, prev) {
+      const abs = Number((cur - prev).toFixed(2));
+      const pct = prev > 0 ? Number((((cur - prev) / prev) * 100).toFixed(1)) : null;
+      return { abs, pct };
+    }
 
     function formatVarBadge(varObj, isMoney = false, invertGood = false) {
       if (!varObj || (varObj.abs === null && varObj.pct === null)) {
@@ -209,7 +237,10 @@
       RAW = await res.json();
 
       document.getElementById("meta-info").textContent =
-        `Corte al: ${RAW.metadata.fecha_referencia} · Histórico extraído: ${RAW.metadata.since} a ${RAW.metadata.until} · Actualizado: ${RAW.metadata.generated_at}`;
+        `Corte al: ${RAW.metadata.fecha_referencia} · Histórico disponible: ${RAW.metadata.since} a ${RAW.metadata.until}`;
+
+      populateMonthFilter();
+      populateCampaignFilter();
 
       document.querySelectorAll(".scope-btn").forEach(btn => {
         btn.addEventListener("click", () => {
@@ -221,11 +252,30 @@
         });
       });
 
+      document.getElementById("month-filter").addEventListener("change", renderAll);
       document.getElementById("campaign-filter").addEventListener("change", renderAll);
       document.getElementById("search-input").addEventListener("input", renderTable);
 
-      populateCampaignFilter();
       renderAll();
+    }
+
+    function populateMonthFilter() {
+      const sel = document.getElementById("month-filter");
+      // Meses desde septiembre en adelante (agosto queda como base comparativa)
+      const months = [...new Set(
+        RAW.serie_diaria_leads
+          .map(r => r.fecha.slice(0, 7))
+          .filter(ym => ym >= "2026-09")
+      )].sort();
+
+      sel.innerHTML = months.map(ym => {
+        const prevYm = getPrevMonthYM(ym);
+        return `<option value="${ym}">${labelMonth(ym)} (vs ${labelMonth(prevYm)})</option>`;
+      }).join("");
+
+      if (months.length > 0) {
+        sel.value = months[months.length - 1]; // Selecciona el mes más reciente por defecto
+      }
     }
 
     function populateCampaignFilter() {
@@ -245,169 +295,157 @@
       if ([...sel.options].some(o => o.value === prev)) sel.value = prev;
     }
 
-    function renderKPIs() {
+    function getActiveDailyRows() {
       const campId = document.getElementById("campaign-filter").value;
-      const kpiGrid = document.getElementById("kpi-grid");
-
       if (campId === "ALL") {
-        const comp = RAW.comparacion_mes_pasado[currentScope];
-        const alDia = comp.al_dia;
-        const ultDia = comp.ultimo_dia;
-
-        const vGasto = formatVarBadge(alDia.var_gasto, true, false);
-        const vLeads = formatVarBadge(alDia.var_leads, false, false);
-        const vCpl = formatVarBadge(alDia.var_cpl, true, true);
-        const vUltLeads = formatVarBadge(ultDia.var_leads, false, false);
-
-        const cards = [
-          {
-            label: `Presupuesto / Gasto al Día (${currentScope})`,
-            value: fmtMoney(alDia.gasto_actual),
-            pill: vGasto,
-            sub: `Mes pasado (días 1–${comp.dias_comparados_en_mes}): ${fmtMoney(alDia.gasto_mes_pasado)}`
-          },
-          {
-            label: `Leads al Día (${currentScope})`,
-            value: fmtInt(alDia.leads_actual),
-            pill: vLeads,
-            sub: `Mes pasado (días 1–${comp.dias_comparados_en_mes}): ${fmtInt(alDia.leads_mes_pasado)} leads`
-          },
-          {
-            label: "CPL al Día vs Mes Pasado",
-            value: fmtMoney(alDia.cpl_actual),
-            pill: vCpl,
-            sub: `CPL mes pasado: ${fmtMoney(alDia.cpl_mes_pasado)}`
-          },
-          {
-            label: `Último Día (${ultDia.fecha_actual})`,
-            value: `${fmtInt(ultDia.leads_actual)} leads`,
-            pill: vUltLeads,
-            sub: `Gasto: ${fmtMoney(ultDia.gasto_actual)} · Mismo día mes ant.: ${fmtInt(ultDia.leads_mes_pasado)} leads`
-          }
-        ];
-
-        kpiGrid.innerHTML = cards.map(c => `
-          <div class="kpi">
-            <div class="kpi-top">
-              <span class="label">${c.label}</span>
-              <span class="pill ${c.pill.cls}">${c.pill.text}</span>
-            </div>
-            <div class="value">${c.value}</div>
-            <div class="sub">${c.sub}</div>
-          </div>
-        `).join("");
-      } else {
-        const camp = RAW.comparacion_campanas_diaria.find(c => c.campaign_id === campId);
-        const mtd = camp.al_dia_vs_mes_pasado;
-        const vGasto = formatVarBadge(mtd.var_gasto, true, false);
-        const vLeads = formatVarBadge(mtd.var_leads, false, false);
-        const presupTxt = camp.daily_budget ? `${fmtMoney(camp.daily_budget)} / día` : (camp.lifetime_budget ? `${fmtMoney(camp.lifetime_budget)} total` : "No definido");
-
-        const cards = [
-          {
-            label: "Gasto al Día (Campaña)",
-            value: fmtMoney(mtd.gasto_actual),
-            pill: vGasto,
-            sub: `Mes pasado al día: ${fmtMoney(mtd.gasto_mes_pasado)} · Presup.: ${presupTxt}`
-          },
-          {
-            label: "Leads al Día (Campaña)",
-            value: fmtInt(mtd.leads_actual),
-            pill: vLeads,
-            sub: `Mes pasado al día: ${fmtInt(mtd.leads_mes_pasado)} leads`
-          },
-          {
-            label: "Acumulado desde Septiembre",
-            value: `${fmtInt(camp.total_leads)} leads`,
-            pill: { text: camp.brand, cls: "" },
-            sub: `Gasto acumulado: ${fmtMoney(camp.total_spend)}`
-          },
-          {
-            label: "CPL Promedio Campaña",
-            value: fmtMoney(camp.cpl_promedio),
-            pill: { text: camp.effective_status || "-", cls: "" },
-            sub: `Objetivo: ${camp.objective || "-"}`
-          }
-        ];
-
-        kpiGrid.innerHTML = cards.map(c => `
-          <div class="kpi">
-            <div class="kpi-top">
-              <span class="label">${c.label}</span>
-              <span class="pill ${c.pill.cls}">${c.pill.text}</span>
-            </div>
-            <div class="value">${c.value}</div>
-            <div class="sub">${c.sub}</div>
-          </div>
-        `).join("");
+        return RAW.serie_diaria_leads.filter(r => r.scope === currentScope);
       }
+      const camp = RAW.comparacion_campanas_diaria.find(c => c.campaign_id === campId);
+      return camp ? camp.historial_diario : [];
     }
 
-    function renderCharts() {
-      const campId = document.getElementById("campaign-filter").value;
-      let series = [];
+    function getMonthlyAlignedData(selectedYM) {
+      const prevYM = getPrevMonthYM(selectedYM);
+      const rows = getActiveDailyRows();
 
-      if (campId === "ALL") {
-        // Filtrar serie desde 2026-09-01 en adelante para el gráfico principal
-        series = RAW.serie_diaria_leads.filter(r => r.scope === currentScope && r.fecha >= "2026-09-01");
-      } else {
-        const camp = RAW.comparacion_campanas_diaria.find(c => c.campaign_id === campId);
-        const hist = (camp ? camp.historial_diario : []).filter(h => h.fecha >= "2026-09-01");
-        const lookup = Object.fromEntries((camp ? camp.historial_diario : []).map(h => [h.fecha, h]));
-        series = hist.map((d, i) => {
-          const win = hist.slice(Math.max(0, i - 6), i + 1);
-          const ma7 = win.reduce((acc, x) => acc + x.leads, 0) / win.length;
-          const dt = new Date(d.fecha + "T00:00:00");
-          dt.setMonth(dt.getMonth() - 1);
-          const prevStr = dt.toISOString().slice(0, 10);
-          const prevLeads = lookup[prevStr] ? lookup[prevStr].leads : 0;
-          return {
-            fecha: d.fecha,
-            leads: d.leads,
-            spend: d.spend,
-            promedio_movil_7d: Number(ma7.toFixed(2)),
-            var_leads_vs_mes_pasado: { abs: d.leads - prevLeads }
-          };
-        });
+      const curMap = {};
+      const prevMap = {};
+
+      rows.forEach(r => {
+        const ym = r.fecha.slice(0, 7);
+        const day = Number(r.fecha.slice(8, 10));
+        if (ym === selectedYM) {
+          curMap[day] = { leads: Number(r.leads || 0), spend: Number(r.spend || 0) };
+        } else if (ym === prevYM) {
+          prevMap[day] = { leads: Number(r.leads || 0), spend: Number(r.spend || 0) };
+        }
+      });
+
+      const curDays = Object.keys(curMap).map(Number);
+      // Si es el mes en curso, corta hasta el último día con datos; si es mes cerrado, toma hasta el último día del mes
+      const refLatestYM = RAW.metadata.fecha_referencia.slice(0, 7);
+      const refLatestDay = Number(RAW.metadata.fecha_referencia.slice(8, 10));
+      const cutoffDay = (selectedYM === refLatestYM)
+        ? refLatestDay
+        : (curDays.length > 0 ? Math.max(...curDays) : 31);
+
+      const days = Array.from({ length: 31 }, (_, i) => i + 1);
+      const curLeadsArr = days.map(d => (d <= cutoffDay && curMap[d] !== undefined) ? curMap[d].leads : null);
+      const prevLeadsArr = days.map(d => (prevMap[d] !== undefined) ? prevMap[d].leads : null);
+
+      const curSpendArr = days.map(d => (d <= cutoffDay && curMap[d] !== undefined) ? curMap[d].spend : null);
+      const prevSpendArr = days.map(d => (prevMap[d] !== undefined) ? prevMap[d].spend : null);
+
+      // Acumulado al día (1..cutoffDay) vs mismo tramo del mes pasado
+      let mtdLeadsCur = 0, mtdLeadsPrev = 0, mtdSpendCur = 0, mtdSpendPrev = 0;
+      for (let d = 1; d <= cutoffDay; d++) {
+        if (curMap[d]) { mtdLeadsCur += curMap[d].leads; mtdSpendCur += curMap[d].spend; }
+        if (prevMap[d]) { mtdLeadsPrev += prevMap[d].leads; mtdSpendPrev += prevMap[d].spend; }
       }
 
-      const labels = series.map(d => d.fecha);
-      const leadsData = series.map(d => d.leads);
-      const ma7Data = series.map(d => d.promedio_movil_7d);
-      const spendData = series.map(d => d.spend);
-      const deltaMesData = series.map(d => d.var_leads_vs_mes_pasado ? d.var_leads_vs_mes_pasado.abs : 0);
+      return {
+        selectedYM,
+        prevYM,
+        cutoffDay,
+        days,
+        curLeadsArr,
+        prevLeadsArr,
+        curSpendArr,
+        prevSpendArr,
+        mtdLeadsCur,
+        mtdLeadsPrev,
+        mtdSpendCur: Number(mtdSpendCur.toFixed(2)),
+        mtdSpendPrev: Number(mtdSpendPrev.toFixed(2))
+      };
+    }
 
-      if (mainChart) mainChart.destroy();
-      mainChart = new Chart(document.getElementById("mainChart"), {
+    function renderKPIs(aligned) {
+      const kpiGrid = document.getElementById("kpi-grid");
+      const vGasto = formatVarBadge(calcVar(aligned.mtdSpendCur, aligned.mtdSpendPrev), true, false);
+      const vLeads = formatVarBadge(calcVar(aligned.mtdLeadsCur, aligned.mtdLeadsPrev), false, false);
+
+      const cplCur = aligned.mtdLeadsCur > 0 ? Number((aligned.mtdSpendCur / aligned.mtdLeadsCur).toFixed(2)) : null;
+      const cplPrev = aligned.mtdLeadsPrev > 0 ? Number((aligned.mtdSpendPrev / aligned.mtdLeadsPrev).toFixed(2)) : null;
+      const vCpl = (cplCur !== null && cplPrev !== null)
+        ? formatVarBadge(calcVar(cplCur, cplPrev), true, true)
+        : { text: "Sin base previa", cls: "" };
+
+      const lastDayCur = aligned.curLeadsArr[aligned.cutoffDay - 1] ?? 0;
+      const lastDayPrev = aligned.prevLeadsArr[aligned.cutoffDay - 1] ?? 0;
+      const vUltDia = formatVarBadge(calcVar(lastDayCur, lastDayPrev), false, false);
+
+      const cards = [
+        {
+          label: `Presupuesto / Gasto al Día (${currentScope})`,
+          value: fmtMoney(aligned.mtdSpendCur),
+          pill: vGasto,
+          sub: `${labelMonth(aligned.prevYM)} (días 1–${aligned.cutoffDay}): ${fmtMoney(aligned.mtdSpendPrev)}`
+        },
+        {
+          label: `Leads al Día (${currentScope})`,
+          value: fmtInt(aligned.mtdLeadsCur),
+          pill: vLeads,
+          sub: `${labelMonth(aligned.prevYM)} (días 1–${aligned.cutoffDay}): ${fmtInt(aligned.mtdLeadsPrev)} leads`
+        },
+        {
+          label: "CPL al Día vs Mes Pasado",
+          value: fmtMoney(cplCur),
+          pill: vCpl,
+          sub: `CPL ${labelMonth(aligned.prevYM)}: ${fmtMoney(cplPrev)}`
+        },
+        {
+          label: `Día ${aligned.cutoffDay} (${labelMonth(aligned.selectedYM)})`,
+          value: `${fmtInt(lastDayCur)} leads`,
+          pill: vUltDia,
+          sub: `Día ${aligned.cutoffDay} de ${labelMonth(aligned.prevYM)}: ${fmtInt(lastDayPrev)} leads`
+        }
+      ];
+
+      kpiGrid.innerHTML = cards.map(c => `
+        <div class="kpi">
+          <div class="kpi-top">
+            <span class="label">${c.label}</span>
+            <span class="pill ${c.pill.cls}">${c.pill.text}</span>
+          </div>
+          <div class="value">${c.value}</div>
+          <div class="sub">${c.sub}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderCharts(aligned) {
+      const curLabel = `${labelMonth(aligned.selectedYM)} (Actual)`;
+      const prevLabel = `${labelMonth(aligned.prevYM)} (Mes pasado)`;
+
+      document.getElementById("leads-chart-hint").textContent = `${curLabel} vs ${prevLabel}`;
+      document.getElementById("spend-chart-hint").textContent = `${curLabel} vs ${prevLabel}`;
+
+      if (leadsChart) leadsChart.destroy();
+      leadsChart = new Chart(document.getElementById("leadsDayOfMonthChart"), {
         type: "line",
         data: {
-          labels,
+          labels: aligned.days,
           datasets: [
             {
-              label: "Leads diarios",
-              data: leadsData,
-              borderColor: "#38bdf8",
-              backgroundColor: "rgba(56, 189, 248, 0.14)",
-              tension: 0.25,
-              fill: true,
-              yAxisID: "y"
+              label: curLabel,
+              data: aligned.curLeadsArr,
+              borderColor: "#16a34a",
+              backgroundColor: "#16a34a",
+              borderWidth: 2.5,
+              pointRadius: 3.5,
+              tension: 0.15,
+              spanGaps: false
             },
             {
-              label: "Media móvil 7d",
-              data: ma7Data,
-              borderColor: "#94a3b8",
-              borderDash: [5, 5],
-              tension: 0.25,
-              fill: false,
-              yAxisID: "y"
-            },
-            {
-              label: "Gasto diario ($)",
-              data: spendData,
-              borderColor: "#facc15",
-              tension: 0.25,
-              fill: false,
-              yAxisID: "y1"
+              label: prevLabel,
+              data: aligned.prevLeadsArr,
+              borderColor: "#86efac",
+              backgroundColor: "#86efac",
+              borderWidth: 2,
+              borderDash: [6, 5],
+              pointRadius: 3,
+              tension: 0.15,
+              spanGaps: false
             }
           ]
         },
@@ -417,44 +455,85 @@
           interaction: { mode: "index", intersect: false },
           plugins: { legend: { labels: { color: "#e2e8f0" } } },
           scales: {
-            x: { ticks: { color: "#94a3b8", maxTicksLimit: 12 }, grid: { color: "rgba(148,163,184,0.08)" } },
-            y: { position: "left", ticks: { color: "#38bdf8" }, grid: { color: "rgba(148,163,184,0.08)" } },
-            y1: { position: "right", ticks: { color: "#facc15" }, grid: { drawOnChartArea: false } }
+            x: {
+              title: { display: true, text: "Día del Mes", color: "#94a3b8" },
+              ticks: { color: "#94a3b8" },
+              grid: { color: "rgba(148,163,184,0.10)" }
+            },
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: "Cantidad de Leads", color: "#94a3b8" },
+              ticks: { color: "#94a3b8" },
+              grid: { color: "rgba(148,163,184,0.10)" }
+            }
           }
         }
       });
 
-      if (deltaChart) deltaChart.destroy();
-      deltaChart = new Chart(document.getElementById("deltaChart"), {
-        type: "bar",
+      if (spendChart) spendChart.destroy();
+      spendChart = new Chart(document.getElementById("spendDayOfMonthChart"), {
+        type: "line",
         data: {
-          labels,
-          datasets: [{
-            label: "Dif. leads vs mismo día mes pasado",
-            data: deltaMesData,
-            backgroundColor: deltaMesData.map(v => v >= 0 ? "rgba(34, 197, 94, 0.75)" : "rgba(239, 68, 68, 0.75)")
-          }]
+          labels: aligned.days,
+          datasets: [
+            {
+              label: curLabel,
+              data: aligned.curSpendArr,
+              borderColor: "#38bdf8",
+              backgroundColor: "#38bdf8",
+              borderWidth: 2.5,
+              pointRadius: 3.5,
+              tension: 0.15,
+              spanGaps: false
+            },
+            {
+              label: prevLabel,
+              data: aligned.prevSpendArr,
+              borderColor: "#7dd3fc",
+              backgroundColor: "#7dd3fc",
+              borderWidth: 2,
+              borderDash: [6, 5],
+              pointRadius: 3,
+              tension: 0.15,
+              spanGaps: false
+            }
+          ]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
+          interaction: { mode: "index", intersect: false },
+          plugins: { legend: { labels: { color: "#e2e8f0" } } },
           scales: {
-            x: { ticks: { color: "#94a3b8", maxTicksLimit: 8 }, grid: { display: false } },
-            y: { ticks: { color: "#94a3b8" }, grid: { color: "rgba(148,163,184,0.08)" } }
+            x: {
+              title: { display: true, text: "Día del Mes", color: "#94a3b8" },
+              ticks: { color: "#94a3b8" },
+              grid: { color: "rgba(148,163,184,0.10)" }
+            },
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: "Gasto Diario (USD)", color: "#94a3b8" },
+              ticks: { color: "#94a3b8" },
+              grid: { color: "rgba(148,163,184,0.10)" }
+            }
           }
         }
       });
     }
 
     function renderTable() {
+      const selectedYM = document.getElementById("month-filter").value;
+      const prevYM = getPrevMonthYM(selectedYM);
       const campId = document.getElementById("campaign-filter").value;
       const q = document.getElementById("search-input").value.toLowerCase().trim();
       const tbody = document.getElementById("campaigns-tbody");
-      const compMeta = RAW.comparacion_mes_pasado[currentScope];
+
+      const refLatestYM = RAW.metadata.fecha_referencia.slice(0, 7);
+      const refLatestDay = Number(RAW.metadata.fecha_referencia.slice(8, 10));
+      const cutoffDay = (selectedYM === refLatestYM) ? refLatestDay : 31;
 
       document.getElementById("table-subtitle").textContent =
-        `Comparando días 1–${compMeta.dias_comparados_en_mes} (${compMeta.mes_actual}) vs (${compMeta.mes_anterior})`;
+        `Comparando días 1–${cutoffDay} de ${labelMonth(selectedYM)} vs ${labelMonth(prevYM)}`;
 
       const rows = RAW.comparacion_campanas_diaria.filter(c => {
         if (currentScope !== "Juntos" && c.brand !== currentScope) return false;
@@ -465,17 +544,23 @@
 
       tbody.innerHTML = rows.map(c => {
         const badgeCls = c.brand === "Motoria" ? "b-motoria" : "b-jetour";
-        const mtd = c.al_dia_vs_mes_pasado;
-        const vGasto = formatVarBadge(mtd.var_gasto, true, false);
-        const vLeads = formatVarBadge(mtd.var_leads, false, false);
+        let curLeads = 0, prevLeads = 0, curSpend = 0, prevSpend = 0;
+
+        c.historial_diario.forEach(h => {
+          const ym = h.fecha.slice(0, 7);
+          const d = Number(h.fecha.slice(8, 10));
+          if (d <= cutoffDay) {
+            if (ym === selectedYM) { curLeads += h.leads; curSpend += h.spend; }
+            if (ym === prevYM) { prevLeads += h.leads; prevSpend += h.spend; }
+          }
+        });
+
+        const vGasto = formatVarBadge(calcVar(curSpend, prevSpend), true, false);
+        const vLeads = formatVarBadge(calcVar(curLeads, prevLeads), false, false);
+        const cpl = curLeads > 0 ? curSpend / curLeads : null;
         const presupTxt = c.daily_budget
           ? `${fmtMoney(c.daily_budget)}/d`
           : (c.lifetime_budget ? `${fmtMoney(c.lifetime_budget)} tot` : "-");
-
-        // Sumar leads desde 2026-09-01 en adelante
-        const leadsSeptPlus = c.historial_diario
-          .filter(h => h.fecha >= "2026-09-01")
-          .reduce((acc, h) => acc + h.leads, 0);
 
         return `
           <tr>
@@ -483,20 +568,21 @@
             <td class="camp-name" title="${c.campaign_name}">${c.campaign_name}</td>
             <td>${c.effective_status || "-"}</td>
             <td class="num">${presupTxt}</td>
-            <td class="num">${fmtMoney(mtd.gasto_actual)}</td>
+            <td class="num">${fmtMoney(curSpend)}</td>
             <td class="num ${vGasto.cls}">${vGasto.text}</td>
-            <td class="num"><strong>${fmtInt(mtd.leads_actual)}</strong></td>
+            <td class="num"><strong>${fmtInt(curLeads)}</strong></td>
             <td class="num ${vLeads.cls}">${vLeads.text}</td>
-            <td class="num">${fmtInt(leadsSeptPlus)}</td>
-            <td class="num">${fmtMoney(c.cpl_promedio)}</td>
+            <td class="num">${fmtMoney(cpl)}</td>
           </tr>
         `;
       }).join("");
     }
 
     function renderAll() {
-      renderKPIs();
-      renderCharts();
+      const selectedYM = document.getElementById("month-filter").value;
+      const aligned = getMonthlyAlignedData(selectedYM);
+      renderKPIs(aligned);
+      renderCharts(aligned);
       renderTable();
     }
 
