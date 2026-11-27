@@ -2,7 +2,7 @@
   "metadata": {
     "since": "2026-08-01",
     "until": "2026-11-27",
-    "fecha_referencia": "2026-11-26",
+    "fecha_referencia": "2026-11-27",
     "generated_at": "2026-11-27",
     "meses_disponibles": [
       "2026-09",
@@ -173,70 +173,70 @@
       "Juntos": {
         "mes": "2026-11",
         "mes_anterior": "2026-10",
-        "dias_comparados": 26,
-        "gasto_actual": 7160.43,
-        "gasto_mes_pasado": 6725.94,
+        "dias_comparados": 27,
+        "gasto_actual": 7251.45,
+        "gasto_mes_pasado": 7017.03,
         "var_gasto": {
-          "abs": 434.49,
-          "pct": 6.5
+          "abs": 234.42,
+          "pct": 3.3
         },
-        "leads_actual": 1593,
-        "leads_mes_pasado": 2009,
+        "leads_actual": 1614,
+        "leads_mes_pasado": 2065,
         "var_leads": {
-          "abs": -416,
-          "pct": -20.7
+          "abs": -451,
+          "pct": -21.8
         },
         "cpl_actual": 4.49,
-        "cpl_mes_pasado": 3.35,
+        "cpl_mes_pasado": 3.4,
         "var_cpl": {
-          "abs": 1.14,
-          "pct": 34.0
+          "abs": 1.09,
+          "pct": 32.1
         }
       },
       "Motoria": {
         "mes": "2026-11",
         "mes_anterior": "2026-10",
-        "dias_comparados": 26,
-        "gasto_actual": 4392.55,
-        "gasto_mes_pasado": 3333.15,
+        "dias_comparados": 27,
+        "gasto_actual": 4445.9,
+        "gasto_mes_pasado": 3506.9,
         "var_gasto": {
-          "abs": 1059.4,
-          "pct": 31.8
+          "abs": 939.0,
+          "pct": 26.8
         },
-        "leads_actual": 997,
-        "leads_mes_pasado": 1079,
+        "leads_actual": 1009,
+        "leads_mes_pasado": 1109,
         "var_leads": {
-          "abs": -82,
-          "pct": -7.6
+          "abs": -100,
+          "pct": -9.0
         },
         "cpl_actual": 4.41,
-        "cpl_mes_pasado": 3.09,
+        "cpl_mes_pasado": 3.16,
         "var_cpl": {
-          "abs": 1.32,
-          "pct": 42.7
+          "abs": 1.25,
+          "pct": 39.6
         }
       },
       "Jetour": {
         "mes": "2026-11",
         "mes_anterior": "2026-10",
-        "dias_comparados": 26,
-        "gasto_actual": 2767.88,
-        "gasto_mes_pasado": 3392.79,
+        "dias_comparados": 27,
+        "gasto_actual": 2805.55,
+        "gasto_mes_pasado": 3510.13,
         "var_gasto": {
-          "abs": -624.91,
-          "pct": -18.4
+          "abs": -704.58,
+          "pct": -20.1
         },
-        "leads_actual": 596,
-        "leads_mes_pasado": 930,
+        "leads_actual": 605,
+        "leads_mes_pasado": 956,
         "var_leads": {
-          "abs": -334,
-          "pct": -35.9
+          "abs": -351,
+          "pct": -36.7
         },
         "cpl_actual": 4.64,
-        "cpl_mes_pasado": 3.65,
+        "cpl_mes_pasado": 3.67,
         "var_cpl": {
-          "abs": 0.99,
-          "pct": 27.1
+          "abs": 0.97,
+          "pct": 26.4
         }
       }
     }
@@ -2682,10 +2682,10 @@
       "fecha": "2026-11-25",
       "scope": "Juntos",
       "leads": 38,
-      "spend": 189.49,
+      "spend": 189.59,
       "cpl_diario": 4.99,
       "promedio_movil_7d": 53.57,
-      "impressions": 35477,
+      "impressions": 35491,
       "clicks": 1039,
       "fecha_mes_pasado": "2026-10-25",
       "leads_mes_pasado": 102,
@@ -2695,29 +2695,50 @@
       },
       "spend_mes_pasado": 435.14,
       "var_spend_vs_mes_pasado": {
-        "abs": -245.65,
-        "pct": -56.5
+        "abs": -245.55,
+        "pct": -56.4
       }
     },
     {
       "fecha": "2026-11-26",
       "scope": "Juntos",
-      "leads": 14,
-      "spend": 134.41,
-      "cpl_diario": 9.6,
-      "promedio_movil_7d": 48.43,
-      "impressions": 22710,
-      "clicks": 670,
+      "leads": 26,
+      "spend": 196.24,
+      "cpl_diario": 7.55,
+      "promedio_movil_7d": 50.14,
+      "impressions": 33831,
+      "clicks": 1031,
       "fecha_mes_pasado": "2026-10-26",
       "leads_mes_pasado": 63,
       "var_leads_vs_mes_pasado": {
-        "abs": -49,
-        "pct": -77.8
+        "abs": -37,
+        "pct": -58.7
       },
       "spend_mes_pasado": 315.2,
       "var_spend_vs_mes_pasado": {
-        "abs": -180.79,
-        "pct": -57.4
+        "abs": -118.96,
+        "pct": -37.7
+      }
+    },
+    {
+      "fecha": "2026-11-27",
+      "scope": "Juntos",
+      "leads": 9,
+      "spend": 29.09,
+      "cpl_diario": 3.23,
+      "promedio_movil_7d": 41.29,
+      "impressions": 4569,
+      "clicks": 139,
+      "fecha_mes_pasado": "2026-10-27",
+      "leads_mes_pasado": 56,
+      "var_leads_vs_mes_pasado": {
+        "abs": -47,
+        "pct": -83.9
+      },
+      "spend_mes_pasado": 291.09,
+      "var_spend_vs_mes_pasado": {
+        "abs": -262.0,
+        "pct": -90.0
       }
     },
     {
@@ -5160,10 +5181,10 @@
       "fecha": "2026-11-25",
       "scope": "Motoria",
       "leads": 22,
-      "spend": 116.97,
+      "spend": 117.0,
       "cpl_diario": 5.32,
       "promedio_movil_7d": 33.14,
-      "impressions": 22652,
+      "impressions": 22660,
       "clicks": 666,
       "fecha_mes_pasado": "2026-10-25",
       "leads_mes_pasado": 72,
@@ -5173,29 +5194,50 @@
       },
       "spend_mes_pasado": 265.15,
       "var_spend_vs_mes_pasado": {
-        "abs": -148.18,
+        "abs": -148.15,
         "pct": -55.9
       }
     },
     {
       "fecha": "2026-11-26",
       "scope": "Motoria",
-      "leads": 10,
-      "spend": 84.08,
-      "cpl_diario": 8.41,
-      "promedio_movil_7d": 30.0,
-      "impressions": 14584,
-      "clicks": 393,
+      "leads": 17,
+      "spend": 120.26,
+      "cpl_diario": 7.07,
+      "promedio_movil_7d": 31.0,
+      "impressions": 21677,
+      "clicks": 617,
       "fecha_mes_pasado": "2026-10-26",
       "leads_mes_pasado": 36,
       "var_leads_vs_mes_pasado": {
-        "abs": -26,
-        "pct": -72.2
+        "abs": -19,
+        "pct": -52.8
       },
       "spend_mes_pasado": 187.39,
       "var_spend_vs_mes_pasado": {
-        "abs": -103.31,
-        "pct": -55.1
+        "abs": -67.13,
+        "pct": -35.8
+      }
+    },
+    {
+      "fecha": "2026-11-27",
+      "scope": "Motoria",
+      "leads": 5,
+      "spend": 17.14,
+      "cpl_diario": 3.43,
+      "promedio_movil_7d": 25.0,
+      "impressions": 2975,
+      "clicks": 75,
+      "fecha_mes_pasado": "2026-10-27",
+      "leads_mes_pasado": 30,
+      "var_leads_vs_mes_pasado": {
+        "abs": -25,
+        "pct": -83.3
+      },
+      "spend_mes_pasado": 173.75,
+      "var_spend_vs_mes_pasado": {
+        "abs": -156.61,
+        "pct": -90.1
       }
     },
     {
@@ -7638,10 +7680,10 @@
       "fecha": "2026-11-25",
       "scope": "Jetour",
       "leads": 16,
-      "spend": 72.52,
-      "cpl_diario": 4.53,
+      "spend": 72.59,
+      "cpl_diario": 4.54,
       "promedio_movil_7d": 20.43,
-      "impressions": 12825,
+      "impressions": 12831,
       "clicks": 373,
       "fecha_mes_pasado": "2026-10-25",
       "leads_mes_pasado": 30,
@@ -7651,29 +7693,50 @@
       },
       "spend_mes_pasado": 169.99,
       "var_spend_vs_mes_pasado": {
-        "abs": -97.47,
+        "abs": -97.4,
         "pct": -57.3
       }
     },
     {
       "fecha": "2026-11-26",
       "scope": "Jetour",
-      "leads": 4,
-      "spend": 50.33,
-      "cpl_diario": 12.58,
-      "promedio_movil_7d": 18.43,
-      "impressions": 8126,
-      "clicks": 277,
+      "leads": 9,
+      "spend": 75.98,
+      "cpl_diario": 8.44,
+      "promedio_movil_7d": 19.14,
+      "impressions": 12154,
+      "clicks": 414,
       "fecha_mes_pasado": "2026-10-26",
       "leads_mes_pasado": 27,
       "var_leads_vs_mes_pasado": {
-        "abs": -23,
-        "pct": -85.2
+        "abs": -18,
+        "pct": -66.7
       },
       "spend_mes_pasado": 127.81,
       "var_spend_vs_mes_pasado": {
-        "abs": -77.48,
-        "pct": -60.6
+        "abs": -51.83,
+        "pct": -40.6
+      }
+    },
+    {
+      "fecha": "2026-11-27",
+      "scope": "Jetour",
+      "leads": 4,
+      "spend": 11.95,
+      "cpl_diario": 2.99,
+      "promedio_movil_7d": 16.29,
+      "impressions": 1594,
+      "clicks": 64,
+      "fecha_mes_pasado": "2026-10-27",
+      "leads_mes_pasado": 26,
+      "var_leads_vs_mes_pasado": {
+        "abs": -22,
+        "pct": -84.6
+      },
+      "spend_mes_pasado": 117.34,
+      "var_spend_vs_mes_pasado": {
+        "abs": -105.39,
+        "pct": -89.8
       }
     }
   ],
@@ -7686,8 +7749,8 @@
       "effective_status": "ACTIVE",
       "daily_budget": null,
       "lifetime_budget": null,
-      "total_leads": 3763,
-      "total_spend": 14190.11,
+      "total_leads": 3772,
+      "total_spend": 14227.78,
       "cpl_promedio": 3.77,
       "historial_diario": [
         {
@@ -8621,18 +8684,26 @@
         {
           "fecha": "2026-11-25",
           "leads": 16,
-          "spend": 72.52,
-          "cpl": 4.53,
-          "impressions": 12825,
+          "spend": 72.59,
+          "cpl": 4.54,
+          "impressions": 12831,
           "clicks": 373
         },
         {
           "fecha": "2026-11-26",
+          "leads": 9,
+          "spend": 75.98,
+          "cpl": 8.44,
+          "impressions": 12154,
+          "clicks": 414
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 4,
-          "spend": 50.33,
-          "cpl": 12.58,
-          "impressions": 8126,
-          "clicks": 277
+          "spend": 11.95,
+          "cpl": 2.99,
+          "impressions": 1594,
+          "clicks": 64
         }
       ]
     },
@@ -9591,6 +9662,14 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
         }
       ]
     },
@@ -9602,9 +9681,9 @@
       "effective_status": "ACTIVE",
       "daily_budget": null,
       "lifetime_budget": null,
-      "total_leads": 677,
-      "total_spend": 2272.25,
-      "cpl_promedio": 3.36,
+      "total_leads": 678,
+      "total_spend": 2285.54,
+      "cpl_promedio": 3.37,
       "historial_diario": [
         {
           "fecha": "2026-08-01",
@@ -10537,18 +10616,26 @@
         {
           "fecha": "2026-11-25",
           "leads": 3,
-          "spend": 24.43,
-          "cpl": 8.14,
-          "impressions": 4642,
+          "spend": 24.44,
+          "cpl": 8.15,
+          "impressions": 4646,
           "clicks": 112
         },
         {
           "fecha": "2026-11-26",
+          "leads": 1,
+          "spend": 28.37,
+          "cpl": 28.37,
+          "impressions": 4187,
+          "clicks": 112
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
-          "spend": 19.91,
+          "spend": 4.82,
           "cpl": null,
-          "impressions": 2790,
-          "clicks": 70
+          "impressions": 627,
+          "clicks": 12
         }
       ]
     },
@@ -10560,9 +10647,9 @@
       "effective_status": "ACTIVE",
       "daily_budget": null,
       "lifetime_budget": null,
-      "total_leads": 509,
-      "total_spend": 1767.08,
-      "cpl_promedio": 3.47,
+      "total_leads": 510,
+      "total_spend": 1779.85,
+      "cpl_promedio": 3.49,
       "historial_diario": [
         {
           "fecha": "2026-08-01",
@@ -11495,18 +11582,26 @@
         {
           "fecha": "2026-11-25",
           "leads": 3,
-          "spend": 24.9,
+          "spend": 24.91,
           "cpl": 8.3,
-          "impressions": 4355,
+          "impressions": 4356,
           "clicks": 146
         },
         {
           "fecha": "2026-11-26",
           "leads": 1,
-          "spend": 16.56,
-          "cpl": 16.56,
-          "impressions": 3483,
-          "clicks": 118
+          "spend": 26.03,
+          "cpl": 26.03,
+          "impressions": 5567,
+          "clicks": 190
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 1,
+          "spend": 3.29,
+          "cpl": 3.29,
+          "impressions": 656,
+          "clicks": 19
         }
       ]
     },
@@ -11518,9 +11613,9 @@
       "effective_status": "ACTIVE",
       "daily_budget": 20.0,
       "lifetime_budget": null,
-      "total_leads": 472,
-      "total_spend": 1684.16,
-      "cpl_promedio": 3.57,
+      "total_leads": 478,
+      "total_spend": 1691.96,
+      "cpl_promedio": 3.54,
       "historial_diario": [
         {
           "fecha": "2026-08-01",
@@ -12453,18 +12548,26 @@
         {
           "fecha": "2026-11-25",
           "leads": 12,
-          "spend": 21.57,
+          "spend": 21.58,
           "cpl": 1.8,
-          "impressions": 4934,
+          "impressions": 4935,
           "clicks": 216
         },
         {
           "fecha": "2026-11-26",
-          "leads": 3,
-          "spend": 10.53,
-          "cpl": 3.51,
-          "impressions": 2276,
-          "clicks": 89
+          "leads": 8,
+          "spend": 16.04,
+          "cpl": 2.0,
+          "impressions": 3380,
+          "clicks": 142
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 1,
+          "spend": 2.28,
+          "cpl": 2.28,
+          "impressions": 389,
+          "clicks": 16
         }
       ]
     },
@@ -13418,6 +13521,14 @@
         },
         {
           "fecha": "2026-11-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
           "spend": 0.0,
           "cpl": null,
@@ -14381,6 +14492,14 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
         }
       ]
     },
@@ -14392,8 +14511,8 @@
       "effective_status": "ACTIVE",
       "daily_budget": 30.0,
       "lifetime_budget": null,
-      "total_leads": 318,
-      "total_spend": 1122.08,
+      "total_leads": 322,
+      "total_spend": 1135.83,
       "cpl_promedio": 3.53,
       "historial_diario": [
         {
@@ -15329,16 +15448,24 @@
           "leads": 4,
           "spend": 25.9,
           "cpl": 6.47,
-          "impressions": 5298,
+          "impressions": 5300,
           "clicks": 108
         },
         {
           "fecha": "2026-11-26",
-          "leads": 6,
-          "spend": 25.11,
-          "cpl": 4.18,
-          "impressions": 4059,
-          "clicks": 80
+          "leads": 7,
+          "spend": 34.19,
+          "cpl": 4.88,
+          "impressions": 5841,
+          "clicks": 111
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 3,
+          "spend": 4.67,
+          "cpl": 1.56,
+          "impressions": 901,
+          "clicks": 20
         }
       ]
     },
@@ -16292,6 +16419,14 @@
         },
         {
           "fecha": "2026-11-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
           "spend": 0.0,
           "cpl": null,
@@ -17255,6 +17390,14 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
         }
       ]
     },
@@ -18208,6 +18351,14 @@
         },
         {
           "fecha": "2026-11-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
           "spend": 0.0,
           "cpl": null,
@@ -19171,6 +19322,14 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
         }
       ]
     },
@@ -20124,6 +20283,14 @@
         },
         {
           "fecha": "2026-11-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
           "spend": 0.0,
           "cpl": null,
@@ -21087,6 +21254,14 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
         }
       ]
     },
@@ -22040,6 +22215,14 @@
         },
         {
           "fecha": "2026-11-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
           "spend": 0.0,
           "cpl": null,
@@ -23003,6 +23186,14 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
         }
       ]
     },
@@ -23956,6 +24147,14 @@
         },
         {
           "fecha": "2026-11-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
           "spend": 0.0,
           "cpl": null,
@@ -24919,6 +25118,14 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
         }
       ]
     },
@@ -24931,7 +25138,7 @@
       "daily_budget": 20.0,
       "lifetime_budget": null,
       "total_leads": 0,
-      "total_spend": 541.63,
+      "total_spend": 547.37,
       "cpl_promedio": null,
       "historial_diario": [
         {
@@ -25873,10 +26080,18 @@
         {
           "fecha": "2026-11-26",
           "leads": 0,
-          "spend": 11.97,
+          "spend": 15.63,
           "cpl": null,
-          "impressions": 1976,
-          "clicks": 36
+          "impressions": 2702,
+          "clicks": 62
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 2.08,
+          "cpl": null,
+          "impressions": 402,
+          "clicks": 8
         }
       ]
     },
@@ -26830,6 +27045,14 @@
         },
         {
           "fecha": "2026-11-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
           "spend": 0.0,
           "cpl": null,
@@ -27793,6 +28016,14 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
         }
       ]
     },
@@ -28746,6 +28977,14 @@
         },
         {
           "fecha": "2026-11-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
           "spend": 0.0,
           "cpl": null,
@@ -29709,6 +29948,14 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
         }
       ]
     },
@@ -30662,6 +30909,14 @@
         },
         {
           "fecha": "2026-11-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
           "spend": 0.0,
           "cpl": null,
@@ -31625,6 +31880,14 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
         }
       ]
     },
@@ -32578,6 +32841,14 @@
         },
         {
           "fecha": "2026-11-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
           "spend": 0.0,
           "cpl": null,
@@ -33541,6 +33812,14 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
         }
       ]
     },
@@ -34494,6 +34773,14 @@
         },
         {
           "fecha": "2026-11-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-11-27",
           "leads": 0,
           "spend": 0.0,
           "cpl": null,
