@@ -1,9 +1,9 @@
 {
   "metadata": {
     "since": "2026-08-01",
-    "until": "2026-11-27",
+    "until": "2026-11-28",
     "fecha_referencia": "2026-11-27",
-    "generated_at": "2026-11-27",
+    "generated_at": "2026-11-28",
     "meses_disponibles": [
       "2026-09",
       "2026-10",
@@ -174,69 +174,69 @@
         "mes": "2026-11",
         "mes_anterior": "2026-10",
         "dias_comparados": 27,
-        "gasto_actual": 7264.29,
+        "gasto_actual": 7367.97,
         "gasto_mes_pasado": 7017.03,
         "var_gasto": {
-          "abs": 247.26,
-          "pct": 3.5
+          "abs": 350.94,
+          "pct": 5.0
         },
-        "leads_actual": 1617,
+        "leads_actual": 1633,
         "leads_mes_pasado": 2065,
         "var_leads": {
-          "abs": -448,
-          "pct": -21.7
+          "abs": -432,
+          "pct": -20.9
         },
-        "cpl_actual": 4.49,
+        "cpl_actual": 4.51,
         "cpl_mes_pasado": 3.4,
         "var_cpl": {
-          "abs": 1.09,
-          "pct": 32.1
+          "abs": 1.11,
+          "pct": 32.6
         }
       },
       "Motoria": {
         "mes": "2026-11",
         "mes_anterior": "2026-10",
         "dias_comparados": 27,
-        "gasto_actual": 4453.6,
+        "gasto_actual": 4520.17,
         "gasto_mes_pasado": 3506.9,
         "var_gasto": {
-          "abs": 946.7,
-          "pct": 27.0
+          "abs": 1013.27,
+          "pct": 28.9
         },
-        "leads_actual": 1011,
+        "leads_actual": 1020,
         "leads_mes_pasado": 1109,
         "var_leads": {
-          "abs": -98,
-          "pct": -8.8
+          "abs": -89,
+          "pct": -8.0
         },
-        "cpl_actual": 4.41,
+        "cpl_actual": 4.43,
         "cpl_mes_pasado": 3.16,
         "var_cpl": {
-          "abs": 1.25,
-          "pct": 39.6
+          "abs": 1.27,
+          "pct": 40.2
         }
       },
       "Jetour": {
         "mes": "2026-11",
         "mes_anterior": "2026-10",
         "dias_comparados": 27,
-        "gasto_actual": 2810.69,
+        "gasto_actual": 2847.8,
         "gasto_mes_pasado": 3510.13,
         "var_gasto": {
-          "abs": -699.44,
-          "pct": -19.9
+          "abs": -662.33,
+          "pct": -18.9
         },
-        "leads_actual": 606,
+        "leads_actual": 613,
         "leads_mes_pasado": 956,
         "var_leads": {
-          "abs": -350,
-          "pct": -36.6
+          "abs": -343,
+          "pct": -35.9
         },
-        "cpl_actual": 4.64,
+        "cpl_actual": 4.65,
         "cpl_mes_pasado": 3.67,
         "var_cpl": {
-          "abs": 0.97,
-          "pct": 26.4
+          "abs": 0.98,
+          "pct": 26.7
         }
       }
     }
@@ -2703,11 +2703,11 @@
       "fecha": "2026-11-26",
       "scope": "Juntos",
       "leads": 26,
-      "spend": 196.47,
-      "cpl_diario": 7.56,
+      "spend": 196.83,
+      "cpl_diario": 7.57,
       "promedio_movil_7d": 50.14,
-      "impressions": 33877,
-      "clicks": 1033,
+      "impressions": 33954,
+      "clicks": 1034,
       "fecha_mes_pasado": "2026-10-26",
       "leads_mes_pasado": 63,
       "var_leads_vs_mes_pasado": {
@@ -2716,29 +2716,29 @@
       },
       "spend_mes_pasado": 315.2,
       "var_spend_vs_mes_pasado": {
-        "abs": -118.73,
-        "pct": -37.7
+        "abs": -118.37,
+        "pct": -37.6
       }
     },
     {
       "fecha": "2026-11-27",
       "scope": "Juntos",
-      "leads": 12,
-      "spend": 41.69,
-      "cpl_diario": 3.47,
-      "promedio_movil_7d": 41.71,
-      "impressions": 6550,
-      "clicks": 200,
+      "leads": 28,
+      "spend": 145.01,
+      "cpl_diario": 5.18,
+      "promedio_movil_7d": 44.0,
+      "impressions": 25135,
+      "clicks": 733,
       "fecha_mes_pasado": "2026-10-27",
       "leads_mes_pasado": 56,
       "var_leads_vs_mes_pasado": {
-        "abs": -44,
-        "pct": -78.6
+        "abs": -28,
+        "pct": -50.0
       },
       "spend_mes_pasado": 291.09,
       "var_spend_vs_mes_pasado": {
-        "abs": -249.4,
-        "pct": -85.7
+        "abs": -146.08,
+        "pct": -50.2
       }
     },
     {
@@ -5202,10 +5202,10 @@
       "fecha": "2026-11-26",
       "scope": "Motoria",
       "leads": 17,
-      "spend": 120.39,
-      "cpl_diario": 7.08,
+      "spend": 120.5,
+      "cpl_diario": 7.09,
       "promedio_movil_7d": 31.0,
-      "impressions": 21709,
+      "impressions": 21758,
       "clicks": 619,
       "fecha_mes_pasado": "2026-10-26",
       "leads_mes_pasado": 36,
@@ -5215,29 +5215,29 @@
       },
       "spend_mes_pasado": 187.39,
       "var_spend_vs_mes_pasado": {
-        "abs": -67.0,
-        "pct": -35.8
+        "abs": -66.89,
+        "pct": -35.7
       }
     },
     {
       "fecha": "2026-11-27",
       "scope": "Motoria",
-      "leads": 7,
-      "spend": 24.7,
-      "cpl_diario": 3.53,
-      "promedio_movil_7d": 25.29,
-      "impressions": 4268,
-      "clicks": 112,
+      "leads": 16,
+      "spend": 91.16,
+      "cpl_diario": 5.7,
+      "promedio_movil_7d": 26.57,
+      "impressions": 16695,
+      "clicks": 440,
       "fecha_mes_pasado": "2026-10-27",
       "leads_mes_pasado": 30,
       "var_leads_vs_mes_pasado": {
-        "abs": -23,
-        "pct": -76.7
+        "abs": -14,
+        "pct": -46.7
       },
       "spend_mes_pasado": 173.75,
       "var_spend_vs_mes_pasado": {
-        "abs": -149.05,
-        "pct": -85.8
+        "abs": -82.59,
+        "pct": -47.5
       }
     },
     {
@@ -7701,11 +7701,11 @@
       "fecha": "2026-11-26",
       "scope": "Jetour",
       "leads": 9,
-      "spend": 76.08,
-      "cpl_diario": 8.45,
+      "spend": 76.33,
+      "cpl_diario": 8.48,
       "promedio_movil_7d": 19.14,
-      "impressions": 12168,
-      "clicks": 414,
+      "impressions": 12196,
+      "clicks": 415,
       "fecha_mes_pasado": "2026-10-26",
       "leads_mes_pasado": 27,
       "var_leads_vs_mes_pasado": {
@@ -7714,29 +7714,29 @@
       },
       "spend_mes_pasado": 127.81,
       "var_spend_vs_mes_pasado": {
-        "abs": -51.73,
-        "pct": -40.5
+        "abs": -51.48,
+        "pct": -40.3
       }
     },
     {
       "fecha": "2026-11-27",
       "scope": "Jetour",
-      "leads": 5,
-      "spend": 16.99,
-      "cpl_diario": 3.4,
-      "promedio_movil_7d": 16.43,
-      "impressions": 2282,
-      "clicks": 88,
+      "leads": 12,
+      "spend": 53.85,
+      "cpl_diario": 4.49,
+      "promedio_movil_7d": 17.43,
+      "impressions": 8440,
+      "clicks": 293,
       "fecha_mes_pasado": "2026-10-27",
       "leads_mes_pasado": 26,
       "var_leads_vs_mes_pasado": {
-        "abs": -21,
-        "pct": -80.8
+        "abs": -14,
+        "pct": -53.8
       },
       "spend_mes_pasado": 117.34,
       "var_spend_vs_mes_pasado": {
-        "abs": -100.35,
-        "pct": -85.5
+        "abs": -63.49,
+        "pct": -54.1
       }
     }
   ],
@@ -7749,9 +7749,9 @@
       "effective_status": "ACTIVE",
       "daily_budget": null,
       "lifetime_budget": null,
-      "total_leads": 3773,
-      "total_spend": 14232.92,
-      "cpl_promedio": 3.77,
+      "total_leads": 3780,
+      "total_spend": 14270.03,
+      "cpl_promedio": 3.78,
       "historial_diario": [
         {
           "fecha": "2026-08-01",
@@ -8692,18 +8692,18 @@
         {
           "fecha": "2026-11-26",
           "leads": 9,
-          "spend": 76.08,
-          "cpl": 8.45,
-          "impressions": 12168,
-          "clicks": 414
+          "spend": 76.33,
+          "cpl": 8.48,
+          "impressions": 12196,
+          "clicks": 415
         },
         {
           "fecha": "2026-11-27",
-          "leads": 5,
-          "spend": 16.99,
-          "cpl": 3.4,
-          "impressions": 2282,
-          "clicks": 88
+          "leads": 12,
+          "spend": 53.85,
+          "cpl": 4.49,
+          "impressions": 8440,
+          "clicks": 293
         }
       ]
     },
@@ -9681,9 +9681,9 @@
       "effective_status": "ACTIVE",
       "daily_budget": null,
       "lifetime_budget": null,
-      "total_leads": 679,
-      "total_spend": 2286.94,
-      "cpl_promedio": 3.37,
+      "total_leads": 680,
+      "total_spend": 2299.51,
+      "cpl_promedio": 3.38,
       "historial_diario": [
         {
           "fecha": "2026-08-01",
@@ -10624,18 +10624,18 @@
         {
           "fecha": "2026-11-26",
           "leads": 1,
-          "spend": 28.39,
-          "cpl": 28.39,
-          "impressions": 4193,
+          "spend": 28.44,
+          "cpl": 28.44,
+          "impressions": 4207,
           "clicks": 112
         },
         {
           "fecha": "2026-11-27",
-          "leads": 1,
-          "spend": 6.19,
-          "cpl": 6.19,
-          "impressions": 814,
-          "clicks": 15
+          "leads": 2,
+          "spend": 18.71,
+          "cpl": 9.36,
+          "impressions": 2353,
+          "clicks": 58
         }
       ]
     },
@@ -10647,9 +10647,9 @@
       "effective_status": "ACTIVE",
       "daily_budget": null,
       "lifetime_budget": null,
-      "total_leads": 510,
-      "total_spend": 1781.28,
-      "cpl_promedio": 3.49,
+      "total_leads": 513,
+      "total_spend": 1796.47,
+      "cpl_promedio": 3.5,
       "historial_diario": [
         {
           "fecha": "2026-08-01",
@@ -11590,18 +11590,18 @@
         {
           "fecha": "2026-11-26",
           "leads": 1,
-          "spend": 26.11,
-          "cpl": 26.11,
-          "impressions": 5579,
+          "spend": 26.12,
+          "cpl": 26.12,
+          "impressions": 5593,
           "clicks": 190
         },
         {
           "fecha": "2026-11-27",
-          "leads": 1,
-          "spend": 4.64,
-          "cpl": 4.64,
-          "impressions": 981,
-          "clicks": 30
+          "leads": 4,
+          "spend": 19.82,
+          "cpl": 4.96,
+          "impressions": 4263,
+          "clicks": 144
         }
       ]
     },
@@ -11613,9 +11613,9 @@
       "effective_status": "ACTIVE",
       "daily_budget": 20.0,
       "lifetime_budget": null,
-      "total_leads": 478,
-      "total_spend": 1692.28,
-      "cpl_promedio": 3.54,
+      "total_leads": 480,
+      "total_spend": 1704.73,
+      "cpl_promedio": 3.55,
       "historial_diario": [
         {
           "fecha": "2026-08-01",
@@ -12556,18 +12556,18 @@
         {
           "fecha": "2026-11-26",
           "leads": 8,
-          "spend": 16.04,
-          "cpl": 2.0,
-          "impressions": 3382,
+          "spend": 16.07,
+          "cpl": 2.01,
+          "impressions": 3387,
           "clicks": 142
         },
         {
           "fecha": "2026-11-27",
-          "leads": 1,
-          "spend": 2.6,
-          "cpl": 2.6,
-          "impressions": 473,
-          "clicks": 19
+          "leads": 3,
+          "spend": 15.02,
+          "cpl": 5.01,
+          "impressions": 2989,
+          "clicks": 95
         }
       ]
     },
@@ -13539,6 +13539,972 @@
     },
     {
       "brand": "Motoria",
+      "campaign_id": "120251718849170040",
+      "campaign_name": "[Formulario][Motoria][Jetourx50]",
+      "objective": "OUTCOME_LEADS",
+      "effective_status": "ACTIVE",
+      "daily_budget": 30.0,
+      "lifetime_budget": null,
+      "total_leads": 326,
+      "total_spend": 1150.95,
+      "cpl_promedio": 3.53,
+      "historial_diario": [
+        {
+          "fecha": "2026-08-01",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-02",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-03",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-04",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-05",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-06",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-07",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-08",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-09",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-10",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-11",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-12",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-13",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-14",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-15",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-16",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-17",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-18",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-19",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-20",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-21",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-22",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-23",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-24",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-25",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-28",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-29",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-30",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-08-31",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-01",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-02",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-03",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-04",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-05",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-06",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-07",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-08",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-09",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-10",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-11",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-12",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-13",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-14",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-15",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-16",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-17",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-18",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-19",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-20",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-21",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-22",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-23",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-24",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-25",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-26",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-27",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-28",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-29",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-09-30",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-01",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-02",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-03",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-04",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-05",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-06",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-07",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-08",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-09",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-10",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-11",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-12",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-13",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-14",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-15",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-16",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-17",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-18",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-19",
+          "leads": 0,
+          "spend": 0.0,
+          "cpl": null,
+          "impressions": 0,
+          "clicks": 0
+        },
+        {
+          "fecha": "2026-10-20",
+          "leads": 4,
+          "spend": 15.57,
+          "cpl": 3.89,
+          "impressions": 4238,
+          "clicks": 65
+        },
+        {
+          "fecha": "2026-10-21",
+          "leads": 3,
+          "spend": 25.74,
+          "cpl": 8.58,
+          "impressions": 6394,
+          "clicks": 100
+        },
+        {
+          "fecha": "2026-10-22",
+          "leads": 1,
+          "spend": 29.68,
+          "cpl": 29.68,
+          "impressions": 7406,
+          "clicks": 82
+        },
+        {
+          "fecha": "2026-10-23",
+          "leads": 11,
+          "spend": 35.14,
+          "cpl": 3.19,
+          "impressions": 7556,
+          "clicks": 281
+        },
+        {
+          "fecha": "2026-10-24",
+          "leads": 5,
+          "spend": 29.51,
+          "cpl": 5.9,
+          "impressions": 7307,
+          "clicks": 207
+        },
+        {
+          "fecha": "2026-10-25",
+          "leads": 15,
+          "spend": 41.07,
+          "cpl": 2.74,
+          "impressions": 11662,
+          "clicks": 337
+        },
+        {
+          "fecha": "2026-10-26",
+          "leads": 4,
+          "spend": 29.91,
+          "cpl": 7.48,
+          "impressions": 10469,
+          "clicks": 265
+        },
+        {
+          "fecha": "2026-10-27",
+          "leads": 3,
+          "spend": 29.43,
+          "cpl": 9.81,
+          "impressions": 10367,
+          "clicks": 262
+        },
+        {
+          "fecha": "2026-10-28",
+          "leads": 4,
+          "spend": 25.5,
+          "cpl": 6.38,
+          "impressions": 9074,
+          "clicks": 204
+        },
+        {
+          "fecha": "2026-10-29",
+          "leads": 7,
+          "spend": 22.65,
+          "cpl": 3.24,
+          "impressions": 7368,
+          "clicks": 156
+        },
+        {
+          "fecha": "2026-10-30",
+          "leads": 7,
+          "spend": 31.63,
+          "cpl": 4.52,
+          "impressions": 10829,
+          "clicks": 214
+        },
+        {
+          "fecha": "2026-10-31",
+          "leads": 5,
+          "spend": 29.7,
+          "cpl": 5.94,
+          "impressions": 9121,
+          "clicks": 186
+        },
+        {
+          "fecha": "2026-11-01",
+          "leads": 15,
+          "spend": 48.08,
+          "cpl": 3.21,
+          "impressions": 11241,
+          "clicks": 199
+        },
+        {
+          "fecha": "2026-11-02",
+          "leads": 18,
+          "spend": 35.4,
+          "cpl": 1.97,
+          "impressions": 11609,
+          "clicks": 195
+        },
+        {
+          "fecha": "2026-11-03",
+          "leads": 18,
+          "spend": 30.29,
+          "cpl": 1.68,
+          "impressions": 11816,
+          "clicks": 171
+        },
+        {
+          "fecha": "2026-11-04",
+          "leads": 10,
+          "spend": 24.38,
+          "cpl": 2.44,
+          "impressions": 8035,
+          "clicks": 101
+        },
+        {
+          "fecha": "2026-11-05",
+          "leads": 12,
+          "spend": 29.65,
+          "cpl": 2.47,
+          "impressions": 8267,
+          "clicks": 185
+        },
+        {
+          "fecha": "2026-11-06",
+          "leads": 10,
+          "spend": 21.76,
+          "cpl": 2.18,
+          "impressions": 6066,
+          "clicks": 115
+        },
+        {
+          "fecha": "2026-11-07",
+          "leads": 9,
+          "spend": 20.3,
+          "cpl": 2.26,
+          "impressions": 6303,
+          "clicks": 73
+        },
+        {
+          "fecha": "2026-11-08",
+          "leads": 11,
+          "spend": 35.56,
+          "cpl": 3.23,
+          "impressions": 10860,
+          "clicks": 144
+        },
+        {
+          "fecha": "2026-11-09",
+          "leads": 6,
+          "spend": 20.16,
+          "cpl": 3.36,
+          "impressions": 6411,
+          "clicks": 77
+        },
+        {
+          "fecha": "2026-11-10",
+          "leads": 8,
+          "spend": 26.91,
+          "cpl": 3.36,
+          "impressions": 7076,
+          "clicks": 84
+        },
+        {
+          "fecha": "2026-11-11",
+          "leads": 8,
+          "spend": 38.58,
+          "cpl": 4.82,
+          "impressions": 10176,
+          "clicks": 161
+        },
+        {
+          "fecha": "2026-11-12",
+          "leads": 8,
+          "spend": 31.77,
+          "cpl": 3.97,
+          "impressions": 6378,
+          "clicks": 183
+        },
+        {
+          "fecha": "2026-11-13",
+          "leads": 6,
+          "spend": 24.62,
+          "cpl": 4.1,
+          "impressions": 5819,
+          "clicks": 112
+        },
+        {
+          "fecha": "2026-11-14",
+          "leads": 9,
+          "spend": 31.94,
+          "cpl": 3.55,
+          "impressions": 6850,
+          "clicks": 134
+        },
+        {
+          "fecha": "2026-11-15",
+          "leads": 13,
+          "spend": 33.65,
+          "cpl": 2.59,
+          "impressions": 7612,
+          "clicks": 157
+        },
+        {
+          "fecha": "2026-11-16",
+          "leads": 12,
+          "spend": 31.47,
+          "cpl": 2.62,
+          "impressions": 6658,
+          "clicks": 142
+        },
+        {
+          "fecha": "2026-11-17",
+          "leads": 4,
+          "spend": 33.26,
+          "cpl": 8.31,
+          "impressions": 7677,
+          "clicks": 126
+        },
+        {
+          "fecha": "2026-11-18",
+          "leads": 12,
+          "spend": 31.54,
+          "cpl": 2.63,
+          "impressions": 7341,
+          "clicks": 132
+        },
+        {
+          "fecha": "2026-11-19",
+          "leads": 7,
+          "spend": 25.8,
+          "cpl": 3.69,
+          "impressions": 5484,
+          "clicks": 84
+        },
+        {
+          "fecha": "2026-11-20",
+          "leads": 12,
+          "spend": 28.04,
+          "cpl": 2.34,
+          "impressions": 6397,
+          "clicks": 105
+        },
+        {
+          "fecha": "2026-11-21",
+          "leads": 8,
+          "spend": 26.16,
+          "cpl": 3.27,
+          "impressions": 5691,
+          "clicks": 91
+        },
+        {
+          "fecha": "2026-11-22",
+          "leads": 9,
+          "spend": 32.85,
+          "cpl": 3.65,
+          "impressions": 8674,
+          "clicks": 120
+        },
+        {
+          "fecha": "2026-11-23",
+          "leads": 6,
+          "spend": 29.83,
+          "cpl": 4.97,
+          "impressions": 7990,
+          "clicks": 114
+        },
+        {
+          "fecha": "2026-11-24",
+          "leads": 8,
+          "spend": 33.54,
+          "cpl": 4.19,
+          "impressions": 7395,
+          "clicks": 134
+        },
+        {
+          "fecha": "2026-11-25",
+          "leads": 4,
+          "spend": 25.9,
+          "cpl": 6.47,
+          "impressions": 5300,
+          "clicks": 108
+        },
+        {
+          "fecha": "2026-11-26",
+          "leads": 7,
+          "spend": 34.23,
+          "cpl": 4.89,
+          "impressions": 5865,
+          "clicks": 111
+        },
+        {
+          "fecha": "2026-11-27",
+          "leads": 7,
+          "spend": 19.75,
+          "cpl": 2.82,
+          "impressions": 3836,
+          "clicks": 66
+        }
+      ]
+    },
+    {
+      "brand": "Motoria",
       "campaign_id": "120251401592230040",
       "campaign_name": "[Leads][Karry][Sept 2026][NS]",
       "objective": "OUTCOME_LEADS",
@@ -14500,972 +15466,6 @@
           "cpl": null,
           "impressions": 0,
           "clicks": 0
-        }
-      ]
-    },
-    {
-      "brand": "Motoria",
-      "campaign_id": "120251718849170040",
-      "campaign_name": "[Formulario][Motoria][Jetourx50]",
-      "objective": "OUTCOME_LEADS",
-      "effective_status": "ACTIVE",
-      "daily_budget": 30.0,
-      "lifetime_budget": null,
-      "total_leads": 323,
-      "total_spend": 1138.25,
-      "cpl_promedio": 3.52,
-      "historial_diario": [
-        {
-          "fecha": "2026-08-01",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-02",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-03",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-04",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-05",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-06",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-07",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-08",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-09",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-10",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-11",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-12",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-13",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-14",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-15",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-16",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-17",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-18",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-19",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-20",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-21",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-22",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-23",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-24",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-25",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-26",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-27",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-28",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-29",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-30",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-08-31",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-01",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-02",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-03",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-04",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-05",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-06",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-07",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-08",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-09",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-10",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-11",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-12",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-13",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-14",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-15",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-16",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-17",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-18",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-19",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-20",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-21",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-22",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-23",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-24",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-25",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-26",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-27",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-28",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-29",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-09-30",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-01",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-02",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-03",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-04",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-05",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-06",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-07",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-08",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-09",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-10",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-11",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-12",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-13",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-14",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-15",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-16",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-17",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-18",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-19",
-          "leads": 0,
-          "spend": 0.0,
-          "cpl": null,
-          "impressions": 0,
-          "clicks": 0
-        },
-        {
-          "fecha": "2026-10-20",
-          "leads": 4,
-          "spend": 15.57,
-          "cpl": 3.89,
-          "impressions": 4238,
-          "clicks": 65
-        },
-        {
-          "fecha": "2026-10-21",
-          "leads": 3,
-          "spend": 25.74,
-          "cpl": 8.58,
-          "impressions": 6394,
-          "clicks": 100
-        },
-        {
-          "fecha": "2026-10-22",
-          "leads": 1,
-          "spend": 29.68,
-          "cpl": 29.68,
-          "impressions": 7406,
-          "clicks": 82
-        },
-        {
-          "fecha": "2026-10-23",
-          "leads": 11,
-          "spend": 35.14,
-          "cpl": 3.19,
-          "impressions": 7556,
-          "clicks": 281
-        },
-        {
-          "fecha": "2026-10-24",
-          "leads": 5,
-          "spend": 29.51,
-          "cpl": 5.9,
-          "impressions": 7307,
-          "clicks": 207
-        },
-        {
-          "fecha": "2026-10-25",
-          "leads": 15,
-          "spend": 41.07,
-          "cpl": 2.74,
-          "impressions": 11662,
-          "clicks": 337
-        },
-        {
-          "fecha": "2026-10-26",
-          "leads": 4,
-          "spend": 29.91,
-          "cpl": 7.48,
-          "impressions": 10469,
-          "clicks": 265
-        },
-        {
-          "fecha": "2026-10-27",
-          "leads": 3,
-          "spend": 29.43,
-          "cpl": 9.81,
-          "impressions": 10367,
-          "clicks": 262
-        },
-        {
-          "fecha": "2026-10-28",
-          "leads": 4,
-          "spend": 25.5,
-          "cpl": 6.38,
-          "impressions": 9074,
-          "clicks": 204
-        },
-        {
-          "fecha": "2026-10-29",
-          "leads": 7,
-          "spend": 22.65,
-          "cpl": 3.24,
-          "impressions": 7368,
-          "clicks": 156
-        },
-        {
-          "fecha": "2026-10-30",
-          "leads": 7,
-          "spend": 31.63,
-          "cpl": 4.52,
-          "impressions": 10829,
-          "clicks": 214
-        },
-        {
-          "fecha": "2026-10-31",
-          "leads": 5,
-          "spend": 29.7,
-          "cpl": 5.94,
-          "impressions": 9121,
-          "clicks": 186
-        },
-        {
-          "fecha": "2026-11-01",
-          "leads": 15,
-          "spend": 48.08,
-          "cpl": 3.21,
-          "impressions": 11241,
-          "clicks": 199
-        },
-        {
-          "fecha": "2026-11-02",
-          "leads": 18,
-          "spend": 35.4,
-          "cpl": 1.97,
-          "impressions": 11609,
-          "clicks": 195
-        },
-        {
-          "fecha": "2026-11-03",
-          "leads": 18,
-          "spend": 30.29,
-          "cpl": 1.68,
-          "impressions": 11816,
-          "clicks": 171
-        },
-        {
-          "fecha": "2026-11-04",
-          "leads": 10,
-          "spend": 24.38,
-          "cpl": 2.44,
-          "impressions": 8035,
-          "clicks": 101
-        },
-        {
-          "fecha": "2026-11-05",
-          "leads": 12,
-          "spend": 29.65,
-          "cpl": 2.47,
-          "impressions": 8267,
-          "clicks": 185
-        },
-        {
-          "fecha": "2026-11-06",
-          "leads": 10,
-          "spend": 21.76,
-          "cpl": 2.18,
-          "impressions": 6066,
-          "clicks": 115
-        },
-        {
-          "fecha": "2026-11-07",
-          "leads": 9,
-          "spend": 20.3,
-          "cpl": 2.26,
-          "impressions": 6303,
-          "clicks": 73
-        },
-        {
-          "fecha": "2026-11-08",
-          "leads": 11,
-          "spend": 35.56,
-          "cpl": 3.23,
-          "impressions": 10860,
-          "clicks": 144
-        },
-        {
-          "fecha": "2026-11-09",
-          "leads": 6,
-          "spend": 20.16,
-          "cpl": 3.36,
-          "impressions": 6411,
-          "clicks": 77
-        },
-        {
-          "fecha": "2026-11-10",
-          "leads": 8,
-          "spend": 26.91,
-          "cpl": 3.36,
-          "impressions": 7076,
-          "clicks": 84
-        },
-        {
-          "fecha": "2026-11-11",
-          "leads": 8,
-          "spend": 38.58,
-          "cpl": 4.82,
-          "impressions": 10176,
-          "clicks": 161
-        },
-        {
-          "fecha": "2026-11-12",
-          "leads": 8,
-          "spend": 31.77,
-          "cpl": 3.97,
-          "impressions": 6378,
-          "clicks": 183
-        },
-        {
-          "fecha": "2026-11-13",
-          "leads": 6,
-          "spend": 24.62,
-          "cpl": 4.1,
-          "impressions": 5819,
-          "clicks": 112
-        },
-        {
-          "fecha": "2026-11-14",
-          "leads": 9,
-          "spend": 31.94,
-          "cpl": 3.55,
-          "impressions": 6850,
-          "clicks": 134
-        },
-        {
-          "fecha": "2026-11-15",
-          "leads": 13,
-          "spend": 33.65,
-          "cpl": 2.59,
-          "impressions": 7612,
-          "clicks": 157
-        },
-        {
-          "fecha": "2026-11-16",
-          "leads": 12,
-          "spend": 31.47,
-          "cpl": 2.62,
-          "impressions": 6658,
-          "clicks": 142
-        },
-        {
-          "fecha": "2026-11-17",
-          "leads": 4,
-          "spend": 33.26,
-          "cpl": 8.31,
-          "impressions": 7677,
-          "clicks": 126
-        },
-        {
-          "fecha": "2026-11-18",
-          "leads": 12,
-          "spend": 31.54,
-          "cpl": 2.63,
-          "impressions": 7341,
-          "clicks": 132
-        },
-        {
-          "fecha": "2026-11-19",
-          "leads": 7,
-          "spend": 25.8,
-          "cpl": 3.69,
-          "impressions": 5484,
-          "clicks": 84
-        },
-        {
-          "fecha": "2026-11-20",
-          "leads": 12,
-          "spend": 28.04,
-          "cpl": 2.34,
-          "impressions": 6397,
-          "clicks": 105
-        },
-        {
-          "fecha": "2026-11-21",
-          "leads": 8,
-          "spend": 26.16,
-          "cpl": 3.27,
-          "impressions": 5691,
-          "clicks": 91
-        },
-        {
-          "fecha": "2026-11-22",
-          "leads": 9,
-          "spend": 32.85,
-          "cpl": 3.65,
-          "impressions": 8674,
-          "clicks": 120
-        },
-        {
-          "fecha": "2026-11-23",
-          "leads": 6,
-          "spend": 29.83,
-          "cpl": 4.97,
-          "impressions": 7990,
-          "clicks": 114
-        },
-        {
-          "fecha": "2026-11-24",
-          "leads": 8,
-          "spend": 33.54,
-          "cpl": 4.19,
-          "impressions": 7395,
-          "clicks": 134
-        },
-        {
-          "fecha": "2026-11-25",
-          "leads": 4,
-          "spend": 25.9,
-          "cpl": 6.47,
-          "impressions": 5300,
-          "clicks": 108
-        },
-        {
-          "fecha": "2026-11-26",
-          "leads": 7,
-          "spend": 34.21,
-          "cpl": 4.89,
-          "impressions": 5849,
-          "clicks": 111
-        },
-        {
-          "fecha": "2026-11-27",
-          "leads": 4,
-          "spend": 7.07,
-          "cpl": 1.77,
-          "impressions": 1263,
-          "clicks": 30
         }
       ]
     },
@@ -25138,7 +25138,7 @@
       "daily_budget": 20.0,
       "lifetime_budget": null,
       "total_leads": 0,
-      "total_spend": 549.5,
+      "total_spend": 563.16,
       "cpl_promedio": null,
       "historial_diario": [
         {
@@ -26088,10 +26088,10 @@
         {
           "fecha": "2026-11-27",
           "leads": 0,
-          "spend": 4.2,
+          "spend": 17.86,
           "cpl": null,
-          "impressions": 737,
-          "clicks": 18
+          "impressions": 3254,
+          "clicks": 77
         }
       ]
     },
